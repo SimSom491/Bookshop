@@ -14,6 +14,10 @@ public class Ajandek {
     public Ajandek() {
     }
 
+    public Ajandek(String nev) {
+        this.nev = nev;
+    }
+
     public int getAr() {
         return ar;
     }
