@@ -1,20 +1,29 @@
 package com.example.konyvesbolt.model;
 
 public class Ajandek {
-    private int ar;
     private String nev;
+    private int ar;
     private String eleresiUt;
 
-    public Ajandek(int ar, String nev, String eleresiUt) {
-        this.ar = ar;
+    public Ajandek(String nev, int ar, String eleresiUt) {
         this.nev = nev;
+        this.ar = ar;
         this.eleresiUt = eleresiUt;
+    }
+
+    public Ajandek(String nev, int ar) {
+        this.nev = nev;
+        this.ar = ar;
     }
 
     public Ajandek() {
     }
 
-    public Ajandek(String nev) {
+    public String getNev() {
+        return nev;
+    }
+
+    public void setNev(String nev) {
         this.nev = nev;
     }
 
@@ -24,14 +33,6 @@ public class Ajandek {
 
     public void setAr(int ar) {
         this.ar = ar;
-    }
-
-    public String getNev() {
-        return nev;
-    }
-
-    public void setNev(String nev) {
-        this.nev = nev;
     }
 
     public String getEleresiUt() {
