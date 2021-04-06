@@ -10,8 +10,9 @@ public class Konyv {
     private String eleresiUt;
     private int kiadasiEv;
     private String tipus;
+    private String leiras;
 
-    public Konyv(int id, String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus) {
+    public Konyv(int id, String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras) {
         this.id = id;
         this.szerzo = szerzo;
         this.cim = cim;
@@ -21,6 +22,7 @@ public class Konyv {
         this.eleresiUt = eleresiUt;
         this.kiadasiEv = kiadasiEv;
         this.tipus = tipus;
+        this.leiras = leiras;
     }
 
     public Konyv() {
@@ -96,5 +98,13 @@ public class Konyv {
 
     public void setTipus(String tipus) {
         this.tipus = tipus;
+    }
+
+    public String getLeiras() {
+        return leiras;
+    }
+
+    public void setLeiras(String leiras) {
+        this.leiras = leiras;
     }
 }
