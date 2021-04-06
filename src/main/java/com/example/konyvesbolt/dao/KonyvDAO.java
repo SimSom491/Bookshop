@@ -16,19 +16,20 @@ public class KonyvDAO implements DAO<Konyv> {
 
     @Override
     public List<Konyv> listaz() {
-        List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV", (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus")));
+        List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV", (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
 
         return konyvek;
     }
 
     @Override
     public Konyv keres(int id) {
-        List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV WHERE id="+id, (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus")));
+        List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV WHERE id="+id, (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
         return konyvek.get(0);
     }
 
     @Override
     public void frissit(Konyv konyv) {
+        //todo ide is beleirni a leirast, meg miért nincs fennt az interface?
         String sql = "UPDATE KONYV SET SZERZO='" + konyv.getSzerzo() + "', CIM='" + konyv.getCim() + "', AR=" + konyv.getAr() + ", OLDALSZAM=" + konyv.getOldalszam() + ", KIADO='" + konyv.getKiado() + "', ELERESIUT='" + konyv.getEleresiUt() + "', KIADASIEV=" + konyv.getKiadasiEv() + ", TIPUS='" + konyv.getTipus() + "'  WHERE id=" + konyv.getId();
         jdbcTemplate.update(sql);
     }
@@ -41,9 +42,9 @@ public class KonyvDAO implements DAO<Konyv> {
 
     @Override
     public void beszur(Konyv konyv) {
-        String sql = "INSERT INTO KONYV( SZERZO, CIM, AR, OLDALSZAM, KIADO, ELERESIUT, KIADASIEV, TIPIS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO KONYV( SZERZO, CIM, AR, OLDALSZAM, KIADO, ELERESIUT, KIADASIEV, TIPUS, LEIRAS) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
         jdbcTemplate.update(sql, new Object[]{
-                konyv.getSzerzo(), konyv.getCim(), konyv.getAr(), konyv.getOldalszam(), konyv.getKiado(), konyv.getEleresiUt(),konyv.getKiadasiEv(),konyv.getTipus() }
+                konyv.getSzerzo(), konyv.getCim(), konyv.getAr(), konyv.getOldalszam(), konyv.getKiado(), konyv.getEleresiUt(),konyv.getKiadasiEv(),konyv.getTipus(), konyv.getLeiras() }
         );
     }
 }
