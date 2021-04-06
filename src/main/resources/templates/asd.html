@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-HEllo
+
+<table>
+    <thead>
+    <tr>
+        <td>nev</td>
+        <td>ar</td>
+        <td>eleresiut</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ajandek : ${ajandekok}">
+        <td th:text="${ajandek.getNev()}"></td>
+        <td th:text="${ajandek.getAr()}"></td>
+        <td th:text="${ajandek.getEleresiUt()} == null ? 'nincs megjelenithető kép' :${ajandek.getEleresiUt()}"></td>
+    </tr>
+
+</tbody>
+</table>
 </body>
 </html>
