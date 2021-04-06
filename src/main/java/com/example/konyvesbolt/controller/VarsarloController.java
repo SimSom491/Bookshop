@@ -2,6 +2,7 @@ package com.example.konyvesbolt.controller;
 
 
 import com.example.konyvesbolt.dao.AjandekDAO;
+import com.example.konyvesbolt.dao.KonyvDAO;
 import com.example.konyvesbolt.model.Ajandek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class VarsarloController {
     @Autowired
     AjandekDAO ajandekDAO;
-    @GetMapping(value = "/")
+    @Autowired
+    KonyvDAO konyvDAO;
+
+    @GetMapping(value = "/ajandekoldal")
     public String ajandekList(Model model) {
         //addAji("FERI",9999 ,"https//valid veboladcim"); beszuras teszt
         model.addAttribute("ajandekok", ajandekDAO.ajitListaz()); //kiiratas
@@ -36,6 +40,14 @@ public class VarsarloController {
         ajandekDAO.ajitTorol(nev);
 
         return "redirect:/asd";
+    }
+    @GetMapping(value = "/")
+    public String konyvlist(Model model) {
+
+        model.addAttribute("konyvek", konyvDAO.listaz()); //kiiratas
+
+
+        return "asd";
     }
 
 }

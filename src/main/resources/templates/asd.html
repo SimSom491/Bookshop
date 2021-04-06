@@ -9,17 +9,16 @@
 <table>
     <thead>
     <tr>
-        <td>nev</td>
-        <td>ar</td>
-        <td>eleresiut</td>
+        <td>cím</td>
+        <td>szerző</td>
+
     </tr>
     </thead>
     <tbody>
-    <tr th:each="ajandek : ${ajandekok}">
-        <td th:text="${ajandek.getNev()}"></td>
-        <td th:text="${ajandek.getAr()}"></td>
-        <td th:text="${ajandek.getEleresiUt()} == null ? 'nincs megjelenithető kép' :${ajandek.getEleresiUt()}"></td>
-    </tr>
+    <tr th:each="konyv : ${konyvek}">
+        <td th:text="${konyv.getCim()}"></td>
+        <td th:text="${konyv.getSzerzo()}"></td>
+         </tr>
 
 </tbody>
 </table>

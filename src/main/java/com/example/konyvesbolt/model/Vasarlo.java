@@ -8,9 +8,9 @@ public class Vasarlo {
     private String nev;
     private Date szulido;
     private String cim;
-    private char torzsvasarloe;
+    private boolean torzsvasarloe;
 
-    public Vasarlo(int id, String email, String jelszo, String nev, Date szulido, String cim, char torzsvasarloe) {
+    public Vasarlo(int id, String email, String jelszo, String nev, Date szulido, String cim, boolean torzsvasarloe) {
         this.id = id;
         this.email = email;
         this.jelszo = jelszo;
@@ -71,11 +71,11 @@ public class Vasarlo {
         this.cim = cim;
     }
 
-    public char getTorzsvasarloe() {
+    public boolean getTorzsvasarloe() {
         return torzsvasarloe;
     }
 
-    public void setTorzsvasarloe(char torzsvasarloe) {
+    public void setTorzsvasarloe(boolean torzsvasarloe) {
         this.torzsvasarloe = torzsvasarloe;
     }
 }

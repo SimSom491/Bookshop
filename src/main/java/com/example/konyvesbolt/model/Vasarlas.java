@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Vasarlas {
     private int id;
-    private char szamlaigenyes;
+    private boolean szamlaigenyes;
     private Date mikor;
     private String atvetel;
 
-    public Vasarlas(int id, char szamlaigenyes, Date mikor, String atvetel) {
+    public Vasarlas(int id, boolean szamlaigenyes, Date mikor, String atvetel) {
         this.id = id;
         this.szamlaigenyes = szamlaigenyes;
         this.mikor = mikor;
@@ -26,11 +26,11 @@ public class Vasarlas {
         this.id = id;
     }
 
-    public char getSzamlaigenyes() {
+    public boolean getSzamlaigenyes() {
         return szamlaigenyes;
     }
 
-    public void setSzamlaigenyes(char szamlaigenyes) {
+    public void setSzamlaigenyes(boolean szamlaigenyes) {
         this.szamlaigenyes = szamlaigenyes;
     }
 
