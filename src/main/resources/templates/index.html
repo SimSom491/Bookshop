@@ -13,6 +13,7 @@
         }
 
         header {
+
             margin: 0 auto 0 auto;
             width: 80%;
             height: 10vh;
@@ -21,7 +22,43 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /*border: black 5px solid;*/
+          /*border: black 5px solid;*/
+        }
+
+        @media only screen and (max-width: 1690px){
+
+            header {
+
+                margin: 0 auto 0 auto;
+                width: 144vh;
+                height: 10vh;
+                background-color: #f4f3e8;
+                flex-direction: row;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*border: black 5px solid;*/
+            }
+            main {
+                margin: 10px auto auto;
+                background-color: #f4f3e8;
+                width: 144vh !important;
+                height: 100%;
+                border: black 5px solid;
+
+
+            }
+
+
+        }
+        main {
+            margin: 10px auto auto;
+            background-color: #f4f3e8;
+            width: 80%;
+            height: 100%;
+            border: black 5px solid;
+
+
         }
 
 
@@ -39,32 +76,32 @@
             display: inline-block;
             margin: 20px 10px 0 10px;
             outline: 2px solid black;
-            padding: 30px;
+            width: 7rem;
+            height: 3em;
+            padding: 5px;
+            text-align: center;
+        }
+
+        nav ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
 
         li img {
             width: 32px;
             height: 32px;
+            padding: 10px;
+        }
+
+        .list-one-row-text{
+            padding: 10px;
         }
 
         #logo-img {
             width: 84px;
             height: 84px;
-        }
-
-        .logo-wrapper {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            /*border: 5px solid black;*/
-        }
-        main {
-            margin: auto;
-            background-color: #f4f3e8;
-            width: 80%;
-            height: 100%;
-            border: black 5px solid;
-
         }
 
         aside {
@@ -114,7 +151,6 @@
             padding: 10px;
 
         }
-        /*asd*/
 
     </style>
 
@@ -122,20 +158,14 @@
 
 <body>
 <header>
-    <div class="logo-wrapper">
-        <img id="logo-img" src="unicorn.svg" alt="logo helye">
-        <p class="logo-name" style="margin-right: 10px">Unicorn könyvlánc</p>
-    </div>
-
+    <img id="logo-img" src="unicorn.svg" alt="logo helye">
+    <p class="logo-name" style="margin-right: 10px">Unicorn könyvlánc</p>
     <nav>
         <ul>
-            <li>Könyvek</li>
-            <li>Multimédia</li>
-            <li>Ajándék</li>
-            <li>Rendelési
-                <br>
-                információk
-            </li>
+            <li><p class="list-one-row-text">Könyvek</p></li>
+            <li><p class="list-one-row-text">Multimédia</p></li>
+            <li><p class="list-one-row-text">Ajándék</p></li>
+            <li><p class="list-text">Rendelési információk</p></li>
             <li><img src="shopping-basket.svg" alt="kosár helye"></li>
             <li><img src="user.svg" alt="felhasználói-fiók"></li>
             <li><img src="logout.svg" alt="kijelentkezés-helye"></li>
