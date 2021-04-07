@@ -29,8 +29,10 @@ public class KonyvDAO implements DAO<Konyv> {
 
     @Override
     public void frissit(Konyv konyv) {
-        //todo ide is beleirni a leirast, meg miért nincs fennt az interface?
-        String sql = "UPDATE KONYV SET SZERZO='" + konyv.getSzerzo() + "', CIM='" + konyv.getCim() + "', AR=" + konyv.getAr() + ", OLDALSZAM=" + konyv.getOldalszam() + ", KIADO='" + konyv.getKiado() + "', ELERESIUT='" + konyv.getEleresiUt() + "', KIADASIEV=" + konyv.getKiadasiEv() + ", TIPUS='" + konyv.getTipus() + "'  WHERE id=" + konyv.getId();
+        //ha gond van, itt van gond a leiras miatt
+        String sql = "UPDATE KONYV SET SZERZO='" + konyv.getSzerzo() + "', CIM='" + konyv.getCim() + "', AR=" + konyv.getAr() + ", OLDALSZAM=" + konyv.getOldalszam() +
+                ", KIADO='" + konyv.getKiado() + "', ELERESIUT='" + konyv.getEleresiUt() + "', KIADASIEV=" + konyv.getKiadasiEv() +
+                ", TIPUS='" + konyv.getTipus()  + "', LEIRAS=" + konyv.getLeiras() +  "WHERE id=" + konyv.getId();
         jdbcTemplate.update(sql);
     }
 
