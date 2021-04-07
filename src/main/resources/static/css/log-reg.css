@@ -1,0 +1,44 @@
+.reg-wrapper, .login-wrapper{
+    width: 500px;
+    height: 270px;
+    background-color: white;
+    margin: 320px auto;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.login-image{
+    width: 256px;
+    height: 256px;
+}
+.login-image-wrapper{
+    position: absolute;
+    left: 43%;
+    top: 15%;
+    width: 500px;
+
+}
+
+blockquote{
+    position: absolute;
+    left: 270px;
+    top: 90px;
+    font-style: italic;
+    font-size: 1.25rem;
+}
+
+.name{
+    font-weight: bolder;
+    font-size: 2em;
+
+}

@@ -1,174 +1,31 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Unicorn</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Roboto Slab', serif;
-            margin: 0;
-            padding: 0;
-        }
+    <link th:href="@{.../staic/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{.../staic/css/index.css}" rel="stylesheet"/>
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/index.css" rel="stylesheet">
 
-        header {
-
-            margin: 0 auto 0 auto;
-            width: 80%;
-            height: 10vh;
-            background-color: #f4f3e8;
-            flex-direction: row;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          /*border: black 5px solid;*/
-        }
-
-        @media only screen and (max-width: 1690px){
-
-            header {
-
-                margin: 0 auto 0 auto;
-                width: 144vh;
-                height: 10vh;
-                background-color: #f4f3e8;
-                flex-direction: row;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                /*border: black 5px solid;*/
-            }
-            main {
-                margin: 10px auto auto;
-                background-color: #f4f3e8;
-                width: 144vh !important;
-                height: 100%;
-                border: black 5px solid;
-
-
-            }
-
-
-        }
-        main {
-            margin: 10px auto auto;
-            background-color: #f4f3e8;
-            width: 80%;
-            height: 100%;
-            border: black 5px solid;
-
-
-        }
-
-
-
-        footer {
-            width: 80%;
-            height: 5vh;
-            background-color: #f4f3e8;
-            margin: auto;
-        }
-
-
-
-        nav ul li {
-            display: inline-block;
-            margin: 20px 10px 0 10px;
-            outline: 2px solid black;
-            width: 7rem;
-            height: 3em;
-            padding: 5px;
-            text-align: center;
-        }
-
-        nav ul{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-
-        li img {
-            width: 32px;
-            height: 32px;
-            padding: 10px;
-        }
-
-        .list-one-row-text{
-            padding: 10px;
-        }
-
-        #logo-img {
-            width: 84px;
-            height: 84px;
-        }
-
-        aside {
-            margin-top: 40px;
-            margin-left: 70px;
-
-
-        }
-        .top-books-header{
-            outline: 2px black solid;
-            padding: 10px;
-        }
-        .top-books {
-
-            width: 200px;
-            height: max-content;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background-color: white;
-
-        }
-
-        .main-wrapper{
-            display: flex;
-            flex-direction: row;
-
-        }
-
-        .new-books{
-            margin-left: 50px;
-            margin-right: 50px;
-            margin-top: 40px;
-            background-color: white;
-        }
-
-        .new-books-items{
-            flex-wrap: wrap;
-            display: flex;
-        }
-        .new-book-item{
-            margin: 40px;
-        }
-        .new-books-header{
-            text-align: center;
-            outline: 2px black solid;
-            padding: 10px;
-
-        }
-
-    </style>
 
 </head>
 
 <body>
 <header>
-    <img id="logo-img" src="unicorn.svg" alt="logo helye">
-    <p class="logo-name" style="margin-right: 10px">Unicorn könyvlánc</p>
+    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <p class="logo-name" style="margin-right: 10px">Unicorn</p>
     <nav>
         <ul>
             <li><p class="list-one-row-text">Könyvek</p></li>
             <li><p class="list-one-row-text">Multimédia</p></li>
             <li><p class="list-one-row-text">Ajándék</p></li>
             <li><p class="list-text">Rendelési információk</p></li>
-            <li><img src="shopping-basket.svg" alt="kosár helye"></li>
-            <li><img src="user.svg" alt="felhasználói-fiók"></li>
-            <li><img src="logout.svg" alt="kijelentkezés-helye"></li>
+            <li><img src="../static/img/shopping-basket.svg" alt="kosár helye"></li>
+            <li><img src="../static/img/user.svg" alt="felhasználói-fiók"></li>
+            <li><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></li>
         </ul>
     </nav>
 </header>
@@ -176,66 +33,83 @@
 <main>
     <div class="main-wrapper">
 
-    <aside class="top-books">
-        <div class="top-books-header">
-            <h2>Toplista</h2>
-        </div>
-        <hr/>
-        <div id="first-book">
-            <img src="orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-            <div>
-                <p>Cím: 1984</p>
-                <p>Szerző: George Orwell</p>
+        <aside class="top-books">
+            <div class="top-books-header">
+                <h2>Toplista</h2>
             </div>
-        </div>
-        <div class="rest">
-            <img src="golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-            <div>
-                <p>Cím: Legyek ura</p>
-                <p>Szerző: William Golding</p>
+            <hr/>
+            <div id="first-book">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
             </div>
-        </div>
-        <div class="rest">
-            <img src="golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-            <div>
-                <p>Cím: Legyek ura</p>
-                <p>Szerző: William Golding</p>
+            <div class="rest">
+                <img src="../static/img/golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                <div>
+                    <p>Cím: Legyek ura</p>
+                    <p>Szerző: William Golding</p>
+                </div>
             </div>
-        </div>
-        <div class="rest">
-            <img src="golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-            <div>
-                <p>Cím: Legyek ura</p>
-                <p>Szerző: William Golding</p>
+            <div class="rest">
+                <img src="../static/img/golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                <div>
+                    <p>Cím: Legyek ura</p>
+                    <p>Szerző: William Golding</p>
+                </div>
             </div>
-        </div>
-    </aside>
+            <div class="rest">
+                <img src="../static/img/golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                <div>
+                    <p>Cím: Legyek ura</p>
+                    <p>Szerző: William Golding</p>
+                </div>
+            </div>
+        </aside>
 
         <div class="new-books">
             <div class="new-books-header">
                 <h2>Újdonságok</h2>
             </div>
-
             <div class="new-books-items">
-                <div class="new-book-item" >
-                    <img src="orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+                <div class="new-book-item">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
                     <div>
                         <p>Cím: 1984</p>
                         <p>Szerző: George Orwell</p>
                     </div>
                 </div>
-                <div class="new-book-item" >
-                    <img src="orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+                <div class="new-book-item">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
                     <div>
                         <p>Cím: 1984</p>
                         <p>Szerző: George Orwell</p>
                     </div>
                 </div>
-
+                <div class="new-book-item">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+                    <div>
+                        <p>Cím: 1984</p>
+                        <p>Szerző: George Orwell</p>
+                    </div>
+                </div>
+                <div class="new-book-item">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+                    <div>
+                        <p>Cím: 1984</p>
+                        <p>Szerző: George Orwell</p>
+                    </div>
+                </div>
+                <div class="new-book-item">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+                    <div>
+                        <p>Cím: 1984</p>
+                        <p>Szerző: George Orwell</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-
     </div>
 </main>
 
