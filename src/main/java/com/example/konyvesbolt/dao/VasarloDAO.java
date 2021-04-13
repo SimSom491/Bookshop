@@ -17,21 +17,21 @@ public class VasarloDAO implements DAO<Vasarlo> {
 
     @Override
     public List<Vasarlo> listaz() {
-        List<Vasarlo> vasarlok = jdbcTemplate.query("SELECT * FROM VASARLO", (rs, rowNum) -> new Vasarlo(rs.getInt("id"), rs.getString("email"), rs.getString("jelszo"),rs.getString("nev"),rs.getDate("szulido"),rs.getString("cim"),rs.getBoolean("torsvasarloe")));
+        List<Vasarlo> vasarlok = jdbcTemplate.query("SELECT * FROM VASARLO", (rs, rowNum) -> new Vasarlo(rs.getInt("id"), rs.getString("email"), rs.getString("jelszo"),rs.getString("nev"),rs.getDate("szulido"),rs.getBoolean("torsvasarloe"),rs.getInt("irszam"),rs.getString("utcanev"),rs.getInt("hazszam")));
 
         return vasarlok;
     }
 
     @Override
     public Vasarlo keres(int id) {
-        List<Vasarlo> vasarlok = jdbcTemplate.query("SELECT * FROM VASARLO WHERE id="+id, (rs, rowNum) -> new Vasarlo(rs.getInt("id"), rs.getString("email"), rs.getString("jelszo"),rs.getString("nev"),rs.getDate("szulido"),rs.getString("cim"),rs.getBoolean("torsvasarloe")));
+        List<Vasarlo> vasarlok = jdbcTemplate.query("SELECT * FROM VASARLO WHERE id="+id, (rs, rowNum) -> new Vasarlo(rs.getInt("id"), rs.getString("email"), rs.getString("jelszo"),rs.getString("nev"),rs.getDate("szulido"),rs.getBoolean("torsvasarloe"),rs.getInt("irszam"),rs.getString("utcanev"),rs.getInt("hazszam")));
         return vasarlok.get(0);
 
     }
 
     @Override
     public void frissit(Vasarlo vasarlo) {
-        String sql = "UPDATE VASARLO SET EMAIL='" + vasarlo.getEmail() + "', JELSZO='" + vasarlo.getJelszo() + "', NEV='" + vasarlo.getNev() + "', SZULIDO='" + vasarlo.getSzulido() + "', CIM='" + vasarlo.getCim() + "', TORZSVASARLOE='" + vasarlo.getTorzsvasarloe() + "'  WHERE id=" + vasarlo.getId();
+        String sql = "UPDATE VASARLO SET EMAIL='" + vasarlo.getEmail() + "', JELSZO='" + vasarlo.getJelszo() + "', NEV='" + vasarlo.getNev() + "', SZULIDO='" + vasarlo.getSzulido()  + "', TORZSVASARLOE='" + vasarlo.getTorzsvasarloe()+"', IRSZAM=" + vasarlo.getIrszam()+", UTCANEV='" + vasarlo.getUtca() + "', HAZSZAM=" + vasarlo.getHazszam() + "  WHERE id=" + vasarlo.getId();
         jdbcTemplate.update(sql);
     }
 
@@ -43,9 +43,9 @@ public class VasarloDAO implements DAO<Vasarlo> {
 
     @Override
     public void beszur(Vasarlo vasarlo) {
-        String sql = "INSERT INTO VASARLO( EMAIL, JELSZO, NEV, SZULIDO, CIM, TORZSVASARLOE) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO VASARLO( EMAIL, JELSZO, NEV, SZULIDO, TORZSVASARLOE, IRSZAM, UTCANEV, HAZSZAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, new Object[]{
-                vasarlo.getEmail(), vasarlo.getJelszo(), vasarlo.getNev(), vasarlo.getSzulido(), vasarlo.getCim(), vasarlo.getTorzsvasarloe() }
+                vasarlo.getEmail(), vasarlo.getJelszo(), vasarlo.getNev(), vasarlo.getSzulido(), vasarlo.getTorzsvasarloe(), vasarlo.getIrszam(), vasarlo.getUtca(), vasarlo.getHazszam() }
         );
     }
 }
