@@ -7,17 +7,60 @@ public class Vasarlo {
     private String jelszo;
     private String nev;
     private Date szulido;
-    private String cim;
     private boolean torzsvasarloe;
+    private int irszam;
+    private String utca;
+    private int hazszam;
 
-    public Vasarlo(int id, String email, String jelszo, String nev, Date szulido, String cim, boolean torzsvasarloe) {
+    public boolean isTorzsvasarloe() {
+        return torzsvasarloe;
+    }
+
+    public int getIrszam() {
+        return irszam;
+    }
+
+    public void setIrszam(int irszam) {
+        this.irszam = irszam;
+    }
+
+    public String getUtca() {
+        return utca;
+    }
+
+    public void setUtca(String utca) {
+        this.utca = utca;
+    }
+
+    public int getHazszam() {
+        return hazszam;
+    }
+
+    public void setHazszam(int hazszam) {
+        this.hazszam = hazszam;
+    }
+
+    public Vasarlo(String email, String jelszo, String nev, Date szulido, boolean torzsvasarloe, int irszam, String utca, int hazszam) {
+        this.email = email;
+        this.jelszo = jelszo;
+        this.nev = nev;
+        this.szulido = szulido;
+        this.torzsvasarloe = torzsvasarloe;
+        this.irszam = irszam;
+        this.utca = utca;
+        this.hazszam = hazszam;
+    }
+
+    public Vasarlo(int id, String email, String jelszo, String nev, Date szulido, boolean torzsvasarloe, int irszam, String utca, int hazszam) {
         this.id = id;
         this.email = email;
         this.jelszo = jelszo;
         this.nev = nev;
         this.szulido = szulido;
-        this.cim = cim;
         this.torzsvasarloe = torzsvasarloe;
+        this.irszam = irszam;
+        this.utca = utca;
+        this.hazszam = hazszam;
     }
 
     public Vasarlo() {
@@ -61,14 +104,6 @@ public class Vasarlo {
 
     public void setSzulido(Date szulido) {
         this.szulido = szulido;
-    }
-
-    public String getCim() {
-        return cim;
-    }
-
-    public void setCim(String cim) {
-        this.cim = cim;
     }
 
     public boolean getTorzsvasarloe() {
