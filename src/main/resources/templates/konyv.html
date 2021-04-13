@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Konyv</title>
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/konyvek.css" rel="stylesheet">
+</head>
+
+<style>
+
+
+    main {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        font-size: 1.24em;
+        min-height: auto;
+    }
+    .main-wrapper{
+        flex-direction: column;
+    }
+    .book-roll {
+        display: flex;
+        flex-direction: row;
+        border-top: black 2px solid;
+        width: 1520px;
+        height: 400px;
+        overflow: scroll;
+
+    }
+    .book-roll-item{
+        margin: 50px;
+    }
+
+    .title {
+        font-size: 60px;
+    }
+
+    .author {
+        font-size: 40px;
+    }
+
+    .price {
+        font-size: 50px;
+    }
+
+    .book-details {
+        width: 1000px;
+    }
+
+    .desc {
+        margin: 20px;
+    }
+
+    .pub, .year, .pageN, .num {
+        display: inline;
+    }
+    h3{
+        margin-left: 10px;
+    }
+
+</style>
+
+
+<body>
+
+<header>
+    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <p class="logo-name" style="margin-right: 10px">Unicorn</p>
+    <nav>
+        <ul>
+            <li><p class="list-one-row-text">Könyvek</p></li>
+            <li><p class="list-one-row-text">Multimédia</p></li>
+            <li><p class="list-one-row-text">Ajándék</p></li>
+            <li><p class="list-text">Rendelési információk</p></li>
+            <li><img src="../static/img/shopping-basket.svg" alt="kosár helye"></li>
+            <li><img src="../static/img/user.svg" alt="felhasználói-fiók"></li>
+            <li><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="main-wrapper">
+        <div class="book-item">
+            <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+            <div class="book-details">
+                <p class="title">1984</p>
+                <p class="author">George Orwell</p>
+                <hr>
+                <p class="pub">Európa Könyvkiadó,</p>
+                <p class="year">2010</p> <br>
+                <p class="pageN">Oldalszám:</p>
+                <p class="num">300</p>
+                <hr>
+                <p class="price">5000 Ft</p>
+                <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
+                <p style="color: green; font-size: large" >Raktáron</p>
+                <hr>
+                <p class="desc">"Üdvözlet az egyformaság korából, a magányosság korából, a Nagy Testvér korából, a
+                    duplagondol korából" - írja a naplójába Winston Smith, a lázadó, a gondolatbűnöző, aki nem hajlandó
+                    elismerni, hogy a 2x2 a Párt akarata szerint lehet három vagy öt. Talán valóban "csak" keserű
+                    üdvözlet lesz ez a regény a jövőben, örök emlékeztető a totalitárius XX. századra. </p>
+            </div>
+        </div>
+        <h3>Ezeket a könyveket vették még meg, akik ezt a könyvet vették:</h3>
+        <div class="book-roll">
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+            <div class="book-roll-item">
+                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
+                <div>
+                    <p>Cím: 1984</p>
+                    <p>Szerző: George Orwell</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

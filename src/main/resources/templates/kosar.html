@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Kosár</title>
+    <link href="../static/css/base.css" rel="stylesheet">
+    <style>
+        .basket-img{
+            height: 300px;
+            width:  500px;
+
+        }
+        .basket{
+            display: flex;
+            flex-direction: column;
+            background-color: #f4f3e8;
+            align-items: center;
+            margin-top: 50px;
+
+        }
+        .basket-item{
+            width: 1000px;
+            display: flex;
+            flex-direction: row;
+            background-color: #DFAB64;
+        }
+        .basket-item-price{
+            display: flex;
+            flex-direction: column;
+        }
+        #amount{
+            width: 50px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <p class="logo-name" style="margin-right: 10px">Unicorn</p>
+    <nav>
+        <ul>
+            <li><p class="list-one-row-text">Könyvek</p></li>
+            <li><p class="list-one-row-text">Multimédia</p></li>
+            <li><p class="list-one-row-text">Ajándék</p></li>
+            <li><p class="list-text">Rendelési információk</p></li>
+            <li><img src="../static/img/shopping-basket.svg" alt="kosár helye"></li>
+            <li><img src="../static/img/user.svg" alt="felhasználói-fiók"></li>
+            <li><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Kosár</h1>
+    <hr>
+    <form>
+
+
+    <div class="basket">
+        <p>A kosár tartalma:</p>
+        <div class="basket-item">
+            <img class="basket-img" src="../static/img/bogre1.jpg" alt="termek kepe">
+            <p class="name">Bögre</p>
+            <label for="amount"></label>
+            <input id="amount" name="amount" type="number" max="50">
+            <div class="basket-item-price">
+                <p class="price">5000 Ft</p>
+                <p>Raktáron</p>
+                <input type="submit" value="töröl">
+            </div>
+
+        </div>
+    </div>
+    </form>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Hozzá-adás</title>
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/konyvek.css" rel="stylesheet">
+</head>
+
+<style>
+
+
+    main {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        font-size: 1.24em;
+        min-height: auto;
+    }
+
+    .book-item{
+        display: flex;
+        flex-direction: column;
+    }
+
+</style>
+
+
+<body>
+
+<header>
+    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <p class="logo-name" style="margin-right: 10px">Unicorn</p>
+    <nav>
+        <ul>
+            <li><p class="list-one-row-text">Könyvek</p></li>
+            <li><p class="list-one-row-text">Multimédia</p></li>
+            <li><p class="list-one-row-text">Ajándék</p></li>
+            <li><p class="list-text">Rendelési információk</p></li>
+            <li><img src="../static/img/shopping-basket.svg" alt="kosár helye"></li>
+            <li><img src="../static/img/user.svg" alt="felhasználói-fiók"></li>
+            <li><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="termek-wrapper">
+        <form>
+            <div class="book-item">
+                <img class="logo-img" src="../static/img/unicorn.svg" alt="unikornis">
+                <label for="cover">Borítókép:</label>
+                <input type="file" id="cover" name="cover">
+                <div class="book-details">
+                    <label for="title">Cím:</label>
+                    <input type="text" id="title" name="title">
+                    <label for="author">Szerző:</label>
+                    <input type="text" id="author" name="author">
+                    <hr>
+                    <label for="pub">Kiadó:</label>
+                    <input type="text" id="pub" name="pub">
+                    <label for="year">Év:</label>
+                    <input type="number" id="year" name="year">
+                    <label for="num">Oldalszám:</label>
+                    <input type="number" id="num" name="num">
+                    <hr>
+                    <label for="price">Ár:</label>
+                    <input type="number" id="price" name="price">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>
