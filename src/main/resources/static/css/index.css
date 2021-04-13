@@ -21,7 +21,7 @@ aside {
 
 
 
-.new-books{
+.new-books, .shop-wrapper{
     outline: 1px black solid;
     margin-left: 50px;
     margin-right: 50px;
@@ -29,16 +29,16 @@ aside {
     background-color: white;
 }
 
-.new-books-items{
+.new-books-items, .shops{
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
 
 }
-.new-book-item{
+.new-book-item, .shop{
     margin: 40px;
 }
-.new-books-header{
+.new-books-header, .shop-header{
     text-align: center;
     outline: 2px black solid;
     padding: 10px;

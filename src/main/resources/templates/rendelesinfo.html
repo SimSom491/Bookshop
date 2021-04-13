@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendelési információ</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/index.css" rel="stylesheet">
+    <style>
+        .nyitvatartás tr {
+            text-align: left;
+            border: 1px solid black;
+        }
+
+        .nyitvatartás caption {
+            font-weight: bold;
+        }
+
+        .nyitvatartás {
+            border: 1px solid black;
+        }
+
+        .shop-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shop-details .shop-name {
+            font-style: italic;
+            font-weight: bold;
+
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <p class="logo-name" style="margin-right: 10px">Unicorn</p>
+    <nav>
+        <ul>
+            <li><p class="list-one-row-text">Könyvek</p></li>
+            <li><p class="list-one-row-text">Multimédia</p></li>
+            <li><p class="list-one-row-text">Ajándék</p></li>
+            <li><p class="list-text">Rendelési információk</p></li>
+            <li><img src="../static/img/shopping-basket.svg" alt="kosár helye"></li>
+            <li><img src="../static/img/user.svg" alt="felhasználói-fiók"></li>
+            <li><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></li>
+        </ul>
+    </nav>
+</header>
+
+
+<main>
+
+    <div class="shop-wrapper">
+        <div class="shop-header">
+            <h2>Üzleteink</h2>
+        </div>
+        <div class="shops">
+            <div class="shop">
+                <img class="shop-img" src="../static/img/szeged.jpg" alt="bolt képének helye" width="400" height="270">
+                <div class="shop-details">
+                    <p class="shop-name">Szegedi üzletünk</p>
+                    <p class="shop-placement">6725 Szeged, Kálvária sugárút 1</p>
+                    <table class="nyitvatartás">
+                        <caption>Nyitvatartás:</caption>
+                        <tr>
+                            <th>Hétfő-Csütörtök:</th>
+                            <td>08-20</td>
+                        </tr>
+                        <tr>
+                            <th>Péntek:</th>
+                            <td>08-16</td>
+                        </tr>
+                        <tr>
+                            <th>Hétvégén.</th>
+                            <td>08-12</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer>
+
+
+</footer>
+
+</body>
+</html>

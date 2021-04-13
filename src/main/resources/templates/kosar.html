@@ -3,34 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Kosár</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link href="../static/css/base.css" rel="stylesheet">
     <style>
-        .basket-img{
-            height: 300px;
-            width:  500px;
 
+        .main-wrapper{
+            justify-content: center;
         }
-        .basket{
+
+        .basket {
+            border: 1px black solid;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top: 40px;
+            background-color: white;
+            width: 50%;
+            border-radius: 10px 10px 10px 10px;
+        }
+
+        .basket-items {
+            flex-wrap: wrap;
             display: flex;
-            flex-direction: column;
-            background-color: #f4f3e8;
-            align-items: center;
-            margin-top: 50px;
+            justify-content: center;
+            margin: 20px 0 20px 20px;
+            width: 90%;
 
         }
-        .basket-item{
-            width: 1000px;
+
+        .basket-item {
+            background-color: #f4f3e8;
+            padding: 50px;
+            border-radius: 10px 10px 10px 10px;
+            border: 1px solid black;
+            margin: 10px;
             display: flex;
             flex-direction: row;
-            background-color: #DFAB64;
+            width: 100%;
+
         }
-        .basket-item-price{
+        .basket-item-img-name{
+            margin-right: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 400px;
+        }
+
+
+        .basket-item-price {
             display: flex;
             flex-direction: column;
+            justify-content: space-evenly;
+
         }
-        #amount{
+        .basket-item-price .price, .basket-item-img-name .name,  .last-price{
+            font-weight: bolder;
+        }
+        .last-price{
+            font-size: 1.25em;
+        }
+        .on-storage{
+            color: green;
+        }
+
+        .basket-img {
+            height: 100px;
+            width: 166px;
+        }
+
+        #amount {
             width: 50px;
             height: 30px;
+        }
+
+        .payment{
+            background-color: white;
+            margin-top: 50px;
+            width: 240px;
+            height: 300px;
+            padding: 40px;
+            border: 1px black solid;
+            border-radius: 10px 10px 10px 10px;
+        }
+
+        .payment span{
+            display: inline-block;
+            margin-top: 5px;
+        }
+        hr{
+            margin: 20px 0;
         }
 
     </style>
@@ -52,27 +114,47 @@
     </nav>
 </header>
 <main>
-    <h1>Kosár</h1>
-    <hr>
-    <form>
-
-
-    <div class="basket">
-        <p>A kosár tartalma:</p>
-        <div class="basket-item">
-            <img class="basket-img" src="../static/img/bogre1.jpg" alt="termek kepe">
-            <p class="name">Bögre</p>
-            <label for="amount"></label>
-            <input id="amount" name="amount" type="number" max="50">
-            <div class="basket-item-price">
-                <p class="price">5000 Ft</p>
-                <p>Raktáron</p>
-                <input type="submit" value="töröl">
+    <div class="main-wrapper">
+        <div class="basket">
+            <div class="basket-header">
+                <h1>Kosár</h1>
             </div>
+            <p>A kosár tartalma:</p>
+            <div class="basket-items">
+                <form class="basket-item">
+                    <div class="basket-item-img-name">
+                        <img class="basket-img" src="../static/img/bogre1.jpg" alt="termek kepe">
+                        <p class="name">Bögre</p>
+                        <div>
+                            <input id="amount" name="amount" type="number" max="50">
+                            <label for="amount">db</label>
+                        </div>
 
+                    </div>
+                    <div class="basket-item-price">
+                        <p class="price">5000 Ft</p>
+                        <p class="on-storage">Raktáron</p>
+                        <input type="submit" value="töröl">
+                    </div>
+                </form>
+            </div>
         </div>
+
+        <form class="payment">
+            <h2>Rendelés összegzése</h2>
+            <span>Összeg:</span> <span>10000 Ft</span> <br>
+            <span>Szállítási költség:</span> <span>10000 Ft</span> <br>
+            <hr>
+            <span class="last-price">Végösszeg:</span> <span  class="last-price">10000 Ft</span> <br>
+            <hr>
+            <div>
+                <span>Vásárlási utalvány megadása:</span>
+                <label for="discount"></label>
+                <input id="discount" type="text" name="discount">
+            </div>
+            <input type="submit" value="Folytatás">
+        </form>
     </div>
-    </form>
 </main>
 
 <footer>
