@@ -1,0 +1,25 @@
+create table TANKONYV
+(
+    KONYV_ID    NUMBER not null
+        constraint TANKONYV_KONYV_ID_FK
+            references KONYV
+                on delete cascade,
+    AJANLOTTKOR NUMBER,
+    FAJTA       VARCHAR2(100)
+)
+/
+
+create unique index TANKONYV_KONYV_ID_UINDEX
+    on TANKONYV (KONYV_ID)
+/
+
+alter table TANKONYV
+    add constraint TANKONYV_PK
+        primary key (KONYV_ID)
+/
+
+INSERT INTO VOROS.TANKONYV (KONYV_ID, AJANLOTTKOR, FAJTA) VALUES (24, 17, 'tankönyv');
+INSERT INTO VOROS.TANKONYV (KONYV_ID, AJANLOTTKOR, FAJTA) VALUES (43, 17, 'feladatgyüjtemény');
+INSERT INTO VOROS.TANKONYV (KONYV_ID, AJANLOTTKOR, FAJTA) VALUES (23, 14, 'feladatgyüjtemény');
+INSERT INTO VOROS.TANKONYV (KONYV_ID, AJANLOTTKOR, FAJTA) VALUES (44, 17, 'tankönyv');
+INSERT INTO VOROS.TANKONYV (KONYV_ID, AJANLOTTKOR, FAJTA) VALUES (45, 17, 'tankönyv');
