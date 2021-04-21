@@ -17,7 +17,6 @@ public class KonyvDAO implements DAO<Konyv> {
     @Override
     public List<Konyv> listaz() {
         List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV", (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
-
         return konyvek;
     }
 

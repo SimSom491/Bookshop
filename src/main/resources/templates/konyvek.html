@@ -1,37 +1,45 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Konyvek</title>
-    <link href="../static/css/base.css" rel="stylesheet">
-    <link href="../static/css/konyvek.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/konyvek.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 
 </head>
 <body>
 
 <header>
-    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <img class="logo-img" th:src="@{/img/unicorn.svg}" src="../static/img/unicorn.svg" alt="logo helye">
     <p class="logo-name" style="margin-right: 10px">Unicorn</p>
     <nav>
         <ul>
-            <li><p class="list-one-row-text">Könyvek</p></li>
-            <li><p class="list-one-row-text">Multimédia</p></li>
-            <li><p class="list-one-row-text">Ajándék</p></li>
-            <li><p class="list-text">Rendelési információk</p></li>
-            <li><img src="../static/img/shopping-basket.svg" alt="kosár helye"></li>
-            <li><img src="../static/img/user.svg" alt="felhasználói-fiók"></li>
-            <li><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></li>
+            <li><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyvek</a></p></li>
+            <li><p class="list-one-row-text"><a  th:href="@{/multimedia.html}">Multimédia</a></p>
+            </li>
+            <li><p class="list-one-row-text"><a  th:href="@{/ajandek.html}">Ajándék</a></p></li>
+            <li>
+                <p class="list-text">
+                    <a href="rendelesinfo.html" th:href="@{/rendelesinfo.html}">Rendelési információk</a>
+                </p>
+            </li>
+            <li><a th:href="@{/kosar.html}"><img th:src="@{/img/shopping-basket.svg}" src="../static/img/shopping-basket.svg"
+                                                               alt="kosár helye"></a></li>
+            <li><a th:href="profil.html"><img  th:src="@{/img/user.svg}" src="../static/img/user.svg"
+                                                                 alt="felhasználói-fiók"></a></li>
+            <li><a><img th:src="@{/img/logout.svg}" src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
         </ul>
     </nav>
 </header>
 <div class="inside-menu-wrapper">
     <ul class="inside-menu">
-        <li class="inside-menu-item"><p class="list-one-row-text">Könyv</p></li>
-        <li class="inside-menu-item"><p class="list-one-row-text">Újság</p></li>
-        <li class="inside-menu-item"><p class="list-one-row-text">Tankönyv</p></li>
-        <li class="inside-menu-item"><p class="list-one-row-text">Hangoskönyv</p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyv</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/magazinok}">Magazin</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/tankonyvek}">Tankönyv</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text">Antikvár könyv</p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/hangoskonyvek}">Hangoskönyv</a></p></li>
         <li class="inside-menu-item"><p class="list-one-row-text">Elérhetőség</p></li>
     </ul>
 </div>
@@ -42,10 +50,9 @@
             Kereső
             <input type="text" placeholder="Keresés..." name="search">
         </label>
-        <input type="submit" value="keres" >
+        <input type="submit" value="keres">
     </form>
 </div>
-
 
 
 <main>
@@ -77,54 +84,14 @@
                 </ul>
             </div>
             <div class="books-items">
-                <div class="book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
+                <div th:each="konyv: ${konyvek}" class="book-item">
+                    <img th:src="@{/img/orwell-1984.jpg}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
                     <div class="book-details">
-                        <p class="title">1984</p>
-                        <p class="author">George Orwell</p>
+                        <p th:text="${konyv.getCim()}" class="title">1984</p>
+                        <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
                         <hr>
-                        <p class="price">5000 Ft</p>
-                        <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
-                    </div>
-                </div>
-                <div class="book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
-                    <div class="book-details">
-                        <p class="title">1984</p>
-                        <p class="author">George Orwell</p>
-                        <hr>
-                        <p class="price">5000 Ft</p>
-                        <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
-                    </div>
-                </div>
-                <div class="book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
-                    <div class="book-details">
-                        <p class="title">1984</p>
-                        <p class="author">George Orwell</p>
-                        <hr>
-                        <p class="price">5000 Ft</p>
-                        <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
-                    </div>
-                </div>
-                <div class="book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
-                    <div class="book-details">
-                        <p class="title">1984</p>
-                        <p class="author">George Orwell</p>
-                        <hr>
-                        <p class="price">5000 Ft</p>
-                        <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
-                    </div>
-                </div>
-                <div class="book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
-                    <div class="book-details">
-                        <p class="title">1984</p>
-                        <p class="author">George Orwell</p>
-                        <hr>
-                        <p class="price">5000 Ft</p>
-                        <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
+                        <p th:text="${konyv.getAr()} + ' ' + Ft" class="price">5000 Ft</p>
+                        <img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
                     </div>
                 </div>
             </div>
