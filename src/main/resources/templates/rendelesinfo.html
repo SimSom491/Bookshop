@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Rendelési információ</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
-    <link href="../static/css/index.css" rel="stylesheet">
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/konyvek.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
+
     <style>
         .nyitvatartás tr {
             text-align: left;
@@ -40,12 +41,12 @@
     <nav>
         <ul>
             <li><p class="list-one-row-text"><a href="konyvek.html" th:href="@{/konyvek.html}">Könyvek</a></p></li>
-            <li><p class="list-one-row-text"><a href="multimedia.html" th:href="">Multimédia</a></p></li>
+            <li><p class="list-one-row-text"><a href="multimedia.html" th:href="@{/multimedia}">Multimédia</a></p></li>
             <li><p class="list-one-row-text"><a href="ajandek.html" th:href="ajandek.html">Ajándék</a></p></li>
             <li><p class="list-text"><a href="rendelesinfo.html" th:href="rendelesinfo.html">Rendelési információk</a></p></li>
             <li><a href="kosar.html" th:href="kosar.html"><img src="../static/img/shopping-basket.svg" alt="kosár helye"></a></li>
             <li><a href="profil.html" th:href="profil.html"><img src="../static/img/user.svg" alt="felhasználói-fiók"></a></li>
-            <li><a  href="" th:href=""><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
+            <li><a  href="" ><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
         </ul>
     </nav>
 </header>
@@ -58,14 +59,15 @@
             <h2>Üzleteink</h2>
         </div>
         <div class="shops">
-            <div class="shop">
+            <div class="shop" th:each="bolt : ${boltok}">
                 <img class="shop-img" src="../static/img/szeged.jpg" alt="bolt képének helye" width="400" height="270">
                 <div class="shop-details">
-                    <p class="shop-name">Szegedi üzletünk</p>
-                    <p class="shop-placement">6725 Szeged, Kálvária sugárút 1</p>
+                    <p class="shop-name" th:text="${bolt.getNev()}">Szegedi üzletünk</p>
+                    <p class="shop-placement" th:text="${bolt.getElhelyezkedes()}">6725 Szeged, Kálvária sugárút 1</p>
                     <table class="nyitvatartás">
                         <caption>Nyitvatartás:</caption>
-                        <tr>
+                        <tr th:text="${bolt.getNyitvatartas()}"></tr>
+             <!--           <tr>
                             <th>Hétfő-Csütörtök:</th>
                             <td>08-20</td>
                         </tr>
@@ -76,7 +78,7 @@
                         <tr>
                             <th>Hétvégén.</th>
                             <td>08-12</td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
             </div>
