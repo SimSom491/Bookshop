@@ -4,7 +4,7 @@ public class AntikvarKonyv extends Konyv{
     private int kor;
     private String allapot;
 
-    public AntikvarKonyv(int id, String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, int kor, String allapot, String leiras) {
+    public AntikvarKonyv(int id, String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras, int kor, String allapot) {
         super(id, szerzo, cim, ar, oldalszam, kiado, eleresiUt, kiadasiEv, tipus, leiras);
         this.kor = kor;
         this.allapot = allapot;

@@ -1,6 +1,7 @@
 package com.example.konyvesbolt.dao;
 
 
+import com.example.konyvesbolt.model.AntikvarKonyv;
 import com.example.konyvesbolt.model.Magazin;
 import com.example.konyvesbolt.model.Tankonyv;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,27 +11,27 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class TankonyvDAO implements DAO<Tankonyv> {
+public class AntikvarDao implements DAO<AntikvarKonyv> {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Tankonyv> listaz() {
+    public List<AntikvarKonyv> listaz() {
 
-        return jdbcTemplate.query("SELECT * FROM KONYV, TANKONYV WHERE TANKONYV.KONYV_ID=KONYV.ID"
-                , (rs, rowNum) -> new Tankonyv(rs.getInt("id"), rs.getString("szerzo")
+        return jdbcTemplate.query("SELECT * FROM KONYV, ANTIKVARKONYV WHERE ANTIKVARKONYV.KONYV_ID=KONYV.ID"
+                , (rs, rowNum) -> new AntikvarKonyv(rs.getInt("id"), rs.getString("szerzo")
                         , rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam")
                         ,rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev")
-                        ,rs.getString("tipus"), rs.getString("leiras"),rs.getInt("ajanlottkor"), rs.getString("fajta")));
+                        ,rs.getString("tipus"), rs.getString("leiras"),rs.getInt("kor"), rs.getString("allapot")));
     }
 
     @Override
-    public Tankonyv keres(int id) {
+    public AntikvarKonyv keres(int id) {
         return null;
     }
 
     @Override
-    public void frissit(Tankonyv tankonyv) {
+    public void frissit(AntikvarKonyv antikvarKonyv) {
 
     }
 
@@ -40,7 +41,7 @@ public class TankonyvDAO implements DAO<Tankonyv> {
     }
 
     @Override
-    public void beszur(Tankonyv tankonyv) {
+    public void beszur(AntikvarKonyv antikvarKonyv) {
 
     }
 }

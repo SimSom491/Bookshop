@@ -14,14 +14,14 @@ public class MagazinDAO implements DAO<Magazin> {
 
     @Override
     public List<Magazin> listaz() {
+
         List<Magazin> magazinok = jdbcTemplate.query("SELECT * FROM KONYV, MAGAZIN WHERE MAGAZIN.KONYV_ID=KONYV.ID"
                 , (rs, rowNum) -> new Magazin(rs.getInt("id"), rs.getString("szerzo")
                         , rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam")
                         ,rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev")
                         ,rs.getString("tipus"), rs.getString("leiras"),rs.getString("gyakorisag")));
-        for (Magazin magazin : magazinok) {
-            System.out.println(magazin.getGyakorisag());
-        }
+
+
         return magazinok;
     }
 

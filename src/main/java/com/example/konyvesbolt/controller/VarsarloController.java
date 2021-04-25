@@ -41,13 +41,13 @@ public class VarsarloController {
 
         return "redirect:/asd";
     }
-    @GetMapping(value = "/")
-    public String konyvlist(Model model) {
-
-        model.addAttribute("konyvek", konyvDAO.listaz()); //kiiratas
-
-
-        return "asd";
-    }
+    //@GetMapping(value = "/")
+    //public String konyvlist(Model model) {
+//
+    //    model.addAttribute("konyvek", konyvDAO.listaz()); //kiiratas
+//
+//
+    //    return "asd";
+    //}
 
 }

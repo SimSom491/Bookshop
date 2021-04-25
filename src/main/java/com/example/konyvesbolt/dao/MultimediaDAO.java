@@ -1,6 +1,7 @@
 package com.example.konyvesbolt.dao;
 
 import com.example.konyvesbolt.model.Kedvezmeny;
+import com.example.konyvesbolt.model.Konyv;
 import com.example.konyvesbolt.model.Multimedia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -45,5 +46,12 @@ public class MultimediaDAO implements DAO<Multimedia> {
         jdbcTemplate.update(sql, new Object[]{
                 multimedia.getCim(), multimedia.getAr(), multimedia.getEleresiUt() }
         );
+    }
+
+    public List<Multimedia> szur(int mufajId) {
+
+
+        return jdbcTemplate.query("SELECT MULTIMEDIA.ID,MULTIMEDIA.AR,MULTIMEDIA.CIM,MULTIMEDIA.ELERESIUT FROM MULTIMEDIA,MUFAJA WHERE MULTIMEDIA.id=MUFAJA.multimedia_id AND MUFAJA.MUFAJ_ID="+mufajId, (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"),rs.getInt("ar"),rs.getString("eleresiut")));
+
     }
 }

@@ -17,7 +17,7 @@
     <nav>
         <ul>
             <li><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyvek</a></p></li>
-            <li><p class="list-one-row-text"><a  th:href="@{/multimedia.html}">Multimédia</a></p>
+            <li><p class="list-one-row-text"><a  th:href="@{/multimedia}">Multimédia</a></p>
             </li>
             <li><p class="list-one-row-text"><a  th:href="@{/ajandek.html}">Ajándék</a></p></li>
             <li>
@@ -38,7 +38,7 @@
         <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyv</a></p></li>
         <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/magazinok}">Magazin</a></p></li>
         <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/tankonyvek}">Tankönyv</a></p></li>
-        <li class="inside-menu-item"><p class="list-one-row-text">Antikvár könyv</p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/antikvarkonyvek}">Antikvár könyv</a></p></li>
         <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/hangoskonyvek}">Hangoskönyv</a></p></li>
         <li class="inside-menu-item"><p class="list-one-row-text">Elérhetőség</p></li>
     </ul>
@@ -61,11 +61,9 @@
             <div class="genre-header">
                 <h2>Műfaj szerint</h2>
             </div>
-            <ul>
-                <li>Krimi</li>
-                <li>Novella</li>
-                <li>Ifjúsági</li>
-                <li>Romantikus</li>
+            <ul th:each="mufaj: ${mufajok}">
+                <a th:href="@{szur/{id}(id=${mufaj.id})}"><li th:text="${mufaj.nev}"></li></a>
+
             </ul>
         </div>
 

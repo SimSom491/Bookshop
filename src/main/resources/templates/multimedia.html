@@ -16,7 +16,7 @@
     <p class="logo-name" style="margin-right: 10px">Unicorn</p>
     <nav>
         <ul>
-            <li><p class="list-one-row-text"><a href="konyvek.html" th:href="@{/konyvek.html}">Könyvek</a></p></li>
+            <li><p class="list-one-row-text"><a href="konyvek.html" th:href="@{/konyvek}">Könyvek</a></p></li>
             <li><p class="list-one-row-text"><a href="multimedia.html" th:href="@{/multimedia}">Multimédia</a></p></li>
             <li><p class="list-one-row-text"><a href="ajandek.html" th:href="ajandek.html">Ajándék</a></p></li>
             <li><p class="list-text"><a href="rendelesinfo.html" th:href="rendelesinfo.html">Rendelési információk</a></p></li>
@@ -52,11 +52,9 @@
             <div class="genre-header">
                 <h2>Műfaj szerint</h2>
             </div>
-            <ul>
-                <li>Sci-fi</li>
-                <li>Vadnyugati</li>
-                <li>Akció</li>
-                <li>Romantikus</li>
+            <ul th:each="mufaj: ${mufajok}">
+                <a th:href="@{/multiszur/{id}(id=${mufaj.id})}"><li th:text="${mufaj.nev}"></li></a>
+
             </ul>
         </div>
 
