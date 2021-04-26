@@ -10,6 +10,12 @@ public class Film extends Multimedia{
         this.hossz = hossz;
     }
 
+    public Film(String cim, int ar, String eleresiUt, int ev, int hossz) {
+        super(cim, ar, eleresiUt);
+        this.ev = ev;
+        this.hossz = hossz;
+    }
+
     public Film() {
     }
 

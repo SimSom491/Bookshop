@@ -13,6 +13,12 @@ public class Multimedia {
         this.eleresiUt = eleresiUt;
     }
 
+    public Multimedia(String cim, int ar, String eleresiUt) {
+        this.cim = cim;
+        this.ar = ar;
+        this.eleresiUt = eleresiUt;
+    }
+
     public Multimedia() {
     }
 

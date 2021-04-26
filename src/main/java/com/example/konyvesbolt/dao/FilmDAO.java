@@ -45,7 +45,28 @@ public class FilmDAO implements DAO<Film>{
 
     @Override
     public void beszur(Film film) {
+        String multisql = "INSERT INTO MULTIMEDIA(CIM, AR, ELERESIUT) VALUES(?,?,?)";
+        jdbcTemplate.update(multisql,
+                film.getCim(),
+                film.getAr(),
+                film.getEleresiUt());
 
+        idkeres();
+        film.setId(idkeres());
+        System.out.println(idkeres());
+        String sql = "INSERT INTO FILM( MULTIMEDIA_ID,EV, HOSSZ) VALUES(?,?,?)";
+        jdbcTemplate.update(sql,
+                film.getId(),
+                film.getEv(),
+                film.getHossz());
+    }
+    private int idkeres(){
+        String idkeressql = "SELECT * FROM(SELECT ID FROM MULTIMEDIA ORDER BY ID DESC ) WHERE ROWNUM = 1 ";
+        List<Integer> id = jdbcTemplate.query(idkeressql,
+                (rs, rowNum) ->
+                        rs.getInt("id")
+        );
+        return id.get(0);
     }
 
 

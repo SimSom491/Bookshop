@@ -1,6 +1,8 @@
 package com.example.konyvesbolt.controller;
 
 import com.example.konyvesbolt.dao.*;
+import com.example.konyvesbolt.model.Ajandek;
+import com.example.konyvesbolt.model.Film;
 import com.example.konyvesbolt.model.Konyv;
 import com.example.konyvesbolt.model.Multimedia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -58,6 +62,24 @@ public class MultimediaController {
         model.addAttribute("mufajok", mufajDAO.multiListaz());
 
         return "multimedia";
+    }
+    @GetMapping(value = "/addfilm")
+    public String addfilmget(){
+        return "multimedia-hozzaad";
+    }
+
+    @PostMapping(value = "/addfilm")
+    public String addfilm(
+                          @RequestParam("cim") String cim,
+                          @RequestParam("ar") int ar,
+                          @RequestParam("ev") int ev,
+                          @RequestParam("eleresiUt") String eleresiUt,
+                          @RequestParam("hossz") int hossz) {
+        Film film = new Film( cim, ar, eleresiUt, ev, hossz);
+
+        filmDAO.beszur(film);
+
+        return "redirect:/addfilm";
     }
 
 }
