@@ -13,6 +13,12 @@ public class Bolt {
         this.nyitvatartas = nyitvatartas;
     }
 
+    public Bolt(String nev, String elhelyezkedes, String nyitvatartas) {
+        this.nev = nev;
+        this.elhelyezkedes = elhelyezkedes;
+        this.nyitvatartas = nyitvatartas;
+    }
+
     public Bolt() {
 
     }

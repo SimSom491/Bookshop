@@ -46,12 +46,7 @@ public class MultimediaController {
         return "multimedia";
     }
 
-    @GetMapping(value = "/bolt")
-    public String boltotListaz(Model model) {
-        model.addAttribute("boltok", boltDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.multiListaz());
-        return "rendelesinfo";
-    }
+
     @GetMapping(value = "/multiszur/{id}")
     public String szures(@PathVariable("id") int mufajId, Model model) {
         List<Multimedia> multimediak = multimediaDAO.szur(mufajId);
@@ -97,4 +92,24 @@ public class MultimediaController {
         return "redirect:/addzene";
     }
 
+    @GetMapping(value = "/bolt")
+    public String boltotListaz(Model model) {
+        model.addAttribute("boltok", boltDAO.listaz());
+        model.addAttribute("mufajok", mufajDAO.multiListaz());
+        return "rendelesinfo";
+    }
+    @GetMapping(value = "/addbolt")
+    public String addboltget(){
+        return "bolthozzaad";
+    }
+    @PostMapping(value = "/addbolt")
+    public String addBolt(
+            @RequestParam("nev") String nev,
+            @RequestParam("elhelyezkedes") String elhelyezkedes,
+            @RequestParam("nyitvatartas") String nyitvatartas
+    ){
+        Bolt bolt = new Bolt(nev,elhelyezkedes,nyitvatartas);
+        boltDAO.beszur(bolt);
+        return "redirect:/addbolt";
+    }
 }

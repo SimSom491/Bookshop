@@ -45,6 +45,12 @@ public class BoltDAO implements DAO<Bolt> {
 
     @Override
     public void beszur(Bolt bolt) {
+        String sql = "INSERT INTO BOLT(NEV, ELHELYEZKEDES, NYITVATARTAS) VALUES(?,?,?)";
+        jdbcTemplate.update(sql,
+               bolt.getNev(),
+                bolt.getElhelyezkedes(),
+                bolt.getNyitvatartas()
+                );
 
     }
 }
