@@ -1,10 +1,7 @@
 package com.example.konyvesbolt.controller;
 
 import com.example.konyvesbolt.dao.*;
-import com.example.konyvesbolt.model.Ajandek;
-import com.example.konyvesbolt.model.Film;
-import com.example.konyvesbolt.model.Konyv;
-import com.example.konyvesbolt.model.Multimedia;
+import com.example.konyvesbolt.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +64,11 @@ public class MultimediaController {
     public String addfilmget(){
         return "multimedia-hozzaad";
     }
+    @GetMapping(value = "/addzene")
+    public String addzeneget(){
+        return "multimedia-hozzaad";
+    }
+
 
     @PostMapping(value = "/addfilm")
     public String addfilm(
@@ -80,6 +82,19 @@ public class MultimediaController {
         filmDAO.beszur(film);
 
         return "redirect:/addfilm";
+    }
+
+    @PostMapping(value = "/addzene")
+    public String addzene(
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("eloado") String eloado
+    ){
+        Zene zene = new Zene(cim,ar,eleresiUt,eloado);
+        zeneDAO.beszur(zene);
+
+        return "redirect:/addzene";
     }
 
 }

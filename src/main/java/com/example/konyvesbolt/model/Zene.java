@@ -7,6 +7,12 @@ public class Zene extends Multimedia{
         super(id, cim, ar, eleresiUt);
         this.eloado = eloado;
     }
+
+    public Zene(String cim, int ar, String eleresiUt, String eloado) {
+        super(cim, ar, eleresiUt);
+        this.eloado = eloado;
+    }
+
     public Zene() {
     }
 

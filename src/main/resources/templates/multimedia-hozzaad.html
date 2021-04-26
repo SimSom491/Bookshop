@@ -21,11 +21,12 @@
         min-height: auto;
     }
 
-    .book-item{
+    .book-item {
         display: flex;
         flex-direction: column;
     }
-    .termek-wrapper{
+
+    .termek-wrapper {
         background-color: white;
         border-radius: 10px 10px 10px 10px;
         margin-top: 50px;
@@ -46,10 +47,13 @@
             <li><p class="list-one-row-text"><a href="konyvek.html" th:href="@{/konyvek.html}">Könyvek</a></p></li>
             <li><p class="list-one-row-text"><a href="multimedia.html" th:href="@{/multimedia}">Multimédia</a></p></li>
             <li><p class="list-one-row-text"><a href="ajandek.html" th:href="ajandek.html">Ajándék</a></p></li>
-            <li><p class="list-text"><a href="rendelesinfo.html" th:href="rendelesinfo.html">Rendelési információk</a></p></li>
-            <li><a href="kosar.html" th:href="kosar.html"><img src="../static/img/shopping-basket.svg" alt="kosár helye"></a></li>
-            <li><a href="profil.html" th:href="profil.html"><img src="../static/img/user.svg" alt="felhasználói-fiók"></a></li>
-            <li><a  href="" ><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
+            <li><p class="list-text"><a href="rendelesinfo.html" th:href="rendelesinfo.html">Rendelési információk</a>
+            </p></li>
+            <li><a href="kosar.html" th:href="kosar.html"><img src="../static/img/shopping-basket.svg"
+                                                               alt="kosár helye"></a></li>
+            <li><a href="profil.html" th:href="profil.html"><img src="../static/img/user.svg"
+                                                                 alt="felhasználói-fiók"></a></li>
+            <li><a href=""><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
         </ul>
     </nav>
 </header>
@@ -74,7 +78,25 @@
                     <input type="text" id="nar" name="ev">
                     <label for="length">Hossz:</label>
                     <input type="text" id="length" name="hossz">
-                    <input type="submit" >
+                    <input type="submit">
+                    <hr>
+                </div>
+            </div>
+        </form>
+        <form action="/addzene" method="post">
+            <div class="book-item">
+                <label for="cover2">Borítókép:</label>
+                <input type="file" id="cover2" name="eleresiUt">
+                <div class="book-details">
+                    <h4>Zene:</h4>
+                    <label for="music"></label>
+                    <input type="text" id="music" name="eloado">
+                    <label for="title">Cím:</label>
+                    <input type="text" id="title2" name="cim">
+                    <label for="price">Ár:</label>
+                    <input type="number" id="price2" name="ar">
+                    <input type="submit">
+                    <hr>
                 </div>
             </div>
         </form>
