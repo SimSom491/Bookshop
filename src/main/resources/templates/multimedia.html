@@ -85,7 +85,7 @@
                     <div class="book-details">
                         <p class="title" th:text="${multi.getCim()}">1984</p>
                         <hr>
-                        <p class="price" th:text="${multi.getAr()}">5000 Ft</p>
+                        <p class="price" th:text="${multi.getAr() + ' Forint'}">5000 Ft</p>
                         <img th:src="@{/img/shopping-basket.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
                     </div>
                 </div>
