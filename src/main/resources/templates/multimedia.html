@@ -2,7 +2,7 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Konyvek</title>
+    <title>Multimédia</title>
     <link th:href="@{/css/base.css}" rel="stylesheet">
     <link th:href="@{/css/konyvek.css}" rel="stylesheet">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
@@ -74,7 +74,7 @@
             </div>
             <div class="books-items">
                 <div class="book-item" th:each="multi : ${multimedia}">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${multi.getEleresiUt()}}">
                     <div class="book-details">
                         <p class="title" th:text="${multi.getCim()}">1984</p>
                         <hr>
