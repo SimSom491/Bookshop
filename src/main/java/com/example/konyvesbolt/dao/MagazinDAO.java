@@ -46,7 +46,7 @@ public class MagazinDAO implements DAO<Magazin> {
 
     @Override
     public void torol(int id) {
-        String sql = "DELETE FROM KONYV WHERE MAGAZIN.ID=KONYV.ID AND id=" + id;
+        String sql = "DELETE FROM KONYV WHERE  MAGAZIN.KONYV_ID=KONYV.ID AND id=" + id;
         jdbcTemplate.update(sql);
     }
 
