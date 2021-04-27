@@ -2,7 +2,7 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Konyvek</title>
+    <title>Multimédia</title>
     <link th:href="@{/css/base.css}" rel="stylesheet">
     <link th:href="@{/css/konyvek.css}" rel="stylesheet">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
@@ -12,17 +12,24 @@
 <body>
 
 <header>
-    <img class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
+    <img th:src="@{/img/unicorn.svg}" class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
     <p class="logo-name" style="margin-right: 10px">Unicorn</p>
     <nav>
         <ul>
-            <li><p class="list-one-row-text"><a href="konyvek.html" th:href="@{/konyvek}">Könyvek</a></p></li>
-            <li><p class="list-one-row-text"><a href="multimedia.html" th:href="@{/multimedia}">Multimédia</a></p></li>
-            <li><p class="list-one-row-text"><a href="ajandek.html" th:href="ajandek.html">Ajándék</a></p></li>
-            <li><p class="list-text"><a href="rendelesinfo.html" th:href="rendelesinfo.html">Rendelési információk</a></p></li>
-            <li><a href="kosar.html" th:href="kosar.html"><img src="../static/img/shopping-basket.svg" alt="kosár helye"></a></li>
-            <li><a href="profil.html" th:href="profil.html"><img src="../static/img/user.svg" alt="felhasználói-fiók"></a></li>
-            <li><a  href="" ><img src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
+            <li><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyvek</a></p></li>
+            <li><p class="list-one-row-text"><a  th:href="@{/multimedia}">Multimédia</a></p>
+            </li>
+            <li><p class="list-one-row-text"><a  th:href="@{/ajandek.html}">Ajándék</a></p></li>
+            <li>
+                <p class="list-text">
+                    <a href="rendelesinfo.html" th:href="@{/rendelesinfo.html}">Rendelési információk</a>
+                </p>
+            </li>
+            <li><a th:href="@{/kosar.html}"><img th:src="@{/img/shopping-basket.svg}" src="../static/img/shopping-basket.svg"
+                                                 alt="kosár helye"></a></li>
+            <li><a th:href="profil.html"><img  th:src="@{/img/user.svg}" src="../static/img/user.svg"
+                                               alt="felhasználói-fiók"></a></li>
+            <li><a><img th:src="@{/img/logout.svg}" src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
         </ul>
     </nav>
 </header>
@@ -74,12 +81,12 @@
             </div>
             <div class="books-items">
                 <div class="book-item" th:each="multi : ${multimedia}">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
+                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${multi.getEleresiUt()}}">
                     <div class="book-details">
                         <p class="title" th:text="${multi.getCim()}">1984</p>
                         <hr>
-                        <p class="price" th:text="${multi.getAr()}">5000 Ft</p>
-                        <img src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
+                        <p class="price" th:text="${multi.getAr() + ' Ft'}">5000 Ft</p>
+                        <img th:src="@{/img/shopping-basket.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
                     </div>
                 </div>
             </div>
