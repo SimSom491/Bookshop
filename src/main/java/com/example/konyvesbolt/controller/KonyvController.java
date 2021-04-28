@@ -38,7 +38,7 @@ public class KonyvController {
     public String Starter(Model model) {
         model.addAttribute("konyvek", konyvDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.listaz());
-        return "konyvek";
+        return "index";
     }
 
     @GetMapping(value = "/konyvek")
@@ -48,7 +48,7 @@ public class KonyvController {
         return "konyvek";
     }
 
-    @GetMapping(value = "/szur/{id}")
+    @GetMapping(value = "/konyvek/szur/{id}")
     public String szures(@PathVariable("id") int mufajId, Model model) {
         List<Konyv> konyvek = konyvDAO.szur(mufajId);
         model.addAttribute("konyvek", konyvek);

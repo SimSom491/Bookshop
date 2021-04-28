@@ -41,7 +41,7 @@
                 <h2>Műfaj szerint</h2>
             </div>
             <ul th:each="mufaj: ${mufajok}">
-                <a th:href="@{szur/{id}(id=${mufaj.id})}"><li th:text="${mufaj.nev}"></li></a>
+                <a th:href="@{/konyvek/szur/{id}(id=${mufaj.id})}"><li th:text="${mufaj.nev}"></li></a>
 
             </ul>
         </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="books-items">
                 <div th:each="konyv: ${konyvek}" class="book-item">
-                    <img th:src="@{/img/orwell-1984.jpg}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270">
+                    <img  src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${konyv.getEleresiUt()}}">
                     <div class="book-details">
                         <p th:text="${konyv.getCim()}" class="title">1984</p>
                         <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
