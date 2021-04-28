@@ -11,28 +11,7 @@
 </head>
 <body>
 
-<header>
-    <img th:src="@{/img/unicorn.svg}" class="logo-img" src="../static/img/unicorn.svg" alt="logo helye">
-    <p class="logo-name" style="margin-right: 10px">Unicorn</p>
-    <nav>
-        <ul>
-            <li><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyvek</a></p></li>
-            <li><p class="list-one-row-text"><a  th:href="@{/multimedia}">Multimédia</a></p>
-            </li>
-            <li><p class="list-one-row-text"><a  th:href="@{/ajandek.html}">Ajándék</a></p></li>
-            <li>
-                <p class="list-text">
-                    <a href="rendelesinfo.html" th:href="@{/rendelesinfo.html}">Rendelési információk</a>
-                </p>
-            </li>
-            <li><a th:href="@{/kosar.html}"><img th:src="@{/img/shopping-basket.svg}" src="../static/img/shopping-basket.svg"
-                                                 alt="kosár helye"></a></li>
-            <li><a th:href="profil.html"><img  th:src="@{/img/user.svg}" src="../static/img/user.svg"
-                                               alt="felhasználói-fiók"></a></li>
-            <li><a><img th:src="@{/img/logout.svg}" src="../static/img/logout.svg" alt="kijelentkezés-helye"></a></li>
-        </ul>
-    </nav>
-</header>
+<header th:replace="fragments/header"></header>
 <div class="inside-menu-wrapper">
     <ul class="inside-menu">
         <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/multimedia}">Multimédia</a></p></li>
