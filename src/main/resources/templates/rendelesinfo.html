@@ -9,63 +9,46 @@
     <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 
     <style>
-        .nyitvatartás tr {
-            text-align: left;
-            border: 1px solid black;
+        .shop-wrapper{
+            width: 300px;
+            flex-wrap: wrap;
+            padding: 2em;
+            margin: 5rem auto;
+            border: 2px solid black;
+            border-radius: 10px 10px 10px 10px;
         }
-
-        .nyitvatartás caption {
-            font-weight: bold;
-        }
-
-        .nyitvatartás {
-            border: 1px solid black;
-        }
-
         .shop-details {
             display: flex;
             flex-direction: column;
+            border: 1px solid black;
+            padding: 1.20em;
+            margin: 5px 0 5px 0;
+            border-radius: 10px 10px 10px 10px;
         }
 
         .shop-details .shop-name {
             font-style: italic;
             font-weight: bold;
 
+
         }
     </style>
 </head>
 <body>
 <header th:replace="fragments/header"></header>
-
-
 <main>
-
     <div class="shop-wrapper">
         <div class="shop-header">
             <h2>Üzleteink</h2>
         </div>
         <div class="shops">
             <div class="shop" th:each="bolt : ${boltok}">
-                <img class="shop-img" src="../static/img/szeged.jpg" alt="bolt képének helye" width="400" height="270">
+<!--                <img class="shop-img" src="../static/img/szeged.jpg" alt="bolt képének helye" width="400" height="270">-->
                 <div class="shop-details">
                     <p class="shop-name" th:text="${bolt.getNev()}">Szegedi üzletünk</p>
+
                     <p class="shop-placement" th:text="${bolt.getElhelyezkedes()}">6725 Szeged, Kálvária sugárút 1</p>
-                    <table class="nyitvatartás">
-                        <caption>Nyitvatartás:</caption>
-                        <tr th:text="${bolt.getNyitvatartas()}"></tr>
-             <!--           <tr>
-                            <th>Hétfő-Csütörtök:</th>
-                            <td>08-20</td>
-                        </tr>
-                        <tr>
-                            <th>Péntek:</th>
-                            <td>08-16</td>
-                        </tr>
-                        <tr>
-                            <th>Hétvégén.</th>
-                            <td>08-12</td>
-                        </tr> -->
-                    </table>
+                    <p> Nyitvatartás: <span th:text="${bolt.getNyitvatartas()}"></span></p>
                 </div>
             </div>
         </div>
