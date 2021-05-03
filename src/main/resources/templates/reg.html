@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
-    <link href="../static/css/log-reg.css" rel="stylesheet">
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/log-reg.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 </head>
 <body>
 <header th:replace="fragments/header"></header>
@@ -22,19 +22,23 @@
 
     <div class="reg-wrapper">
         <h1>Regisztráció</h1>
-        <form class="login-form">
+        <form class="login-form" action="/register" method="post">
             <label for="email">Email cím:</label>
             <input id="email" type="text" name="email">
             <label for="pw">jelszó:</label>
             <input id="pw" type="password" name="pw">
             <label for="pw-again">jelszó újra:</label>
-            <input id="pw-again" type="password" name="pw">
+            <input id="pw-again" type="password" name="pw-again">
             <label for="name">Név:</label>
             <input id="name" type="text" name="name">
             <label for="tel">Telefonszám:</label>
             <input id="tel" type="tel" name="tel">
-            <label for="address">Szállítási cím:</label>
-            <input id="address" type="text" name="address">
+            <label for="post-code">Írányító szám:</label>
+            <input id="post-code" type="number" name="post-code">
+            <label for="street">Utca szám:</label>
+            <input id="street" type="text" name="street">
+            <label for="street-number">Írányító szám:</label>
+            <input id="street-number" type="number" name="street-number">
             <input type="submit" value="Belépés">
         </form>
     </div>

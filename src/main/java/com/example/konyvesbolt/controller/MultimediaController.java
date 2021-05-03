@@ -35,13 +35,13 @@ public class MultimediaController {
     @GetMapping(value = "/zene")
     public String zenetListaz(Model model) {
         model.addAttribute("multimedia", zeneDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.multiListaz());
+        model.addAttribute("mufajok", mufajDAO.zeneListaz());
         return "multimedia";
     }
     @GetMapping(value = "/film")
     public String filmetListaz(Model model) {
         model.addAttribute("multimedia", filmDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.multiListaz());
+        model.addAttribute("mufajok", mufajDAO.filmListaz());
         return "multimedia";
     }
 
@@ -51,7 +51,6 @@ public class MultimediaController {
         List<Multimedia> multimediak = multimediaDAO.szur(mufajId);
         model.addAttribute("multimedia", multimediak);
         model.addAttribute("mufajok", mufajDAO.multiListaz());
-
         return "multimedia";
     }
     @GetMapping(value = "/addfilm")

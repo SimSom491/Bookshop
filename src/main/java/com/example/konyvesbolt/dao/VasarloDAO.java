@@ -17,8 +17,7 @@ public class VasarloDAO implements DAO<Vasarlo> {
 
     @Override
     public List<Vasarlo> listaz() {
-        List<Vasarlo> vasarlok = jdbcTemplate.query("SELECT * FROM VASARLO", (rs, rowNum) -> new Vasarlo(rs.getInt("id"), rs.getString("email"), rs.getString("jelszo"),rs.getString("nev"),rs.getDate("szulido"),rs.getBoolean("torsvasarloe"),rs.getInt("irszam"),rs.getString("utcanev"),rs.getInt("hazszam")));
-
+        List<Vasarlo> vasarlok = jdbcTemplate.query("SELECT * FROM VASARLO", (rs, rowNum) -> new Vasarlo(rs.getInt("id"), rs.getString("email"), rs.getString("jelszo"),rs.getString("nev"),rs.getDate("szulido"), (rs.getInt("torsvasarloe") == 1), (rs.getInt("admine") == 1), rs.getInt("irszam"),rs.getString("utcanev"),rs.getInt("hazszam")));
         return vasarlok;
     }
 

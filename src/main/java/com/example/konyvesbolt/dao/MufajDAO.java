@@ -19,6 +19,10 @@ public class MufajDAO implements DAO<Mufaj> {
         return jdbcTemplate.query("SELECT DISTINCT MUFAJ_ID AS id,MUFAJ.NEV AS nev FROM MUFAJ,MUFAJA WHERE MUFAJA.MUFAJ_ID=MUFAJ.ID AND NOT MUFAJA.KONYV_ID IS NULL ", (rs, rowNum) -> new Mufaj(rs.getInt("id"), rs.getString("nev")));
     }
 
+    public List<Mufaj> listazKonyvek(String param) {
+        return jdbcTemplate.query("SELECT DISTINCT MUFAJ_ID AS id,MUFAJ.NEV AS nev FROM MUFAJ,MUFAJA, KONYV WHERE KONYV.ID = MUFAJA.KONYV_ID AND MUFAJA.MUFAJ_ID=MUFAJ.ID AND NOT MUFAJA.KONYV_ID IS NULL AND KONYV.TIPUS='" + param + "'", (rs, rowNum) -> new Mufaj(rs.getInt("id"), rs.getString("nev")));
+    }
+
     @Override
     public Mufaj keres(int id) {
         return null;
@@ -43,4 +47,13 @@ public class MufajDAO implements DAO<Mufaj> {
         return jdbcTemplate.query("SELECT DISTINCT MUFAJ_ID AS id,MUFAJ.NEV AS nev FROM MUFAJ,MUFAJA WHERE MUFAJA.MUFAJ_ID=MUFAJ.ID AND MUFAJA.KONYV_ID IS NULL ", (rs, rowNum) -> new Mufaj(rs.getInt("id"), rs.getString("nev")));
 
     }
+
+    public List<Mufaj> zeneListaz() {
+        return jdbcTemplate.query("SELECT DISTINCT MUFAJ_ID AS id,MUFAJ.NEV AS nev FROM MUFAJ,MUFAJA, ZENE WHERE ZENE.MULTIMEDIA_ID = MUFAJA.MULTIMEDIA_ID AND MUFAJA.MUFAJ_ID=MUFAJ.ID AND MUFAJA.KONYV_ID IS NULL ", (rs, rowNum) -> new Mufaj(rs.getInt("id"), rs.getString("nev")));
+    }
+    public List<Mufaj> filmListaz() {
+        return jdbcTemplate.query("SELECT DISTINCT MUFAJ_ID AS id,MUFAJ.NEV AS nev FROM MUFAJ,MUFAJA, FILM WHERE FILM.MULTIMEDIA_ID = MUFAJA.MULTIMEDIA_ID AND MUFAJA.MUFAJ_ID=MUFAJ.ID AND MUFAJA.KONYV_ID IS NULL ", (rs, rowNum) -> new Mufaj(rs.getInt("id"), rs.getString("nev")));
+    }
+
+
 }

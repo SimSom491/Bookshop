@@ -2,17 +2,16 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
-    <link href="../static/css/log-reg.css" rel="stylesheet">
-</head>
+    <title>Konyvek</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/log-reg.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 <body>
 <header th:replace="fragments/header"></header>
 <main>
     <div class="login-image-wrapper">
-        <img class="login-image" src="../static/img/unicorn.svg" alt="logo helye">
+        <img class="login-image" th:src="@{/img/unicorn.svg}" alt="logo helye">
         <blockquote>
             "Annyira hihetetlenek az áraink, <br> mint egy unikornis"
         </blockquote>
@@ -21,7 +20,7 @@
 
     <div class="login-wrapper">
         <h1 >Bejelentkezés</h1>
-        <form class="login-form">
+        <form class="login-form" method="post" action="/login">
 
             <label for="email">Email cím:</label>
             <input id="email" type="text" name="email">
@@ -30,6 +29,14 @@
             <input type="submit" value="Belépés">
 
         </form>
+        <div style="display: none" id="error_message" th:text="${error_message}"></div>
+        <div style="display: none" id="success_message" th:text="${success_message}"></div>
+        <script th:if="${error_message != null}">
+            alert(document.getElementById("error_message").innerText);
+        </script>
+        <script th:if="${success_message != null}">
+            alert(document.getElementById("success_message").innerText);
+        </script>
     </div>
 
 

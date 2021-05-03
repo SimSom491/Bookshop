@@ -20,8 +20,6 @@ public class MagazinDAO implements DAO<Magazin> {
                         , rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam")
                         ,rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev")
                         ,rs.getString("tipus"), rs.getString("leiras"),rs.getString("gyakorisag")));
-
-
         return magazinok;
     }
 

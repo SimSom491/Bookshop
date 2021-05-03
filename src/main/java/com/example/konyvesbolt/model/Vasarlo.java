@@ -8,9 +8,34 @@ public class Vasarlo {
     private String nev;
     private Date szulido;
     private boolean torzsvasarloe;
+
+    public boolean isAdmine() {
+        return admine;
+    }
+
+    public void setAdmine(boolean admine) {
+        this.admine = admine;
+    }
+
+    private boolean admine;
+
+    public Vasarlo(int id, String email, String jelszo, String nev, Date szulido, boolean torzsvasarloe, boolean admine, int irszam, String utca, int hazszam) {
+        this.id = id;
+        this.email = email;
+        this.jelszo = jelszo;
+        this.nev = nev;
+        this.szulido = szulido;
+        this.torzsvasarloe = torzsvasarloe;
+        this.admine = admine;
+        this.irszam = irszam;
+        this.utca = utca;
+        this.hazszam = hazszam;
+    }
+
     private int irszam;
     private String utca;
     private int hazszam;
+
 
     public boolean isTorzsvasarloe() {
         return torzsvasarloe;
