@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Repository
@@ -42,9 +43,10 @@ public class VasarloDAO implements DAO<Vasarlo> {
 
     @Override
     public void beszur(Vasarlo vasarlo) {
-        String sql = "INSERT INTO VASARLO( EMAIL, JELSZO, NEV, SZULIDO, TORZSVASARLOE, IRSZAM, UTCANEV, HAZSZAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String strDate = new SimpleDateFormat("dd-MMM-yy").format(vasarlo.getSzulido());
+        String sql = "INSERT INTO VASARLO(EMAIL, JELSZO, NEV, SZULIDO, TORZSVASARLOE, ADMINE, IRSZAM, UTCANEV, HAZSZAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, new Object[]{
-                vasarlo.getEmail(), vasarlo.getJelszo(), vasarlo.getNev(), vasarlo.getSzulido(), vasarlo.getTorzsvasarloe(), vasarlo.getIrszam(), vasarlo.getUtca(), vasarlo.getHazszam() }
+                vasarlo.getEmail(), vasarlo.getJelszo(), vasarlo.getNev(), strDate, vasarlo.getTorzsvasarloe() ? 1 : 0, vasarlo.isAdmine() ? 1 : 0, vasarlo.getIrszam(), vasarlo.getUtca(), vasarlo.getHazszam() }
         );
     }
 }

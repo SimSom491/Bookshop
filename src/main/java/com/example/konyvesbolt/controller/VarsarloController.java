@@ -1,20 +1,16 @@
 package com.example.konyvesbolt.controller;
 
 
-import com.example.konyvesbolt.dao.AjandekDAO;
-import com.example.konyvesbolt.dao.KonyvDAO;
 import com.example.konyvesbolt.dao.VasarloDAO;
-import com.example.konyvesbolt.model.Ajandek;
 import com.example.konyvesbolt.model.Vasarlo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,13 +24,15 @@ public class VarsarloController {
     @Autowired
     VasarloDAO vasarloDAO;
 
-    public static Map<String, String> messages = new HashMap<>();
+    public static Map<String, String> logMessages = new HashMap<>();
+    public static Map<String, String> regMessages = new HashMap<>();
 
 
     @GetMapping(value = "/login")
     public String login(Model model) {
-        model.addAttribute("error_message",  messages.get("error_message"));
-        model.addAttribute("success_message",  messages.get("succes_message"));
+        model.addAttribute("error_message",  logMessages.get("error_message"));
+        model.addAttribute("success_message",  logMessages.get("succes_message"));
+        logMessages.clear();
         return "login";
     }
 
@@ -53,50 +51,71 @@ public class VarsarloController {
         List<Vasarlo> vasarlok = vasarloDAO.listaz();
         for (Vasarlo vasarlo : vasarlok) {
             if (vasarlo.getEmail().equals(email) && vasarlo.getJelszo().equals(pw)){
-                messages.put("success_message", "Sikeres bejelentkezés!");
+                logMessages.put("success_message", "Sikeres bejelentkezés!");
                 return true;
             }
         }
-        messages.put("error_message", "A felhasználónév vagy jelszó hibás");
+        logMessages.put("error_message", "A felhasználónév vagy jelszó hibás");
         return false;
     }
 
     @GetMapping(value = "/register")
     public String register(Model model) {
-        model.addAttribute("error_message",  messages.get("error_message"));
-        model.addAttribute("success_message",  messages.get("succes_message"));
-        return "login";
+        model.addAttribute("error_message",  logMessages.get("error_message"));
+        model.addAttribute("success_message",  logMessages.get("succes_message"));
+        return "reg";
     }
 
     @PostMapping(value = "/register")
-    public String register(@RequestParam("email") String email,
-                           @RequestParam("pw") String pw,
-                           @RequestParam("pw-again") String pwAgain,
-                           @RequestParam("name") String name,
-                           @RequestParam("tel") String tel,
-                           @RequestParam("post-code") int postCode,
-                           @RequestParam("street") String street,
-                           @RequestParam("street-number") String streetNumber
+    public String register(@RequestParam( value = "email",   required = false) String email,
+                           @RequestParam(value = "pw",       required = false) String pw,
+                           @RequestParam(value = "pw-again",required = false) String pwAgain,
+                           @RequestParam(value = "name", required = false ) String name,
+                           @RequestParam(value = "date", required = false ) String date,
+                           @RequestParam(value = "tel", required = false) String tel,
+                           @RequestParam(value = "post-code" ,required = false) int postCode,
+                           @RequestParam(value = "street"    ,required = false) String street,
+                           @RequestParam(value = "street-number", required = false) int streetNumber
                            ) {
+
+
+        if(email  == null  || email.trim().equals("") ){
+            regMessages.put("user_empty", "Meg kell adni az emailt!");
+        } else if( pw == null || pw.trim().equals("")){
+            regMessages.put("pw_empty", "Meg kell adni a jelszot!");
+        } else if (tel == null || tel.trim().equals("")){
+            regMessages.put("tel_empty", "Meg kell adni a telefonszámot!");
+        } else if (name == null || name.trim().equals("")){
+            regMessages.put("tel_empty", "Meg kell adni a telefonszámot!");
+        } else if (postCode == 0){
+            regMessages.put("post_empty", "Meg kell adni a irányítószámot!");
+        } else if(street == null || street.equals("")){
+            regMessages.put("street_empty", "Meg kell adni az utcát!");
+        } else if(streetNumber == 0){
+            regMessages.put("street_empty", "Meg kell adni a házszámot!");
+        } else if(date == null || date.equals("")){
+            regMessages.put("date", "Meg kell adni a születésidátumot!");
+        }
+        if(regMessages.size() > 0){
+            return "redirect:/register";
+        }
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
-        if(name.trim().equals("")){
-
-        } else if(tel.trim().equals("")){
-
-        }
-
         if (!matcher.find()){
-            messages.put("emailFormat", "Rossz email formátum");
+            regMessages.put("emailFormat", "Rossz email formátum");
         }
-
         if(!pw.equals(pwAgain)){
-            messages.put("verificationPW", "Nem egyezik meg a jelszó az ellenörző jelszóval");
+            regMessages.put("verificationPW", "Nem egyezik meg a jelszó az ellenörző jelszóval");
         }
 
+        Date dateObj = Date.valueOf(date);
+        if (logMessages.size() == 0){
+            regMessages.put("succes", "Sikeres regisztráció");
+            vasarloDAO.beszur(new Vasarlo(email,pw,name,dateObj,  false,false, postCode,street,streetNumber));
 
-
-    return "";
-
+            return "redirect:/";
+        } else {
+            return "redirect:/register";
+        }
     }
 }

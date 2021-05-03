@@ -32,6 +32,16 @@ public class Vasarlo {
         this.hazszam = hazszam;
     }
 
+    public Vasarlo(String email, String jelszo, String nev, Date szulido, int irszam, String utca, int hazszam) {
+        this.email = email;
+        this.jelszo = jelszo;
+        this.nev = nev;
+        this.szulido = szulido;
+        this.irszam = irszam;
+        this.utca = utca;
+        this.hazszam = hazszam;
+    }
+
     private int irszam;
     private String utca;
     private int hazszam;
@@ -71,6 +81,18 @@ public class Vasarlo {
         this.nev = nev;
         this.szulido = szulido;
         this.torzsvasarloe = torzsvasarloe;
+        this.irszam = irszam;
+        this.utca = utca;
+        this.hazszam = hazszam;
+    }
+
+    public Vasarlo(String email, String jelszo, String nev, Date szulido, boolean torzsvasarloe, boolean admine, int irszam, String utca, int hazszam) {
+        this.email = email;
+        this.jelszo = jelszo;
+        this.nev = nev;
+        this.szulido = szulido;
+        this.torzsvasarloe = torzsvasarloe;
+        this.admine = admine;
         this.irszam = irszam;
         this.utca = utca;
         this.hazszam = hazszam;
