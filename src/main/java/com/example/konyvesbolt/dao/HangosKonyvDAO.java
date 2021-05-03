@@ -40,6 +40,33 @@ public class HangosKonyvDAO implements DAO<Hangoskonyv> {
 
     @Override
     public void beszur(Hangoskonyv hangosKonyv) {
-
+        String konyvsql = "INSERT INTO KONYV( SZERZO, CIM, AR, OLDALSZAM, KIADO, ELERESIUT, KIADASIEV, TIPUS, LEIRAS) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+        jdbcTemplate.update(konyvsql,
+                hangosKonyv.getSzerzo(),
+                hangosKonyv.getCim(),
+                hangosKonyv.getAr(),
+                hangosKonyv.getOldalszam(),
+                hangosKonyv.getKiado(),
+                hangosKonyv.getEleresiUt(),
+                hangosKonyv.getKiadasiEv(),
+                hangosKonyv.getTipus(),
+                hangosKonyv.getEleresiUt()
+        );
+        idkeres();
+        hangosKonyv.setId(idkeres());
+        String sql = "INSERT INTO VOROS.HANGOSKONYV(KONYV_ID, ELBESZELO, HOSSZ) VALUES(?,?,?)";
+        jdbcTemplate.update(sql,
+                hangosKonyv.getId(),
+                hangosKonyv.getElbeszelo(),
+                hangosKonyv.getHossz()
+        );
+    }
+    private int idkeres() {
+        String idkeressql = "SELECT * FROM(SELECT ID FROM KONYV ORDER BY ID DESC ) WHERE ROWNUM = 1 ";
+        List<Integer> id = jdbcTemplate.query(idkeressql,
+                (rs, rowNum) ->
+                        rs.getInt("id")
+        );
+        return id.get(0);
     }
 }
