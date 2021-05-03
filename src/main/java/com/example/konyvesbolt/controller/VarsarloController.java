@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ public class VarsarloController {
 
     public static Map<String, String> logMessages = new HashMap<>();
     public static Map<String, String> regMessages = new HashMap<>();
+    public static Map<String, String> profilMessages = new HashMap<>();
 
 
     @GetMapping(value = "/login")
@@ -37,8 +39,13 @@ public class VarsarloController {
     }
 
     @PostMapping(value = "/login")
-    public String login(@RequestParam("email") String email, @RequestParam("pw") String pw) {
-            if(registered(email,pw)){
+    public String login(@RequestParam("email") String email, @RequestParam("pw") String pw, HttpSession session) {
+
+        Vasarlo vasarlo = new Vasarlo();
+        vasarlo.setEmail(email);
+        vasarlo.setJelszo(pw);
+        if(registered(email,pw)){
+                session.setAttribute("logged_in_user", vasarlo);
                 return "redirect:/";
             } else {
                 return "redirect:/login";
@@ -46,6 +53,32 @@ public class VarsarloController {
 
 
         }
+
+    @GetMapping(value = "/profil")
+    public String profil(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+        if (vasarlo != null) {
+            System.out.println(vasarlo);
+            model.addAttribute("currentVasarlo",vasarloDAO.keres(vasarlo.getEmail()));
+            return "profil";
+        } else {
+            profilMessages.put("error_message", "A profil megtekintéshez be kell jelentkezni!");
+            return "redirect:/login";
+        }
+    }
+    @GetMapping(value = "/logout")
+    public String logout(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+        if (vasarlo != null) {
+            httpSession.setAttribute("logged_in_user", null);
+            return "redirect:/";
+        } else {
+            profilMessages.put("error_message", "A kijelentkezéshez be kell jelentkezni!");
+            return "redirect:/";
+        }
+    }
+
+
 
     private boolean registered(String email, String pw){
         List<Vasarlo> vasarlok = vasarloDAO.listaz();
@@ -59,10 +92,16 @@ public class VarsarloController {
         return false;
     }
 
+
     @GetMapping(value = "/register")
     public String register(Model model) {
-        model.addAttribute("error_message",  logMessages.get("error_message"));
-        model.addAttribute("success_message",  logMessages.get("succes_message"));
+        for (Map.Entry<String, String> entry : regMessages.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+        }
+        model.addAttribute("error_messages",  regMessages);
+        model.addAttribute("success_message",  regMessages.get("succes_message"));
+
         return "reg";
     }
 
@@ -77,8 +116,7 @@ public class VarsarloController {
                            @RequestParam(value = "street"    ,required = false) String street,
                            @RequestParam(value = "street-number", required = false) int streetNumber
                            ) {
-
-
+        regMessages.clear();
         if(email  == null  || email.trim().equals("") ){
             regMessages.put("user_empty", "Meg kell adni az emailt!");
         } else if( pw == null || pw.trim().equals("")){
@@ -100,17 +138,29 @@ public class VarsarloController {
             return "redirect:/register";
         }
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        assert email != null;
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         if (!matcher.find()){
+            System.out.println("asd");
             regMessages.put("emailFormat", "Rossz email formátum");
         }
+        assert pw != null;
         if(!pw.equals(pwAgain)){
+
             regMessages.put("verificationPW", "Nem egyezik meg a jelszó az ellenörző jelszóval");
+        }
+        List<Vasarlo> vasarlok = vasarloDAO.listaz();
+        for (Vasarlo vasarlo : vasarlok) {
+            if (vasarlo.getEmail().equals(email)){
+                regMessages.put("userName", "Felhasználónév foglalt");
+            }
         }
 
         Date dateObj = Date.valueOf(date);
-        if (logMessages.size() == 0){
+        if (regMessages.size() == 0){
             regMessages.put("succes", "Sikeres regisztráció");
+
+
             vasarloDAO.beszur(new Vasarlo(email,pw,name,dateObj,  false,false, postCode,street,streetNumber));
 
             return "redirect:/";
@@ -118,4 +168,14 @@ public class VarsarloController {
             return "redirect:/register";
         }
     }
+
+
+
+
+
+
+
 }
+
+
+

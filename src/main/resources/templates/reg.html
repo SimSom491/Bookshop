@@ -13,7 +13,7 @@
 
 <main>
     <div class="login-image-wrapper">
-        <img class="login-image" src="../static/img/unicorn.svg" alt="logo helye">
+        <img class="login-image" th:src="@{/img/unicorn.svg}" alt="logo helye">
         <blockquote>
             "Annyira hihetetlenek az áraink, <br> mint egy unikornis"
         </blockquote>
@@ -37,12 +37,15 @@
             <input id="tel" type="tel" name="tel">
             <label for="post-code">Írányító szám:</label>
             <input id="post-code" type="number" name="post-code">
-            <label for="street">Utca szám:</label>
+            <label for="street">Utca:</label>
             <input id="street" type="text" name="street">
-            <label for="street-number">Írányító szám:</label>
+            <label for="street-number">Utca szám:</label>
             <input id="street-number" type="number" name="street-number">
             <input type="submit" value="Belépés">
         </form>
+        <div th:each="error : ${error_messages}">
+            <div th:text="${error.value}">num</div>
+        </div>
     </div>
 
 </main>

@@ -1,13 +1,18 @@
 package com.example.konyvesbolt.model;
 
+import java.awt.*;
+import java.io.Serializable;
 import java.sql.Date;
-public class Vasarlo {
+public class Vasarlo implements Serializable {
     private int id;
     private String email;
     private String jelszo;
     private String nev;
     private Date szulido;
     private boolean torzsvasarloe;
+    private int irszam;
+    private String utca;
+    private int hazszam;
 
     public boolean isAdmine() {
         return admine;
@@ -41,10 +46,6 @@ public class Vasarlo {
         this.utca = utca;
         this.hazszam = hazszam;
     }
-
-    private int irszam;
-    private String utca;
-    private int hazszam;
 
 
     public boolean isTorzsvasarloe() {

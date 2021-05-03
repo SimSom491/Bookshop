@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Profil</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 
     <style>
         main{
@@ -46,20 +46,20 @@
 
 </head>
 <body>
-<header th:replace="fragments/header"></header></header>
+<header th:replace="fragments/header"></header>
 <main>
 <div class="profil-wrapper">
     <div class="item1">
         <p>Név:</p>
-        <p>Wolf Franciska</p>
+        <p th:text="${currentVasarlo.nev}">Wolf Franciska</p>
     </div>
     <div class="item2">
         <p>E-mail cím:</p>
-        <p>asd@gmail.com</p>
+        <p th:text="${currentVasarlo.email}">asd@gmail.com</p>
     </div>
     <div class="item3">
-        <p>Telefonszám:</p>
-        <p>06969696</p>
+        <p>SzületésiIdő:</p>
+        <p th:text="${currentVasarlo.getSzulido()}">06969696</p>
     </div>
 
     <div class="item0">
@@ -69,19 +69,15 @@
 
         <div>
             <p>írányítószám:</p>
-            <p>6969</p>
-        </div>
-        <div>
-            <p>Város:</p>
-            <p>Szeged</p>
+            <p th:text="${currentVasarlo.getIrszam()}">6969</p>
         </div>
         <div>
             <p>Utca:</p>
-            <p>Fő u.</p>
+            <p th:text="${currentVasarlo.getUtca()}">Szeged</p>
         </div>
         <div>
             <p>szám</p>
-            <p>12</p>
+            <p th:text="${currentVasarlo.getHazszam()}">12</p>
         </div>
     </div>
 </div>
