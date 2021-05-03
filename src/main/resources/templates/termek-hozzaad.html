@@ -2,11 +2,12 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Hozzá-adás</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
-    <link href="../static/css/konyvek.css" rel="stylesheet">
+    <title>Hozzáadás</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/konyvek.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
+
 </head>
 
 <style>
@@ -38,52 +39,88 @@
 
 <main>
     <div class="termek-wrapper">
-        <form>
+        <form action="/addkonyv" method="post">
             <div class="book-item">
-                <img class="logo-img" src="../static/img/unicorn.svg" alt="unikornis">
-                <label for="cover">Borítókép:</label>
-                <input type="file" id="cover" name="cover">
+                <img th:src="@{/img/unicorn.svg}" class="logo-img" src="../static/img/unicorn.svg" alt="unikornis">
                 <div class="book-details">
+                    <h4>Könyv:</h4>
+                    <label for="cover">Borítókép:</label>
+                    <input type="text" id="cover" name="eleresiUt">
                     <label for="title">Cím:</label>
-                    <input type="text" id="title" name="title">
+                    <input type="text" id="title" name="cim">
                     <label for="author">Szerző:</label>
-                    <input type="text" id="author" name="author">
-                    <hr>
+                    <input type="text" id="author" name="szerzo">
                     <label for="pub">Kiadó:</label>
-                    <input type="text" id="pub" name="pub">
+                    <input type="text" id="pub" name="kiado">
                     <label for="year">Év:</label>
-                    <input type="number" id="year" name="year">
+                    <input type="number" id="year" name="kiadasiEv">
                     <label for="num">Oldalszám:</label>
-                    <input type="number" id="num" name="num">
-                    <hr>
+                    <input type="number" id="num" name="oldalszam">
                     <label for="price">Ár:</label>
-                    <input type="number" id="price" name="price">
-                    <h4>Magazin:</h4>
-                    <hr>
-                    <label for="freq">Gyakoriság:</label>
-                    <input type="text" id="freq" name="freq">
-                    <h4>Hangoskönyv</h4>
-                    <hr>
-                    <label for="nar">Elbeszélő:</label>
-                    <input type="text" id="nar" name="nar">
-                    <label for="length">Hossz:</label>
-                    <input type="text" id="length" name="length">
-                    <h4>Antikvár:</h4>
-                    <hr>
-                    <label for="era">Kor:</label>
-                    <input type="text" id="era" name="era">
-                    <label for="state">Allapot:</label>
-                    <input type="text" id="state" name="state">
-                    <h4>Tankönyv:</h4>
-                    <hr>
-                    <label for="age">Ajánlott Kor:</label>
-                    <input type="text" id="age" name="age">
+                    <input type="number" id="price" name="ar">
+                    <label for="desc">Leírás:</label>
+                    <input type="text" id="desc" name="leiras">
                     <label for="type">Típus:</label>
-                    <input type="text" id="type" name="type">
+                    <input type="text" id="type" name="tipus">
                     <input type="submit" >
                 </div>
             </div>
         </form>
+
+
+        <form action="/addmagazin" method="post">
+            <div class="book-item">
+                <img th:src="@{/img/unicorn.svg}" class="logo-img" src="../static/img/unicorn.svg" alt="unikornis">
+                <div class="book-details">
+                    <h4>Magazin:</h4>
+                    <label for="cover2">Borítókép:</label>
+                    <input type="text" id="cover2" name="eleresiUt">
+                    <label for="title2">Cím:</label>
+                    <input type="text" id="title2" name="cim">
+                    <label for="author2">Szerző:</label>
+                    <input type="text" id="author2" name="szerzo">
+                    <label for="pub2">Kiadó:</label>
+                    <input type="text" id="pub2" name="kiado">
+                    <label for="year2">Év:</label>
+                    <input type="number" id="year2" name="kiadasiEv">
+                    <label for="num2">Oldalszám:</label>
+                    <input type="number" id="num2" name="oldalszam">
+                    <label for="price2">Ár:</label>
+                    <input type="number" id="price2" name="ar">
+                    <label for="desc2">Leírás:</label>
+                    <input type="text" id="desc2" name="leiras">
+                    <label for="type2">Típus:</label>
+                    <input type="text" id="type2" name="tipus">
+                    <label for="freq">Gyakoriság:</label>
+                    <input type="text" id="freq" name="gyakorisag">
+                    <input type="submit" >
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+<!--                    <h4>Hangoskönyv</h4>-->
+<!--                    <hr>-->
+<!--                    <label for="nar">Elbeszélő:</label>-->
+<!--                    <input type="text" id="nar" name="nar">-->
+<!--                    <label for="length">Hossz:</label>-->
+<!--                    <input type="text" id="length" name="length">-->
+<!--                    <h4>Antikvár:</h4>-->
+<!--                    <hr>-->
+<!--                    <label for="era">Kor:</label>-->
+<!--                    <input type="text" id="era" name="era">-->
+<!--                    <label for="state">Allapot:</label>-->
+<!--                    <input type="text" id="state" name="state">-->
+<!--                    <h4>Tankönyv:</h4>-->
+<!--                    <hr>-->
+<!--                    <label for="age">Ajánlott Kor:</label>-->
+<!--                    <input type="text" id="age" name="age">-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
 
     </div>
 </main>

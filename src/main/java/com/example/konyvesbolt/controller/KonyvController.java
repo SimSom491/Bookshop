@@ -1,7 +1,9 @@
 package com.example.konyvesbolt.controller;
 import com.example.konyvesbolt.dao.*;
 
+import com.example.konyvesbolt.model.Film;
 import com.example.konyvesbolt.model.Konyv;
+import com.example.konyvesbolt.model.Magazin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,6 +83,55 @@ public class KonyvController {
         model.addAttribute("konyvek", antikvarDao.listaz());
         model.addAttribute("mufajok",mufajDAO.listazKonyvek("Antikvár"));
         return "konyvek";
+    }
+
+    @GetMapping(value = "/addkonyv")
+    public String addkonyvGet(){
+        return "termek-hozzaad";
+    }
+    @GetMapping(value = "/addmagazin")
+    public String addmagazinGet(){
+        return "termek-hozzaad";
+    }
+
+    @PostMapping(value = "/addkonyv")
+    public String addkonyv(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras)
+
+    {
+        Konyv konyv = new Konyv(szerzo, cim, ar, oldalszam,
+               kiado, eleresiUt, kiadasiEv, tipus, leiras);
+        konyvDAO.beszur(konyv);
+
+        return "redirect:/addkonyv";
+    }
+    @PostMapping(value = "/addmagazin")
+    public String addmagazin(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras,
+            @RequestParam("gyakorisag") String gyakorisag
+            )
+
+    {
+        Magazin magazin = new Magazin(szerzo, cim, ar, oldalszam,
+                kiado, eleresiUt, kiadasiEv, tipus, leiras, gyakorisag);
+        magazinDAO.beszur(magazin);
+        return "redirect:/addmagazin";
     }
 
 
