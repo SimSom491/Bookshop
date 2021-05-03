@@ -107,4 +107,16 @@ public class Konyv {
     public void setLeiras(String leiras) {
         this.leiras = leiras;
     }
+
+    public Konyv(String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras) {
+        this.szerzo = szerzo;
+        this.cim = cim;
+        this.ar = ar;
+        this.oldalszam = oldalszam;
+        this.kiado = kiado;
+        this.eleresiUt = eleresiUt;
+        this.kiadasiEv = kiadasiEv;
+        this.tipus = tipus;
+        this.leiras = leiras;
+    }
 }

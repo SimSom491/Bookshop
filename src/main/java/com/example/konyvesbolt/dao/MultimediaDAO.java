@@ -43,13 +43,13 @@ public class MultimediaDAO implements DAO<Multimedia> {
     @Override
     public void beszur(Multimedia multimedia) {
         String sql = "INSERT INTO MULTIMEDIA(CIM, AR, ELERESIUT) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, new Object[]{
-                multimedia.getCim(), multimedia.getAr(), multimedia.getEleresiUt() }
-        );
+        jdbcTemplate.update(sql,
+                multimedia.getCim(),
+                multimedia.getAr(),
+                multimedia.getEleresiUt());
     }
 
     public List<Multimedia> szur(int mufajId) {
-
 
         return jdbcTemplate.query("SELECT MULTIMEDIA.ID,MULTIMEDIA.AR,MULTIMEDIA.CIM,MULTIMEDIA.ELERESIUT FROM MULTIMEDIA,MUFAJA WHERE MULTIMEDIA.id=MUFAJA.multimedia_id AND MUFAJA.MUFAJ_ID="+mufajId, (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"),rs.getInt("ar"),rs.getString("eleresiut")));
 

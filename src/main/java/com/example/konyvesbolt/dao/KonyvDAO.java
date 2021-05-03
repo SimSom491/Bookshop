@@ -44,9 +44,16 @@ public class KonyvDAO implements DAO<Konyv> {
     @Override
     public void beszur(Konyv konyv) {
         String sql = "INSERT INTO KONYV( SZERZO, CIM, AR, OLDALSZAM, KIADO, ELERESIUT, KIADASIEV, TIPUS, LEIRAS) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
-        jdbcTemplate.update(sql, new Object[]{
-                konyv.getSzerzo(), konyv.getCim(), konyv.getAr(), konyv.getOldalszam(), konyv.getKiado(), konyv.getEleresiUt(),konyv.getKiadasiEv(),konyv.getTipus(), konyv.getLeiras() }
-        );
+        jdbcTemplate.update(sql,
+                konyv.getSzerzo(),
+                konyv.getCim(),
+                konyv.getAr(),
+                konyv.getOldalszam(),
+                konyv.getKiado(),
+                konyv.getEleresiUt(),
+                konyv.getKiadasiEv(),
+                konyv.getTipus(),
+                konyv.getLeiras());
     }
 
     public List<Konyv> szur(int mufajId) {

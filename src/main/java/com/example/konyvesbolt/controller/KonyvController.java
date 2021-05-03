@@ -1,7 +1,7 @@
 package com.example.konyvesbolt.controller;
 import com.example.konyvesbolt.dao.*;
 
-import com.example.konyvesbolt.model.Konyv;
+import com.example.konyvesbolt.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,6 +81,131 @@ public class KonyvController {
         model.addAttribute("konyvek", antikvarDao.listaz());
         model.addAttribute("mufajok",mufajDAO.listazKonyvek("Antikvár"));
         return "konyvek";
+    }
+
+    @GetMapping(value = "/addkonyv")
+    public String addkonyvGet(){
+        return "termek-hozzaad";
+    }
+    @GetMapping(value = "/addmagazin")
+    public String addmagazinGet(){
+        return "termek-hozzaad";
+    }
+    @GetMapping(value = "/addtankonyv")
+    public String addtankonyvGet(){
+        return "termek-hozzaad";
+    }
+    @GetMapping(value = "/addantikvar")
+    public String addantikvarGet(){
+        return "termek-hozzaad";
+    }
+    @GetMapping(value = "/addhangoskonyv")
+    public String addhangoskonyvGet(){
+        return "termek-hozzaad";
+    }
+
+    @PostMapping(value = "/addkonyv")
+    public String addkonyv(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras)
+
+    {
+        Konyv konyv = new Konyv(szerzo, cim, ar, oldalszam,
+               kiado, eleresiUt, kiadasiEv, tipus, leiras);
+        konyvDAO.beszur(konyv);
+
+        return "redirect:/addkonyv";
+    }
+    @PostMapping(value = "/addmagazin")
+    public String addmagazin(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras,
+            @RequestParam("gyakorisag") String gyakorisag
+            )
+
+    {
+        Magazin magazin = new Magazin(szerzo, cim, ar, oldalszam,
+                kiado, eleresiUt, kiadasiEv, tipus, leiras, gyakorisag);
+        magazinDAO.beszur(magazin);
+        return "redirect:/addmagazin";
+    }
+    @PostMapping(value = "/addtankonyv")
+    public String addtankonyv(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras,
+            @RequestParam("ajanlottKor") int ajanlottKor,
+            @RequestParam("fajta") String fajta
+    )
+
+    {
+        Tankonyv tankonyv = new Tankonyv(szerzo, cim, ar, oldalszam,
+                kiado, eleresiUt, kiadasiEv, tipus, leiras, ajanlottKor, fajta);
+        tankonyvDAO.beszur(tankonyv);
+        return "redirect:/addtankonyv";
+    }
+    @PostMapping(value = "/addantikvar")
+    public String addantikvar(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras,
+            @RequestParam("kor") int kor,
+            @RequestParam("allapot") String allapot
+    )
+
+    {
+        AntikvarKonyv antikvarKonyv = new AntikvarKonyv(szerzo, cim, ar, oldalszam,
+                kiado, eleresiUt, kiadasiEv, tipus, leiras, kor, allapot);
+        antikvarDao.beszur(antikvarKonyv);
+        return "redirect:/addantikvar";
+    }
+    @PostMapping(value = "/addhangoskonyv")
+    public String addhangoskonyv(
+            @RequestParam("szerzo") String szerzo,
+            @RequestParam("cim") String cim,
+            @RequestParam("ar") int ar,
+            @RequestParam("oldalszam") int oldalszam,
+            @RequestParam("kiado") String kiado,
+            @RequestParam("eleresiUt") String eleresiUt,
+            @RequestParam("kiadasiEv") int kiadasiEv,
+            @RequestParam("tipus") String tipus,
+            @RequestParam("leiras") String leiras,
+            @RequestParam("elbeszelo") String elbeszelo,
+            @RequestParam("hossz") int hossz
+
+    )
+
+    {
+        Hangoskonyv hangoskonyv = new Hangoskonyv(szerzo, cim, ar, oldalszam,
+                kiado, eleresiUt, kiadasiEv, tipus, leiras, elbeszelo, hossz);
+     hangosKonyvDAO.beszur(hangoskonyv);
+        return "redirect:/addhangoskonyv";
     }
 
 

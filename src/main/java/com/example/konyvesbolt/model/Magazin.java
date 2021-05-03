@@ -8,6 +8,11 @@ public class Magazin extends Konyv{
         this.gyakorisag = gyakorisag;
     }
 
+    public Magazin(String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras, String gyakorisag) {
+        super(szerzo, cim, ar, oldalszam, kiado, eleresiUt, kiadasiEv, tipus, leiras);
+        this.gyakorisag = gyakorisag;
+    }
+
     public Magazin() {
     }
 

@@ -10,6 +10,12 @@ public class Tankonyv extends Konyv{
         this.fajta = fajta;
     }
 
+    public Tankonyv(String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras, int ajanlottKor, String fajta) {
+        super(szerzo, cim, ar, oldalszam, kiado, eleresiUt, kiadasiEv, tipus, leiras);
+        this.ajanlottKor = ajanlottKor;
+        this.fajta = fajta;
+    }
+
     public Tankonyv() {
     }
 

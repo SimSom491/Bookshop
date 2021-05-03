@@ -10,6 +10,12 @@ public class AntikvarKonyv extends Konyv{
         this.allapot = allapot;
     }
 
+    public AntikvarKonyv(String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras, int kor, String allapot) {
+        super(szerzo, cim, ar, oldalszam, kiado, eleresiUt, kiadasiEv, tipus, leiras);
+        this.kor = kor;
+        this.allapot = allapot;
+    }
+
     public AntikvarKonyv() {
     }
 

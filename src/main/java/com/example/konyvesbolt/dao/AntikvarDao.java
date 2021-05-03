@@ -42,6 +42,33 @@ public class AntikvarDao implements DAO<AntikvarKonyv> {
 
     @Override
     public void beszur(AntikvarKonyv antikvarKonyv) {
-
+        String konyvsql = "INSERT INTO KONYV( SZERZO, CIM, AR, OLDALSZAM, KIADO, ELERESIUT, KIADASIEV, TIPUS, LEIRAS) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+        jdbcTemplate.update(konyvsql,
+                antikvarKonyv.getSzerzo(),
+                antikvarKonyv.getCim(),
+                antikvarKonyv.getAr(),
+                antikvarKonyv.getOldalszam(),
+                antikvarKonyv.getKiado(),
+                antikvarKonyv.getEleresiUt(),
+                antikvarKonyv.getKiadasiEv(),
+                antikvarKonyv.getTipus(),
+                antikvarKonyv.getEleresiUt()
+        );
+        idkeres();
+        antikvarKonyv.setId(idkeres());
+        String sql = "INSERT INTO VOROS.ANTIKVARKONYV(KONYV_ID, KOR, ALLAPOT) VALUES(?,?,?)";
+        jdbcTemplate.update(sql,
+                antikvarKonyv.getId(),
+                antikvarKonyv.getKor(),
+                antikvarKonyv.getAllapot()
+        );
+    }
+    private int idkeres() {
+        String idkeressql = "SELECT * FROM(SELECT ID FROM KONYV ORDER BY ID DESC ) WHERE ROWNUM = 1 ";
+        List<Integer> id = jdbcTemplate.query(idkeressql,
+                (rs, rowNum) ->
+                        rs.getInt("id")
+        );
+        return id.get(0);
     }
 }
