@@ -40,7 +40,8 @@ public class BoltDAO implements DAO<Bolt> {
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM BOLT WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override

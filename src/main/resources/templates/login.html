@@ -25,10 +25,13 @@
             <label for="email">Email cím:</label>
             <input id="email" type="text" name="email">
             <label for="pw">jelszó</label>
-            <input id="pw" type="text" name="pw">
+            <input id="pw" type="password" name="pw">
             <input type="submit" value="Belépés">
 
         </form>
+        <div>Ha még nem regisztráltál itt megteheted:</div>
+        <a href="/register">Regisztráció</a>
+
         <div style="display: none" id="error_message" th:text="${error_message}"></div>
         <div style="display: none" id="success_message" th:text="${success_message}"></div>
         <script th:if="${error_message != null}">

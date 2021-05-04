@@ -1,6 +1,6 @@
 package com.example.konyvesbolt.model;
 
-public class Mufaj {
+public class Mufaj implements Comparable<Mufaj>{
     private int id;
     private String nev;
 
@@ -26,5 +26,15 @@ public class Mufaj {
     }
 
     public Mufaj() {
+    }
+
+
+    @Override
+    public int compareTo(Mufaj o) {
+        if (this.nev.charAt(0)<o.nev.charAt(0)){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

@@ -37,14 +37,18 @@ public class KonyvController {
     @GetMapping(value = "/")
     public String Starter(Model model) {
         model.addAttribute("konyvek", konyvDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.listaz());
+        List<Mufaj> mufajok= mufajDAO.listaz();
+
+        model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));
         return "index";
     }
 
     @GetMapping(value = "/konyvek")
     public String konyvList(Model model) {
         model.addAttribute("konyvek", konyvDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.listaz());
+        List<Mufaj> mufajok= mufajDAO.listaz();
+
+        model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));
         return "konyvek";
     }
 
@@ -52,34 +56,62 @@ public class KonyvController {
     public String szures(@PathVariable("id") int mufajId, Model model) {
         List<Konyv> konyvek = konyvDAO.szur(mufajId);
         model.addAttribute("konyvek", konyvek);
-        model.addAttribute("mufajok", mufajDAO.listaz());
+        List<Mufaj> mufajok= mufajDAO.listazKonyvek(konyvek.get(0).getTipus());
+
+
+        model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));
 
         return "konyvek";
+    }
+
+    @GetMapping(value = "/konyvek/reszletek/{id}")
+    public String reszletezes(@PathVariable("id") int konyvid, Model model) {
+        Konyv konyv = konyvDAO.keres(konyvid);
+        switch (konyv.getTipus()) {
+            case "Könyv":
+                model.addAttribute("konyv", konyv);
+                break;
+            case "Magazin":
+                model.addAttribute("konyv", magazinDAO.keres(konyvid));
+                break;
+            case "Hangoskönyv":
+                model.addAttribute("konyv", hangosKonyvDAO.keres(konyvid));
+                break;
+            case "Antikvár":
+                model.addAttribute("konyv", antikvarDao.keres(konyvid));
+                break;
+            default:
+                model.addAttribute("konyv", tankonyvDAO.keres(konyvid));
+                break;
+        }
+
+
+        return "konyv";
     }
 
     @GetMapping(value = "/magazinok")
     public String magazinList(Model model){
         model.addAttribute("konyvek", magazinDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.listazKonyvek("Magazin"));
+        model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Magazin"),"Magazin"));
         return "konyvek";
     }
     @GetMapping(value = "/tankonyvek")
     public String tankonyvList(Model model){
         model.addAttribute("konyvek", tankonyvDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.listazKonyvek("Tankönyv"));
+        model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Tankönyv"),"Tankönyv"));
         return "konyvek";
     }
 
     @GetMapping(value = "/hangoskonyvek")
     public String hangosList(Model model){
         model.addAttribute("konyvek", hangosKonyvDAO.listaz());
-        model.addAttribute("mufajok", mufajDAO.listazKonyvek("Hangoskönyv"));
+        model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Hangoskönyv"),"Hangoskönyv"));
         return "konyvek";
     }
     @GetMapping(value = "/antikvarkonyvek")
     public String antikvarlistaz(Model model){
         model.addAttribute("konyvek", antikvarDao.listaz());
-        model.addAttribute("mufajok",mufajDAO.listazKonyvek("Antikvár"));
+        model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Antikvár"),"Antikvár"));
         return "konyvek";
     }
 

@@ -40,7 +40,8 @@ public class FilmDAO implements DAO<Film>{
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM MULTIMEDIA WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override

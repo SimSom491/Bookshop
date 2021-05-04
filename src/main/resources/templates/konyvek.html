@@ -40,8 +40,8 @@
             <div class="genre-header">
                 <h2>Műfaj szerint</h2>
             </div>
-            <ul th:each="mufaj: ${mufajok}">
-                <a th:href="@{/konyvek/szur/{id}(id=${mufaj.id})}"><li th:text="${mufaj.nev}"></li></a>
+            <ul th:each=" mufaj: ${mufajok}">
+                <a th:href="@{/konyvek/szur/{id}(id=${mufaj.key.getId()})}"><li th:text="${mufaj.key.getNev()}+' ('+${mufaj.value}+')'"></li></a>
 
             </ul>
         </div>
@@ -62,13 +62,13 @@
             </div>
             <div class="books-items">
                 <div th:each="konyv: ${konyvek}" class="book-item">
-                    <img  src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${konyv.getEleresiUt()}}">
+                    <a th:href="@{/konyvek/reszletek/{id}(id=${konyv.getId()})}"><img  src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${konyv.getEleresiUt()}}"></a>
                     <div class="book-details">
                         <p th:text="${konyv.getCim()}" class="title">1984</p>
                         <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
                         <hr>
                         <p th:text="${konyv.getAr()} + ' ' + Ft" class="price">5000 Ft</p>
-                        <img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
+                       <img  th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
                     </div>
                 </div>
             </div>
