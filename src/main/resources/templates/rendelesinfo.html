@@ -42,6 +42,7 @@
             <h2>Üzleteink</h2>
         </div>
         <div class="shops">
+            <li th:if="${admine}" class="sort-list-item" ><a href="/addbolt" > bolt hozzáadása</a></li>
             <div class="shop" th:each="bolt : ${boltok}">
 <!--                <img class="shop-img" src="../static/img/szeged.jpg" alt="bolt képének helye" width="400" height="270">-->
                 <div class="shop-details">
@@ -51,6 +52,7 @@
                     <p> Nyitvatartás: <span th:text="${bolt.getNyitvatartas()}"></span></p>
                 </div>
             </div>
+
         </div>
     </div>
 </main>
