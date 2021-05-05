@@ -27,7 +27,11 @@ public class AntikvarDao implements DAO<AntikvarKonyv> {
 
     @Override
     public AntikvarKonyv keres(int id) {
-        return null;
+        List<AntikvarKonyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV, ANTIKVARKONYV WHERE ANTIKVARKONYV.KONYV_ID=KONYV.ID AND id=" + id, (rs, rowNum) -> new AntikvarKonyv(rs.getInt("id"), rs.getString("szerzo")
+                , rs.getString("cim"), rs.getInt("ar"), rs.getInt("oldalszam")
+                , rs.getString("kiado"), rs.getString("eleresiut"), rs.getInt("kiadasiev")
+                , rs.getString("tipus"), rs.getString("leiras"), rs.getInt("kor"),rs.getString("allapot")));
+        return konyvek.get(0);
     }
 
     @Override
@@ -37,7 +41,8 @@ public class AntikvarDao implements DAO<AntikvarKonyv> {
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM KONYV WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override

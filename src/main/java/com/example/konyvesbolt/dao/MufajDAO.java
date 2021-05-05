@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Repository
 public class MufajDAO implements DAO<Mufaj> {
@@ -35,7 +37,8 @@ public class MufajDAO implements DAO<Mufaj> {
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM MUFAJ WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override
@@ -56,4 +59,18 @@ public class MufajDAO implements DAO<Mufaj> {
     }
 
 
+    public Map<Mufaj,Integer> mufajszam(List<Mufaj> mufajok) {
+        Map<Mufaj,Integer> res = new TreeMap<>();
+        for (Mufaj mufaj : mufajok) {
+            jdbcTemplate.query("SELECT  Count(*) AS ossz, MUFAJ.NEV AS ossz FROM MUFAJ,MUFAJA WHERE MUFAJA.MUFAJ_ID=MUFAJ.ID AND NOT MUFAJA.KONYV_ID IS NULL AND MUFAJA.MUFAJ_ID="+mufaj.getId()+" GROUP BY MUFAJ.NEV",(rs, rowNum) -> res.put(mufaj,rs.getInt("ossz")));
+        }
+        return res;
+    }
+    public Map<Mufaj,Integer> konyvszam(List<Mufaj> mufajok, String tipus) {
+        Map<Mufaj,Integer> res = new TreeMap<>();
+        for (Mufaj mufaj : mufajok) {
+            jdbcTemplate.query("SELECT  Count(*) AS ossz, MUFAJ.NEV AS nev FROM Konyv,MUFAJ,MUFAJA WHERE KONyv.ID=MUFAJA.KONYV_ID AND KONYV.TIPUS='"+tipus+"' AND MUFAJA.MUFAJ_ID=MUFAJ.ID AND NOT MUFAJA.KONYV_ID IS NULL AND MUFAJA.MUFAJ_ID="+mufaj.getId()+" GROUP BY MUFAJ.NEV",(rs, rowNum) -> res.put(mufaj,rs.getInt("ossz")));
+        }
+        return res;
+    }
 }

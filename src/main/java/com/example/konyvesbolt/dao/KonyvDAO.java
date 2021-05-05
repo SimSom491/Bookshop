@@ -59,11 +59,11 @@ public class KonyvDAO implements DAO<Konyv> {
     public List<Konyv> szur(int mufajId) {
         List<Konyv> konyvek = jdbcTemplate.query("SELECT KONYV.id,KONYV.szerzo,KONYV.cim,KONYV.ar,KONYV.oldalszam,KONYV.kiado,KONYV.eleresiut,KONYV.kiadasiev,KONYV.tipus,KONYV.leiras FROM KONYV,MUFAJA WHERE KONYV.id=MUFAJA.konyv_id AND MUFAJA.MUFAJ_ID="+mufajId, (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
 
-        for (Konyv konyv : konyvek) {
-            System.out.println(konyv.getCim());
-        }
+
 
         return konyvek;
 
     }
+
+
 }

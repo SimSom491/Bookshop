@@ -26,7 +26,11 @@ public class TankonyvDAO implements DAO<Tankonyv> {
 
     @Override
     public Tankonyv keres(int id) {
-        return null;
+        List<Tankonyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV, TANKONYV WHERE TANKONYV.KONYV_ID=KONYV.ID AND id=" + id, (rs, rowNum) -> new Tankonyv(rs.getInt("id"), rs.getString("szerzo")
+                , rs.getString("cim"), rs.getInt("ar"), rs.getInt("oldalszam")
+                , rs.getString("kiado"), rs.getString("eleresiut"), rs.getInt("kiadasiev")
+                , rs.getString("tipus"), rs.getString("leiras"), rs.getInt("ajanlottkor"),rs.getString("fajta")));
+        return konyvek.get(0);
     }
 
     @Override
@@ -36,7 +40,8 @@ public class TankonyvDAO implements DAO<Tankonyv> {
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM KONYV WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override

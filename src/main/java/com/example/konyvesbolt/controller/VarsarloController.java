@@ -41,11 +41,11 @@ public class VarsarloController {
     @PostMapping(value = "/login")
     public String login(@RequestParam("email") String email, @RequestParam("pw") String pw, HttpSession session) {
 
-        Vasarlo vasarlo = new Vasarlo();
-        vasarlo.setEmail(email);
-        vasarlo.setJelszo(pw);
-        if(registered(email,pw)){
-                session.setAttribute("logged_in_user", vasarlo);
+        Vasarlo vasarlo = registered(email,pw);
+
+
+        if( vasarlo != null) {
+            session.setAttribute("logged_in_user", vasarlo);
                 return "redirect:/";
             } else {
                 return "redirect:/login";
@@ -80,16 +80,16 @@ public class VarsarloController {
 
 
 
-    private boolean registered(String email, String pw){
+    private Vasarlo registered(String email, String pw){
         List<Vasarlo> vasarlok = vasarloDAO.listaz();
         for (Vasarlo vasarlo : vasarlok) {
             if (vasarlo.getEmail().equals(email) && vasarlo.getJelszo().equals(pw)){
                 logMessages.put("success_message", "Sikeres bejelentkezés!");
-                return true;
+                return vasarlo;
             }
         }
         logMessages.put("error_message", "A felhasználónév vagy jelszó hibás");
-        return false;
+        return null;
     }
 
 

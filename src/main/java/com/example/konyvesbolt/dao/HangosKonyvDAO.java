@@ -1,6 +1,7 @@
 package com.example.konyvesbolt.dao;
 
 import com.example.konyvesbolt.model.Hangoskonyv;
+import com.example.konyvesbolt.model.Tankonyv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,11 @@ public class HangosKonyvDAO implements DAO<Hangoskonyv> {
 
     @Override
     public Hangoskonyv keres(int id) {
-        return null;
+        List<Hangoskonyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV, HANGOSKONYV WHERE HANGOSKONYV.KONYV_ID=KONYV.ID AND id=" + id, (rs, rowNum) -> new Hangoskonyv(rs.getInt("id"), rs.getString("szerzo")
+                , rs.getString("cim"), rs.getInt("ar"), rs.getInt("oldalszam")
+                , rs.getString("kiado"), rs.getString("eleresiut"), rs.getInt("kiadasiev")
+                , rs.getString("tipus"), rs.getString("leiras"), rs.getString("elbeszelo"),rs.getInt("hossz")));
+        return konyvek.get(0);
     }
 
     @Override
@@ -35,7 +40,8 @@ public class HangosKonyvDAO implements DAO<Hangoskonyv> {
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM KONYV WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override

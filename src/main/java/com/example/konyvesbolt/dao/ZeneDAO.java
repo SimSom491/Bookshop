@@ -39,7 +39,8 @@ public class ZeneDAO implements DAO<Zene> {
 
     @Override
     public void torol(int id) {
-
+        String sql = "DELETE FROM MULTIMEDIA WHERE id=" + id;
+        jdbcTemplate.update(sql);
     }
 
     @Override

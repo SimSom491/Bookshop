@@ -56,7 +56,7 @@ public class VasarloDAO implements DAO<Vasarlo> {
 
     @Override
     public void torol(int id) {
-        String sql = "DELETE FROM VASARLAS WHERE id=" + id;
+        String sql = "DELETE FROM VASARLO WHERE id=" + id;
         jdbcTemplate.update(sql);
     }
 
