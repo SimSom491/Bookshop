@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,24 @@ public class KonyvController {
         return "index";
     }
 
+    @GetMapping(value = "/add")
+    public String Addpage(Model model) {
+
+
+        return "termek-hozzaad";
+    }
+
+
     @GetMapping(value = "/konyvek")
-    public String konyvList(Model model) {
+    public String konyvList(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            System.out.println(vasarlo.getEmail()+ vasarlo.isAdmine() );
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("konyvek", konyvDAO.listaz());
         List<Mufaj> mufajok= mufajDAO.listaz();
 
@@ -53,7 +70,14 @@ public class KonyvController {
     }
 
     @GetMapping(value = "/konyvek/szur/{id}")
-    public String szures(@PathVariable("id") int mufajId, Model model) {
+    public String szures(@PathVariable("id") int mufajId, Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         List<Konyv> konyvek = konyvDAO.szur(mufajId);
         model.addAttribute("konyvek", konyvek);
         List<Mufaj> mufajok= mufajDAO.listazKonyvek(konyvek.get(0).getTipus());
@@ -90,26 +114,54 @@ public class KonyvController {
     }
 
     @GetMapping(value = "/magazinok")
-    public String magazinList(Model model){
+    public String magazinList(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("konyvek", magazinDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Magazin"),"Magazin"));
         return "konyvek";
     }
     @GetMapping(value = "/tankonyvek")
-    public String tankonyvList(Model model){
+    public String tankonyvList(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("konyvek", tankonyvDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Tankönyv"),"Tankönyv"));
         return "konyvek";
     }
 
     @GetMapping(value = "/hangoskonyvek")
-    public String hangosList(Model model){
+    public String hangosList(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("konyvek", hangosKonyvDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Hangoskönyv"),"Hangoskönyv"));
         return "konyvek";
     }
     @GetMapping(value = "/antikvarkonyvek")
-    public String antikvarlistaz(Model model){
+    public String antikvarlistaz(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("konyvek", antikvarDao.listaz());
         model.addAttribute("mufajok", mufajDAO.konyvszam(mufajDAO.listazKonyvek("Antikvár"),"Antikvár"));
         return "konyvek";
