@@ -38,9 +38,12 @@ aside {
 .new-book-item, .shop{
     margin: 40px;
 }
+
 .new-books-header, .shop-header{
     text-align: center;
     outline: 2px black solid;
     padding: 10px;
-
+}
+.new-books .title, .new-books .author{
+    max-width: 200px;
 }

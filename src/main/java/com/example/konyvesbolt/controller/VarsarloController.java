@@ -44,15 +44,12 @@ public class VarsarloController {
 
         Vasarlo vasarlo = registered(email,pw);
 
-
         if( vasarlo != null) {
             session.setAttribute("logged_in_user", vasarlo);
                 return "redirect:/";
             } else {
                 return "redirect:/login";
             }
-
-
         }
 
     @GetMapping(value = "/profil")
@@ -60,7 +57,7 @@ public class VarsarloController {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
         if (vasarlo != null) {
             System.out.println(vasarlo);
-            model.addAttribute("currentVasarlo",vasarloDAO.keres(vasarlo.getEmail()));
+            model.addAttribute("currentVasarlo",  vasarlo);
             return "profil";
         } else {
             profilMessages.put("error_message", "A profil megtekintéshez be kell jelentkezni!");
