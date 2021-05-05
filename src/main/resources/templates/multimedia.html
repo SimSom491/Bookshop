@@ -28,7 +28,7 @@
         </label>
         <input type="submit" value="keres" >
     </form>
-    <a  th:if="${admine}" href="/addm" > adatok hozzáadása</a>
+
 
 </div>
 
@@ -58,6 +58,8 @@
                     <li class="sort-list-item">Eladott darabszám</li>
                     <li class="sort-list-item">Ár</li>
                     <li class="sort-list-item">Forgatási év</li>
+                    <li th:if="${admine}" class="sort-list-item" ><a href="/addm" > adatok hozzáadása</a></li>
+                    <li th:if="${admine}" class="sort-list-item" ><a href="/addbolt" > bolt hozzáadása</a></li>
                 </ul>
             </div>
             <div class="books-items">
