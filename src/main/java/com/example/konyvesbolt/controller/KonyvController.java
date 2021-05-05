@@ -58,7 +58,6 @@ public class KonyvController {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
 
         if (vasarlo!=null) {
-            System.out.println(vasarlo.getEmail()+ vasarlo.isAdmine() );
             model.addAttribute("admine", vasarlo.isAdmine());
         }else{
             model.addAttribute("admine", false);
