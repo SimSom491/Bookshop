@@ -27,6 +27,13 @@ public class MultimediaController {
     FilmDAO filmDAO;
 
 
+    @GetMapping(value = "/multimedia/deleteMult/{id}")
+    public String delete(@PathVariable("id") int multiId, Model model) {
+        multimediaDAO.torol(multiId);
+
+        return "redirect:/multimedia";
+    }
+
     @GetMapping(value = "/multimedia")
     public String multimediatListaz(Model model, HttpSession httpSession) {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");

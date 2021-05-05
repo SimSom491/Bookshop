@@ -52,6 +52,13 @@ public class KonyvController {
         return "termek-hozzaad";
     }
 
+    @GetMapping(value = "/konyvek/deleteKonyv/{id}")
+    public String delete(@PathVariable("id") int konyvid, Model model) {
+        konyvDAO.torol(konyvid);
+
+        return "redirect:/konyvek";
+    }
+
 
     @GetMapping(value = "/konyvek")
     public String konyvList(Model model, HttpSession httpSession) {

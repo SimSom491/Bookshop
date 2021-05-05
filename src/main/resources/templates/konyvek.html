@@ -71,6 +71,7 @@
                         <hr>
                         <p th:text="${konyv.getAr()} + ' ' + Ft" class="price">5000 Ft</p>
                        <img  th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
+                        <p th:if="${admine}"> <a  th:href="@{/konyvek/deleteKonyv/{id}(id=${konyv.getId()})}" >Könyv törlése</a></p>
                     </div>
                 </div>
             </div>
