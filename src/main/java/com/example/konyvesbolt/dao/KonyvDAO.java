@@ -64,6 +64,13 @@ public class KonyvDAO implements DAO<Konyv> {
         return konyvek;
 
     }
-
+    public List<Konyv> legujabbListaz() {
+        List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV WHERE KIADASIEV > 2019 ORDER BY  KIADASIEV DESC", (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
+        return konyvek;
+    }
+    public List<Konyv> toplista() {
+        List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV WHERE AR  < 2000 ORDER BY AR", (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
+        return konyvek;
+    }
 
 }

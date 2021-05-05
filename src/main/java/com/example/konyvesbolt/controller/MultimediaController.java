@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -27,19 +28,47 @@ public class MultimediaController {
 
 
     @GetMapping(value = "/multimedia")
-    public String multimediatListaz(Model model) {
+    public String multimediatListaz(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("multimedia", multimediaDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.multiListaz());
         return "multimedia";
     }
+    @GetMapping(value = "/addm")
+    public String Addpage(Model model) {
+
+
+        return "multimedia-hozzaad";
+    }
+
     @GetMapping(value = "/zene")
-    public String zenetListaz(Model model) {
+    public String zenetListaz(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("multimedia", zeneDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.zeneListaz());
         return "multimedia";
     }
     @GetMapping(value = "/film")
-    public String filmetListaz(Model model) {
+    public String filmetListaz(Model model, HttpSession httpSession) {
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
         model.addAttribute("multimedia", filmDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.filmListaz());
         return "multimedia";

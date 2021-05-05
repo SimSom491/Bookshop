@@ -21,34 +21,21 @@
                 <h2>Toplista</h2>
             </div>
             <hr/>
-            <div id="first-book">
-                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+<!--            <div id="first-book">-->
+<!--                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">-->
+<!--                <div>-->
+<!--                    <p>Cím: 1984</p>-->
+<!--                    <p>Szerző: George Orwell</p>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="rest" th:each="top : ${toplista}">
+                <img th:src="@{${top.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
                 <div>
-                    <p>Cím: 1984</p>
-                    <p>Szerző: George Orwell</p>
-                </div>
+                    <p th:text="${top.getCim()}" class="title">1984</p>
+                    <p th:text="${top.getSzerzo()}" class="author">George Orwell</p>
             </div>
-            <div class="rest">
-                <img src="../static/img/golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-                <div>
-                    <p>Cím: Legyek ura</p>
-                    <p>Szerző: William Golding</p>
-                </div>
             </div>
-            <div class="rest">
-                <img src="../static/img/golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-                <div>
-                    <p>Cím: Legyek ura</p>
-                    <p>Szerző: William Golding</p>
-                </div>
-            </div>
-            <div class="rest">
-                <img src="../static/img/golding-legyek-ura.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-                <div>
-                    <p>Cím: Legyek ura</p>
-                    <p>Szerző: William Golding</p>
-                </div>
-            </div>
+
         </aside>
 
         <div class="new-books">
@@ -56,41 +43,13 @@
                 <h2>Újdonságok</h2>
             </div>
             <div class="new-books-items">
-                <div class="new-book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
+                <div class="new-book-item" th:each="konyv : ${konyvek}">
+                    <img th:src="@{${konyv.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
                     <div>
-                        <p>Cím: 1984</p>
-                        <p>Szerző: George Orwell</p>
+                        <p th:text="${konyv.getCim()}" class="title">1984</p>
+                        <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
                     </div>
-                </div>
-                <div class="new-book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
-                    <div>
-                        <p>Cím: 1984</p>
-                        <p>Szerző: George Orwell</p>
                     </div>
-                </div>
-                <div class="new-book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
-                    <div>
-                        <p>Cím: 1984</p>
-                        <p>Szerző: George Orwell</p>
-                    </div>
-                </div>
-                <div class="new-book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
-                    <div>
-                        <p>Cím: 1984</p>
-                        <p>Szerző: George Orwell</p>
-                    </div>
-                </div>
-                <div class="new-book-item">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535">
-                    <div>
-                        <p>Cím: 1984</p>
-                        <p>Szerző: George Orwell</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -37,7 +37,8 @@ public class KonyvController {
 
     @GetMapping(value = "/")
     public String Starter(Model model) {
-        model.addAttribute("konyvek", konyvDAO.listaz());
+        model.addAttribute("konyvek", konyvDAO.legujabbListaz());
+        model.addAttribute("toplista", konyvDAO.toplista());
         List<Mufaj> mufajok= mufajDAO.listaz();
 
         model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));
@@ -57,7 +58,6 @@ public class KonyvController {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
 
         if (vasarlo!=null) {
-            System.out.println(vasarlo.getEmail()+ vasarlo.isAdmine() );
             model.addAttribute("admine", vasarlo.isAdmine());
         }else{
             model.addAttribute("admine", false);
