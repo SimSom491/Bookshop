@@ -455,6 +455,7 @@ create unique index VASARLO_ID_UINDEX
     on VASARLO (ID)
 /
 
+
 alter table VASARLO
     add constraint VASARLO_PK
         primary key (ID)
