@@ -3,6 +3,11 @@ package com.example.konyvesbolt.model;
 import java.awt.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Vasarlo implements Serializable {
     private int id;
     private String email;
@@ -46,6 +51,7 @@ public class Vasarlo implements Serializable {
         this.utca = utca;
         this.hazszam = hazszam;
     }
+
 
 
     public boolean isTorzsvasarloe() {

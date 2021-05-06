@@ -25,6 +25,9 @@ public class MultimediaDAO implements DAO<Multimedia> {
     @Override
     public Multimedia keres(int id) {
         List<Multimedia> multik = jdbcTemplate.query("SELECT * FROM MULTIMEDIA WHERE id="+id, (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"), rs.getInt("ar"),rs.getString("eleresiut")));
+        if (multik.size() == 0){
+            throw new ArrayIndexOutOfBoundsException("Nem találtuk a keresett id-t");
+        }
         return multik.get(0);
     }
 

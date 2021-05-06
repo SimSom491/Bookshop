@@ -23,6 +23,10 @@ public class KonyvDAO implements DAO<Konyv> {
     @Override
     public Konyv keres(int id) {
         List<Konyv> konyvek = jdbcTemplate.query("SELECT * FROM KONYV WHERE id="+id, (rs, rowNum) -> new Konyv(rs.getInt("id"), rs.getString("szerzo"), rs.getString("cim"),rs.getInt("ar"),rs.getInt("oldalszam"),rs.getString("kiado"),rs.getString("eleresiut"),rs.getInt("kiadasiev"),rs.getString("tipus"), rs.getString("leiras")));
+
+        if (konyvek.size() == 0){
+            throw new ArrayIndexOutOfBoundsException("Nem találtuk a keresett id-t");
+        }
         return konyvek.get(0);
     }
 

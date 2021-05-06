@@ -1,10 +1,15 @@
 package com.example.konyvesbolt.model;
 
-public class Multimedia {
+import java.awt.*;
+import java.io.Serializable;
+
+public class Multimedia implements Comparable<Multimedia>, Serializable {
     private int id;
     private String cim;
     private int ar;
     private String eleresiUt;
+
+
 
     public Multimedia(int id, String cim, int ar, String eleresiUt) {
         this.id = id;
@@ -52,5 +57,10 @@ public class Multimedia {
 
     public void setEleresiUt(String eleresiUt) {
         this.eleresiUt = eleresiUt;
+    }
+
+    @Override
+    public int compareTo(Multimedia multimedia) {
+        return Character.compare(this.cim.charAt(0), multimedia.cim.charAt(0));
     }
 }

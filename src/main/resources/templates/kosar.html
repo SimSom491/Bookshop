@@ -2,100 +2,13 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Kosár</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
-    <style>
+    <title>Konyvek</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/konyvek.css}" rel="stylesheet">
+    <link th:href="@{/css/cart.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 
-        .main-wrapper{
-            justify-content: center;
-        }
-
-        .basket {
-            border: 1px black solid;
-            margin-left: 50px;
-            margin-right: 50px;
-            margin-top: 40px;
-            background-color: white;
-            width: 50%;
-            border-radius: 10px 10px 10px 10px;
-        }
-
-        .basket-items {
-            flex-wrap: wrap;
-            display: flex;
-            justify-content: center;
-            margin: 20px 0 20px 20px;
-            width: 90%;
-
-        }
-
-        .basket-item {
-            background-color: #f4f3e8;
-            padding: 50px;
-            border-radius: 10px 10px 10px 10px;
-            border: 1px solid black;
-            margin: 10px;
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-
-        }
-        .basket-item-img-name{
-            margin-right: auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            width: 400px;
-        }
-
-
-        .basket-item-price {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-
-        }
-        .basket-item-price .price, .basket-item-img-name .name,  .last-price{
-            font-weight: bolder;
-        }
-        .last-price{
-            font-size: 1.25em;
-        }
-        .on-storage{
-            color: green;
-        }
-
-        .basket-img {
-            height: 100px;
-            width: 166px;
-        }
-
-        #amount {
-            width: 50px;
-            height: 30px;
-        }
-
-        .payment{
-            background-color: white;
-            margin-top: 50px;
-            width: 240px;
-            height: 300px;
-            padding: 40px;
-            border: 1px black solid;
-            border-radius: 10px 10px 10px 10px;
-        }
-
-        .payment span{
-            display: inline-block;
-            margin-top: 5px;
-        }
-        hr{
-            margin: 20px 0;
-        }
-
-    </style>
 </head>
 <body>
 <header th:replace="fragments/header"></header>
@@ -105,20 +18,35 @@
             <div class="basket-header">
                 <h1>Kosár</h1>
             </div>
-            <p>A kosár tartalma:</p>
-            <div class="basket-items">
-                <form class="basket-item">
-                    <div class="basket-item-img-name">
-                        <img class="basket-img" src="../static/img/bogre1.jpg" alt="termek kepe">
-                        <p class="name">Bögre</p>
-                        <div>
-                            <input id="amount" name="amount" type="number" max="50">
-                            <label for="amount">db</label>
-                        </div>
 
+            <p>A kosár tartalma: <span th:if="${sum == 0}">A kosár jelenleg üres</span></p>
+            <div class="basket-items">
+                <form th:each=" konyv: ${konyvKosar}" method="post" th:action="@{/kosar/kosarbolTorolKonyv/{id}(id=${konyv.key.getId()})}"  class="basket-item">
+                    <div class="basket-item-img-name">
+                        <img  th:src="@{${konyv.key.getEleresiUt()}}" class="basket-img" src="../static/img/bogre1.jpg" alt="termek kepe">
+                        <p th:text="${konyv.key.getCim()}" class="name">Bögre</p>
                     </div>
                     <div class="basket-item-price">
-                        <p class="price">5000 Ft</p>
+                        <div>
+                            <div th:text="${konyv.value}" class="amount"></div>
+                            <div>db</div>
+                        </div>
+                        <p th:text="${konyv.key.getAr() * konyv.value} + Ft" class="price">5000 Ft</p>
+                        <p class="on-storage">Raktáron</p>
+                        <input type="submit" value="töröl">
+                    </div>
+                </form>
+                <form th:each=" multi: ${multiKosar}" method="post" th:action="@{/kosar/kosarbolTorolMulti/{id}(id=${multi.key.getId()})}" class="basket-item">
+                    <div class="basket-item-img-name">
+                        <img  th:src="@{${multi.key.getEleresiUt()}}" class="basket-img" src="../static/img/bogre1.jpg" alt="termek kepe">
+                        <p th:text="${multi.key.getCim()}" class="name">Bögre</p>
+                    </div>
+                    <div class="basket-item-price">
+                        <div>
+                            <div th:text="${multi.value}" class="amount"></div>
+                            <div>db</div>
+                        </div>
+                        <p th:text="${multi.key.getAr() * multi.value} + Ft" class="price">5000 Ft</p>
                         <p class="on-storage">Raktáron</p>
                         <input type="submit" value="töröl">
                     </div>
@@ -128,17 +56,26 @@
 
         <form class="payment">
             <h2>Rendelés összegzése</h2>
-            <span>Összeg:</span> <span>10000 Ft</span> <br>
-            <span>Szállítási költség:</span> <span>10000 Ft</span> <br>
-            <hr>
-            <span class="last-price">Végösszeg:</span> <span  class="last-price">10000 Ft</span> <br>
+<!--            <span>Összeg:</span> <span></span> <br>-->
+<!--            <span>Szállítási költség:</span> <span>10000 Ft</span> <br>-->
+<!--            <hr>-->
+            <span class="last-price">Végösszeg:</span> <span th:text="${sum} + ' Ft' " class="last-price">10000 Ft</span> <br>
             <hr>
             <div>
                 <span>Vásárlási utalvány megadása:</span>
                 <label for="discount"></label>
                 <input id="discount" type="text" name="discount">
             </div>
-            <input type="submit" value="Folytatás">
+            <div class="details">
+                Átvétel:
+            <label for="hazhoz">Házhozszállítással:</label>
+            <input id="hazhoz" type="radio" name="szalliatas" value="hazhoz">
+            <label for="uzletbe">Átvétel üzletünkben:</label>
+            <input id="uzletbe" type="radio" name="szalliatas" value="uzletbe">
+            <label for="szamla">Szamla igényes:</label>
+            <input id="szamla" type="checkbox" name="szamla" value="szamla">
+            <input type="submit" value="Fizetés">
+            </div>
         </form>
     </div>
 </main>

@@ -69,6 +69,10 @@ public class VarsarloController {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
         if (vasarlo != null) {
             httpSession.setAttribute("logged_in_user", null);
+            httpSession.setAttribute("cartSize",null);
+            VasarlasController.konyvKosar.clear();
+            VasarlasController.multiKosar.clear();
+
             return "redirect:/";
         } else {
             profilMessages.put("error_message", "A kijelentkezéshez be kell jelentkezni!");

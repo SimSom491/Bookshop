@@ -1,6 +1,9 @@
 package com.example.konyvesbolt.model;
 
-public class Konyv {
+import java.io.Serializable;
+import java.util.Comparator;
+
+public class Konyv implements Comparable<Konyv>, Serializable {
     private int id;
     private String szerzo;
     private String cim;
@@ -11,6 +14,15 @@ public class Konyv {
     private int kiadasiEv;
     private String tipus;
     private String leiras;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Konyv){
+            return (((Konyv) obj).cim.equals(cim));
+        } else {
+            return false;
+        }
+    }
 
     public Konyv(int id, String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras) {
         this.id = id;
@@ -118,5 +130,20 @@ public class Konyv {
         this.kiadasiEv = kiadasiEv;
         this.tipus = tipus;
         this.leiras = leiras;
+    }
+
+
+    @Override
+    public int compareTo(Konyv o) {
+       if (o.getCim().charAt(0) > cim.charAt(0)){
+           return -1;
+       } else if(o.getCim().charAt(0) < cim.charAt(0)){
+           return 1;
+       } else if (o.cim.equals(this.cim)){
+           return 0;
+       } else {
+           return 1;
+       }
+
     }
 }

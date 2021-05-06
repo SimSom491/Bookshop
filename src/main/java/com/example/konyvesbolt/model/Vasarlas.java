@@ -1,8 +1,11 @@
 package com.example.konyvesbolt.model;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Vasarlas {
+public class Vasarlas implements Serializable {
     private int id;
     private boolean szamlaigenyes;
     private Date mikor;

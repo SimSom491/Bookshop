@@ -3,6 +3,7 @@ package com.example.konyvesbolt.dao;
 import com.example.konyvesbolt.model.Bolt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,7 +25,6 @@ public class BoltDAO implements DAO<Bolt> {
                         rs.getString("elhelyezkedes"),
                         rs.getString("nyitvatartas")
                 ));
-
         return boltok;
     }
 
@@ -40,8 +40,8 @@ public class BoltDAO implements DAO<Bolt> {
 
     @Override
     public void torol(int id) {
-        String sql = "DELETE FROM BOLT WHERE id=" + id;
-        jdbcTemplate.update(sql);
+        String sql = "DELETE FROM BOLT WHERE id = ?";
+        jdbcTemplate.update(sql,id);
     }
 
     @Override
