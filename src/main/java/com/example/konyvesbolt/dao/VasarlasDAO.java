@@ -17,7 +17,7 @@ public class VasarlasDAO implements DAO<Vasarlas> {
     @Override
     public List<Vasarlas> listaz() {
         //TODO soma nem hiszi el hogy a char(1)==boolean tipus
-        List<Vasarlas> vasarlasok = jdbcTemplate.query("SELECT * FROM VASARLAS", (rs, rowNum) -> new Vasarlas(rs.getInt("id"), rs.getBoolean("szamlaigenyes"), rs.getDate("mikor"), rs.getString("atvetel")));
+        List<Vasarlas> vasarlasok = jdbcTemplate.query("SELECT * FROM VASARLAS", (rs, rowNum) -> new Vasarlas(rs.getInt("id"), rs.getInt("szamlaigenyes") == 1, rs.getDate("mikor"), rs.getString("atvetel")));
 
         return vasarlasok;
 
@@ -25,13 +25,13 @@ public class VasarlasDAO implements DAO<Vasarlas> {
 
     @Override
     public Vasarlas keres(int id) {
-        List<Vasarlas> vasarlasok = jdbcTemplate.query("SELECT * FROM VASARLAS WHERE id="+id, (rs, rowNum) -> new Vasarlas(rs.getInt("id"), rs.getBoolean("szamlaigenyes"), rs.getDate("mikor"), rs.getString("atvetel")));
+        List<Vasarlas> vasarlasok = jdbcTemplate.query("SELECT * FROM VASARLAS WHERE id="+id, (rs, rowNum) -> new Vasarlas(rs.getInt("id"), rs.getInt("szamlaigenyes") == 1, rs.getDate("mikor"), rs.getString("atvetel")));
         return vasarlasok.get(0);
     }
 
     @Override
     public void frissit(Vasarlas vasarlas) {
-        String sql = "UPDATE VASARLAS SET SZAMLAIGENYES='" + vasarlas.getSzamlaigenyes() + "', MIKOR=" + vasarlas.getMikor() + ", ATVETEL='" + vasarlas.getAtvetel() + "'  WHERE id=" + vasarlas.getId();
+        String sql = "UPDATE VASARLAS SET SZAMLAIGENYES=" + (vasarlas.getSzamlaigenyes() ? 1 : 0 )+ ", MIKOR=" + vasarlas.getMikor() + ", ATVETEL='" + vasarlas.getAtvetel() + "'  WHERE id=" + vasarlas.getId();
         jdbcTemplate.update(sql);
     }
 
@@ -45,7 +45,7 @@ public class VasarlasDAO implements DAO<Vasarlas> {
     public void beszur(Vasarlas vasarlas) {
         String sql = "INSERT INTO VASARLAS(SZAMLAIGENYES, MIKOR, ATVETEL) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, new Object[]{
-                vasarlas.getSzamlaigenyes(), vasarlas.getMikor(), vasarlas.getAtvetel() }
+                (vasarlas.getSzamlaigenyes() ? 1 : 0 ), vasarlas.getMikor(), vasarlas.getAtvetel() }
         );
     }
 }
