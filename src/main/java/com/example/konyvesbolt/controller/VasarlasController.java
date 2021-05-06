@@ -45,11 +45,11 @@ public class VasarlasController {
 
     private int sum() {
         int sum = 0;
-        for (Konyv konyv : konyvKosar.keySet()) {
-            sum += konyv.getAr();
+        for (Map.Entry<Konyv, Integer> entry : konyvKosar.entrySet()) {
+            sum += entry.getKey().getAr() * entry.getValue();
         }
-        for (Multimedia multimedia : multiKosar.keySet()) {
-            sum += multimedia.getAr();
+        for (Map.Entry<Multimedia, Integer> entry : multiKosar.entrySet()) {
+            sum += entry.getKey().getAr() * entry.getValue();
         }
         return sum;
     }
