@@ -19,28 +19,35 @@
 
         <aside class="top-books">
             <div class="top-books-header">
-                <h2>Toplista</h2>
+                <h2>Könyv toplista</h2>
             </div>
             <hr/>
-<!--            <div id="first-book">-->
-<!--                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">-->
-<!--                <div>-->
-<!--                    <p>Cím: 1984</p>-->
-<!--                    <p>Szerző: George Orwell</p>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div id="first-book">-->
+            <!--                <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">-->
+            <!--                <div>-->
+            <!--                    <p>Cím: 1984</p>-->
+            <!--                    <p>Szerző: George Orwell</p>-->
+            <!--                </div>-->
+            <!--            </div>-->
             <div class="rest" th:each="top : ${toplista}">
-                <img th:src="@{${top.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                <img th:src="@{${top.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye"
+                     width="200" height="267.5">
                 <div>
                     <p th:text="${top.getCim()}" class="title">1984</p>
                     <p th:text="${top.getSzerzo()}" class="author">George Orwell</p>
+                </div>
             </div>
+
+            <div class="top-books-header">
+                <h2>Multimédia toplista</h2>
             </div>
-                <div class="rest" th:each="topM : ${toplistaM}">
-                    <img th:src="@{${topM.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
-                    <div>
-                        <p th:text="${topM.getCim()}" class="title">1984</p>
-                    </div>
+            <hr/>
+            <div class="rest" th:each="topM : ${toplistaM}">
+                <img th:src="@{${topM.getEleresiUt()}}" src="../static/img/orwell-1984.jpg"
+                     alt="könyv borítójának helye" width="200" height="267.5">
+                <div>
+                    <p th:text="${topM.getCim()}" class="title">1984</p>
+                </div>
 
             </div>
 
@@ -48,26 +55,33 @@
 
         <div class="new-books">
             <div class="new-books-header">
-                <h2>Újdonságok</h2>
+                <h2>Könyv újdonságok</h2>
             </div>
             <div class="new-books-items">
                 <div class="new-book-item" th:each="konyv : ${konyvek}">
-                    <img th:src="@{${konyv.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                    <img th:src="@{${konyv.getEleresiUt()}}" src="../static/img/orwell-1984.jpg"
+                         alt="könyv borítójának helye" width="200" height="267.5">
                     <div>
                         <p th:text="${konyv.getCim()}" class="title">1984</p>
                         <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
                     </div>
-                    </div>
+                </div>
+            </div>
+                <div class="new-books-header">
+                    <h2>Multimédia újdonságok</h2>
+                </div>
+            <div class="new-books-items">
                 <div class="new-book-item" th:each="multi : ${multimediak}">
-                    <img th:src="@{${multi.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                    <img th:src="@{${multi.getEleresiUt()}}" src="../static/img/orwell-1984.jpg"
+                         alt="könyv borítójának helye" width="200" height="267.5">
                     <div>
                         <p th:text="${multi.getCim()}" class="title">1984</p>
 
                     </div>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
 </main>
 
 

@@ -72,8 +72,8 @@ public class MultimediaDAO implements DAO<Multimedia> {
     }
     public List<Multimedia> legujabbListaz() {
         List<Multimedia> multimediak = new ArrayList<>();
-        List<Integer> id = jdbcTemplate.query("SELECT MULTIMEDIA.ID FROM MULTIMEDIA,RAKTARON WHERE CIM LIKE 'A%' AND " +
-                        "(SELECT SUM(MENNYISEG) FROM MULTIMEDIA, RAKTARON WHERE MULTIMEDIA.ID=RAKTARON.MULTIMEDIA_ID)>10 AND" +
+        List<Integer> id = jdbcTemplate.query("SELECT MULTIMEDIA.ID FROM MULTIMEDIA,RAKTARON WHERE CIM LIKE 'A%' OR CIM LIKE 'D%' AND " +
+                        "(SELECT SUM(MENNYISEG) FROM MULTIMEDIA, RAKTARON WHERE MULTIMEDIA.ID=RAKTARON.MULTIMEDIA_ID)>3 AND" +
                         " MULTIMEDIA.ID = RAKTARON.MULTIMEDIA_ID GROUP BY MULTIMEDIA.ID",
                 (rs, rowNum) -> (rs.getInt("id")));
 
