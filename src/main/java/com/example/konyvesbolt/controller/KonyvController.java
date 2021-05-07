@@ -96,9 +96,9 @@ public class KonyvController {
     }
 
     @PostMapping(value = "/konyvek/keres")
-    public String konyvKeres(@RequestParam("cim") String cim, Model model,HttpSession httpSession ){
+    public String konyvKeres(@RequestParam("cim") String cim, @RequestParam("szerzo") String szerzo, Model model,HttpSession httpSession ){
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
-        model.addAttribute("konyvek", konyvDAO.keresNev(cim));
+        model.addAttribute("konyvek", konyvDAO.keresNev(cim, szerzo));
         if (vasarlo!=null) {
             model.addAttribute("admine", vasarlo.isAdmine());
         }else{

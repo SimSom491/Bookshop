@@ -35,9 +35,11 @@ public class KonyvDAO implements DAO<Konyv> {
         }
         return konyvek.get(0);
     }
-    public List<Konyv> keresNev(String cim){
-        SqlParameterSource parameters = new MapSqlParameterSource("cim", cim+"%");
-        String sql = "SELECT * FROM KONYV WHERE CIM LIKE (:cim)";
+    public List<Konyv> keresNev(String cim, String szerzo){
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("cim", cim+"%");
+        parameters.addValue("szerzo", szerzo+"%");
+        String sql = "SELECT * FROM KONYV WHERE CIM LIKE (:cim) AND SZERZO LIKE(:szerzo)";
 
         List<Konyv> konyvek =  namedParameterJdbcTemplate.query(sql, parameters, (rs, rowNum) -> new Konyv(
                 rs.getInt("id"),
