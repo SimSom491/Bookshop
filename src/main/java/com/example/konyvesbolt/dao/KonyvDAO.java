@@ -2,6 +2,7 @@ package com.example.konyvesbolt.dao;
 
 import com.example.konyvesbolt.model.Ajandek;
 import com.example.konyvesbolt.model.Konyv;
+import com.example.konyvesbolt.model.Multimedia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -40,7 +42,7 @@ public class KonyvDAO implements DAO<Konyv> {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("cim", cim + "%");
         parameters.addValue("szerzo", szerzo + "%");
-        String sql = "SELECT * FROM KONYV WHERE CIM LIKE (:cim) AND SZERZO LIKE(:szerzo)";
+        String sql = "SELECT * FROM KONYV WHERE CIM LIKE (:cim) AND SZERZO LIKE (:szerzo)";
 
         List<Konyv> konyvek = namedParameterJdbcTemplate.query(sql, parameters, (rs, rowNum) -> new Konyv(
                 rs.getInt("id"),
@@ -57,6 +59,32 @@ public class KonyvDAO implements DAO<Konyv> {
 
         return konyvek;
     }
+    //könyvek listája, akik még ezt a könyvet vették meg
+    //thoseBooksWhoBoughtThisBookAsWell
+    public List<Konyv> getBooksWhoBoughtThisBookAsWell(int bookID, int buyerID){
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("bookId", bookID );
+        parameters.addValue("buyerId", buyerID);
+        String sql = "SELECT KONYV.ID, COUNT(*) as num FROM KONYV, VASARLO, VASAROL, VASARLAS, TARTOZIK\n" +
+                "WHERE VASARLO.ID IN (SELECT VASARLO.ID FROM KONYV, VASARLO, VASAROL, VASARLAS, TARTOZIK\n" +
+                "                     WHERE KONYV.ID = TARTOZIK.ID AND KONYV_ID = (:bookId) AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
+                "                       AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASAROL.VASARLO_ID = VASARLO.ID\n" +
+                "                       AND VASARLO.ID != (:buyerId) GROUP BY VASARLO.ID)\n" +
+                "  AND KONYV.ID = TARTOZIK.KONYV_ID AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
+                "  AND VASARLO.ID =VASAROL.VASARLO_ID AND KONYV.ID != (:bookId) GROUP BY KONYV.ID ORDER BY num DESC";
+        List<Integer> bookIds = namedParameterJdbcTemplate.query(sql,parameters,(rs, rowNum) ->
+                rs.getInt("id")
+               );
+        List<Integer> bookNumbers = namedParameterJdbcTemplate.query(sql,parameters,(rs, rowNum) ->
+                rs.getInt("num")
+        );
+        List<Konyv> konyvek = new ArrayList<>();
+        for (Integer bookId : bookIds) {
+            konyvek.add(keres(bookId));
+        }
+        return konyvek;
+    }
+
 
     @Override
     public void frissit(Konyv konyv) {

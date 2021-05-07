@@ -30,7 +30,6 @@ public class MultimediaController {
     @GetMapping(value = "/multimedia/deleteMult/{id}")
     public String delete(@PathVariable("id") int multiId, Model model) {
         multimediaDAO.torol(multiId);
-
         return "redirect:/multimedia";
     }
 
@@ -45,12 +44,10 @@ public class MultimediaController {
         }
         model.addAttribute("multimedia", multimediaDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.multiListaz());
-        return "multimedia";
+        return "multimediak";
     }
     @GetMapping(value = "/addm")
     public String Addpage(Model model) {
-
-
         return "multimedia-hozzaad";
     }
 
@@ -65,7 +62,7 @@ public class MultimediaController {
         }
         model.addAttribute("multimedia", zeneDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.zeneListaz());
-        return "multimedia";
+        return "multimediak";
     }
     @GetMapping(value = "/film")
     public String filmetListaz(Model model, HttpSession httpSession) {
@@ -78,7 +75,7 @@ public class MultimediaController {
         }
         model.addAttribute("multimedia", filmDAO.listaz());
         model.addAttribute("mufajok", mufajDAO.filmListaz());
-        return "multimedia";
+        return "multimediak";
     }
 
 
@@ -87,7 +84,7 @@ public class MultimediaController {
         List<Multimedia> multimediak = multimediaDAO.szur(mufajId);
         model.addAttribute("multimedia", multimediak);
         model.addAttribute("mufajok", mufajDAO.multiListaz());
-        return "multimedia";
+        return "multimediak";
     }
     @GetMapping(value = "/addfilm")
     public String addfilmget(){

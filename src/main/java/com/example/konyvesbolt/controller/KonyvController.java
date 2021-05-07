@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -110,8 +109,14 @@ public class KonyvController {
         return "konyvek";
     }
     @GetMapping(value = "/konyvek/reszletek/{id}")
-    public String reszletezes(@PathVariable("id") int konyvid, Model model) {
+    public String reszletezes(@PathVariable("id") int konyvid, Model model, HttpSession httpSession) {
         Konyv konyv = konyvDAO.keres(konyvid);
+        if (httpSession.getAttribute("logged_in_user") != null){
+            Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+            List<Konyv> vettKonyvek = konyvDAO.getBooksWhoBoughtThisBookAsWell(konyvid,vasarlo.getId());
+            model.addAttribute("vettKonyvek", vettKonyvek);
+        }
+
         switch (konyv.getTipus()) {
             case "Könyv":
                 model.addAttribute("konyv", konyv);
