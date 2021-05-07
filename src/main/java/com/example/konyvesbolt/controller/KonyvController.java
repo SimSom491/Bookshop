@@ -32,12 +32,17 @@ public class KonyvController {
     HangosKonyvDAO hangosKonyvDAO;
 
     @Autowired
+    MultimediaDAO multimediaDAO;
+
+    @Autowired
     KonyvDAO konyvDAO;
 
     @GetMapping(value = "/")
     public String Starter(Model model) {
         model.addAttribute("konyvek", konyvDAO.legujabbListaz());
+        model.addAttribute("multimediak", multimediaDAO.legujabbListaz());
         model.addAttribute("toplista", konyvDAO.toplista());
+        model.addAttribute("toplistaM", multimediaDAO.toplista());
         List<Mufaj> mufajok= mufajDAO.listaz();
 
         model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));

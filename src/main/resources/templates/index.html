@@ -36,6 +36,13 @@
                     <p th:text="${top.getSzerzo()}" class="author">George Orwell</p>
             </div>
             </div>
+                <div class="rest" th:each="topM : ${toplistaM}">
+                    <img th:src="@{${topM.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                    <div>
+                        <p th:text="${topM.getCim()}" class="title">1984</p>
+                    </div>
+
+            </div>
 
         </aside>
 
@@ -51,6 +58,13 @@
                         <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
                     </div>
                     </div>
+                <div class="new-book-item" th:each="multi : ${multimediak}">
+                    <img th:src="@{${multi.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="267.5">
+                    <div>
+                        <p th:text="${multi.getCim()}" class="title">1984</p>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
