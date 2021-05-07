@@ -24,6 +24,10 @@ public class Konyv implements Comparable<Konyv>, Serializable {
         }
     }
 
+    public Konyv(int id) {
+        this.id = id;
+    }
+
     public Konyv(int id, String szerzo, String cim, int ar, int oldalszam, String kiado, String eleresiUt, int kiadasiEv, String tipus, String leiras) {
         this.id = id;
         this.szerzo = szerzo;
