@@ -1,13 +1,8 @@
 package com.example.konyvesbolt.controller;
 
 
-import com.example.konyvesbolt.dao.KonyvDAO;
-import com.example.konyvesbolt.dao.MultimediaDAO;
-import com.example.konyvesbolt.dao.VasarlasDAO;
-import com.example.konyvesbolt.model.Konyv;
-import com.example.konyvesbolt.model.Multimedia;
-import com.example.konyvesbolt.model.Vasarlas;
-import com.example.konyvesbolt.model.Vasarlo;
+import com.example.konyvesbolt.dao.*;
+import com.example.konyvesbolt.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +24,10 @@ public class VasarlasController {
     MultimediaDAO multimediaDAO;
     @Autowired
     VasarlasDAO vasarlasDAO;
+    @Autowired
+    TartozikDAO tartozikDAO;
+    @Autowired
+    VasarolDAO vasarolDAO;
 
     public static Map<Konyv, Integer> konyvKosar = new TreeMap<>();
     public static Map<Multimedia, Integer> multiKosar = new TreeMap<>();
@@ -141,9 +140,26 @@ public class VasarlasController {
             vasarlas.setAtvetel(szallitas);
             vasarlas.setMikor(Date.valueOf(LocalDate.now()));
 
-            //TODO tartozikDao ba a kosár tartalmának felvitele foreacheh nem iterrel
-
             vasarlasDAO.beszur(vasarlas);
+
+            int id=vasarlasDAO.idkeres();
+
+            for (Map.Entry<Konyv, Integer> konyvIntegerEntry : konyvKosar.entrySet()) {
+                tartozikDAO.beszur(new Tartozik(id,konyvIntegerEntry.getKey().getId(),0,0,konyvIntegerEntry.getValue()));
+            }
+            for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : multiKosar.entrySet()) {
+                tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
+            }
+            //for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : .entrySet()) {
+            //    tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
+            //}TODO ajándékkosoár
+
+
+            vasarolDAO.beszur(new Vasarol(vasarlo.getId(),0,1,id));
+
+            konyvKosar.clear();
+            multiKosar.clear();
+            httpSession.setAttribute("cartSize",null);
 
             return "redirect:/kosar";
         }

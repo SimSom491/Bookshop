@@ -48,4 +48,14 @@ public class VasarlasDAO implements DAO<Vasarlas> {
                 (vasarlas.getSzamlaigenyes() ? 1 : 0 ), vasarlas.getMikor(), vasarlas.getAtvetel() }
         );
     }
+
+    public int idkeres() {
+        String idkeressql = "SELECT * FROM(SELECT ID FROM VASARLAS ORDER BY ID DESC ) WHERE ROWNUM = 1 ";
+        List<Integer> id = jdbcTemplate.query(idkeressql,
+                (rs, rowNum) ->
+                        rs.getInt("id")
+        );
+        return id.get(0);
+    }
+
 }
