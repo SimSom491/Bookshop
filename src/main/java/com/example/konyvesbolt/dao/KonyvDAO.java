@@ -4,15 +4,21 @@ import com.example.konyvesbolt.model.Ajandek;
 import com.example.konyvesbolt.model.Konyv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class KonyvDAO implements DAO<Konyv> {
     @Autowired
     JdbcTemplate jdbcTemplate;
+    @Autowired
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public List<Konyv> listaz() {
@@ -29,6 +35,29 @@ public class KonyvDAO implements DAO<Konyv> {
         }
         return konyvek.get(0);
     }
+    public List<Konyv> keresNev(String cim){
+        SqlParameterSource parameters = new MapSqlParameterSource("cim", cim+"%");
+        String sql = "SELECT * FROM KONYV WHERE CIM LIKE (:cim)";
+
+        List<Konyv> konyvek =  namedParameterJdbcTemplate.query(sql, parameters, (rs, rowNum) -> new Konyv(
+                rs.getInt("id"),
+                rs.getString("szerzo"),
+                rs.getString("cim"),
+                rs.getInt("ar"),
+                rs.getInt("oldalszam"),
+                rs.getString("kiado"),
+                rs.getString("eleresiut"),
+                rs.getInt("kiadasiev"),
+                rs.getString("tipus"),
+                rs.getString("leiras")));
+
+
+
+        return konyvek;
+    }
+  /*  public List<Konyv> keresSzerzo(String szerzo){
+
+    }*/
 
     @Override
     public void frissit(Konyv konyv) {

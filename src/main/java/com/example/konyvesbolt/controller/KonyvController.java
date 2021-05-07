@@ -95,6 +95,20 @@ public class KonyvController {
         return "konyvek";
     }
 
+    @PostMapping(value = "/konyvek/keres")
+    public String konyvKeres(@RequestParam("cim") String cim, Model model,HttpSession httpSession ){
+        Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+        model.addAttribute("konyvek", konyvDAO.keresNev(cim));
+        if (vasarlo!=null) {
+            model.addAttribute("admine", vasarlo.isAdmine());
+        }else{
+            model.addAttribute("admine", false);
+        }
+        List<Mufaj> mufajok= mufajDAO.listaz();
+
+        model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));
+        return "konyvek";
+    }
     @GetMapping(value = "/konyvek/reszletek/{id}")
     public String reszletezes(@PathVariable("id") int konyvid, Model model) {
         Konyv konyv = konyvDAO.keres(konyvid);
@@ -119,6 +133,7 @@ public class KonyvController {
 
         return "konyv";
     }
+
 
     @GetMapping(value = "/magazinok")
     public String magazinList(Model model, HttpSession httpSession) {
