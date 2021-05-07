@@ -87,4 +87,11 @@ public class MultimediaDAO implements DAO<Multimedia> {
         return jdbcTemplate.query("SELECT MULTIMEDIA.ID,MULTIMEDIA.AR,MULTIMEDIA.CIM,MULTIMEDIA.ELERESIUT FROM MULTIMEDIA,MUFAJA WHERE MULTIMEDIA.id=MUFAJA.multimedia_id AND MUFAJA.MUFAJ_ID="+mufajId, (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"),rs.getInt("ar"),rs.getString("eleresiut")));
 
     }
+
+    public boolean isZene(int multiId) {
+
+            List<Multimedia> multik = jdbcTemplate.query("SELECT * FROM ZENE,MULTIMEDIA WHERE id="+multiId +" AND id=multimedia_id", (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"), rs.getInt("ar"),rs.getString("eleresiut")));
+        return multik.size() != 0;
+
+    }
 }

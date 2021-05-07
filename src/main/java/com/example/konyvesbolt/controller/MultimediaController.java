@@ -123,5 +123,26 @@ public class MultimediaController {
         return "redirect:/addzene";
     }
 
+    @GetMapping(value = "/multimediak/reszletekm/{id}")
+    public String reszletezesM(@PathVariable("id") int multiId, Model model, HttpSession httpSession) {
+        Multimedia multi = multimediaDAO.keres(multiId);
+        if (httpSession.getAttribute("logged_in_user") != null) {
+            Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
+            List<Multimedia> vettMultik = multimediaDAO.getMultisWhoBoughtThisMultiAsWell(multiId, vasarlo.getId());
+            model.addAttribute("vettMultik", vettMultik);
+        }
 
+        if (multimediaDAO.isZene(multiId)) {
+            model.addAttribute("konyv", zeneDAO.keres(multiId));
+            System.out.println(zeneDAO.keres(multiId)==null?"null":"nem null");
+            model.addAttribute("zenee", true);
+
+        } else {
+            model.addAttribute("konyv", filmDAO.keres(multiId));
+            model.addAttribute("zenee", false);
+
+        }
+
+        return "multi";
+    }
 }

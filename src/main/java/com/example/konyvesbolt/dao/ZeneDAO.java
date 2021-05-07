@@ -1,5 +1,6 @@
 package com.example.konyvesbolt.dao;
 
+import com.example.konyvesbolt.model.Magazin;
 import com.example.konyvesbolt.model.Zene;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,7 +30,9 @@ public class ZeneDAO implements DAO<Zene> {
 
     @Override
     public Zene keres(int id) {
-        return null;
+        List<Zene> zenek = jdbcTemplate.query("SELECT * FROM Zene, MULTIMEDIA WHERE ZENE.MULTIMEDIA_ID=MULTIMEDIA.ID AND id=" + id, (rs, rowNum) -> new Zene(rs.getInt("id"), rs.getString("cim"),
+               rs.getInt("ar"), rs.getString("eleresiut"), rs.getString("eloado")));
+        return zenek.get(0);
     }
 
     @Override
