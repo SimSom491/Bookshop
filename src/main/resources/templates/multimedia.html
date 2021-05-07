@@ -69,7 +69,7 @@
                         <p class="title" th:text="${multi.getCim()}">1984</p>
                         <hr>
                         <p class="price" th:text="${multi.getAr() + ' Ft'}">5000 Ft</p>
-                       <a th:href="@{/multimedia/kosarhozad/{id}(id=${multi.getId()})}"> <img th:src="@{/img/shopping-basket.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64"></a>
+                       <a th:href="@{/multimedia/kosarhozad/{id}(id=${multi.getId()})}"> <img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64"></a>
                         <p th:if="${admine}"> <a  th:href="@{/multimedia/deleteMult/{id}(id=${multi.getId()})}" >Elem törlése</a></p>
                     </div>
                 </div>

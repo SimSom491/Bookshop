@@ -19,26 +19,23 @@ public class AjandekController {
     AjandekDAO ajandekDAO;
 
 
-    @GetMapping(value = "/ajandekoldal")
+    @GetMapping(value = "/ajandek")
     public String ajandekList(Model model) {
-        //addAji("FERI",9999 ,"https//valid veboladcim"); beszuras teszt
         model.addAttribute("ajandekok", ajandekDAO.ajitListaz());
-        //ajandekDAO.ajitTorol("FERI"); torlesteszt
-
-        return "asd";
+        return "ajandek";
     }
     @PostMapping(value = "/addAji")
     public String addAji(@RequestParam("nev") String nev, @RequestParam("ar") int ar, @RequestParam("path") String ut) {
         Ajandek aji = new Ajandek(nev, ar, ut);
         ajandekDAO.ajitHozzaad(aji);
-
-        return "redirect:/asd";
+/*todo*/
+        return "redirect:/ajandek";
     }
 
     @GetMapping(value = "/deleteAji/{nev}")
     public String deleteAji(@PathVariable("nev") String nev) {
         ajandekDAO.ajitTorol(nev);
-
-        return "redirect:/asd";
+/*todo*/
+        return "redirect:/ajandek";
     }
 }

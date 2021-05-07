@@ -2,17 +2,19 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Ajandek</title>
-    <link th:href="@{.../staic/css/base.css}" href="../static/css/base.css" rel="stylesheet">
-    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Ajándék</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/konyvek.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
+
     <style>
         .main-wrapper{
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            height: 500px;
             flex-wrap: wrap;
         }
 
@@ -22,7 +24,7 @@
             align-items: center;
         }
         .gift-img{
-            width: 712px;
+            width: 400px;
             height: 320px;
             margin: 20px;
         }
@@ -38,25 +40,11 @@
 
 <div class="main-wrapper">
 
-    <div class="gift-item">
-        <img class="gift-img" src="../static/img/bogre1.jpg" alt="ajandek helye">
-        <p>Bögre</p>
-        <p>5000Ft</p>
-    </div>
-    <div class="gift-item">
-        <img class="gift-img" src="../static/img/bogre1.jpg" alt="ajandek helye">
-        <p>Bögre</p>
-        <p>5000Ft</p>
-    </div>
-    <div class="gift-item">
-        <img class="gift-img" src="../static/img/bogre1.jpg" alt="ajandek helye">
-        <p>Bögre</p>
-        <p>5000Ft</p>
-    </div>
-    <div class="gift-item">
-        <img  class="gift-img" src="../static/img/bogre1.jpg" alt="ajandek helye">
-        <p>Bögre</p>
-        <p>5000Ft</p>
+    <div class="gift-item" th:each="aji : ${ajandekok}">
+        <img   class="gift-img" src="../static/img/bogre1.jpg" alt="ajandek helye" th:src="@{${aji.getEleresiUt()}}">
+        <p th:text="${aji.getNev()}">Bögre</p>
+        <p th:text="${aji.getAr()} + ' Ft'">5000Ft</p>
+ <img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64">
     </div>
 </div>
 

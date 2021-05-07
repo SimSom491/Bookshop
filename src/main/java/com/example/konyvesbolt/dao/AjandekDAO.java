@@ -33,9 +33,10 @@ public class AjandekDAO {
 
     public void ajitHozzaad(Ajandek aji) {
         String sql = "INSERT INTO AJANDEK(NEV, AR, ELERESIUT) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, new Object[]{
-                aji.getNev(), aji.getAr(), aji.getEleresiUt() }
-    );
+        jdbcTemplate.update(sql,
+                aji.getNev(),
+                aji.getAr(),
+                aji.getEleresiUt());
     }
 
     public void ajitTorol(String nev) {

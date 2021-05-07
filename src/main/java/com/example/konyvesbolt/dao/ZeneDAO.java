@@ -45,7 +45,7 @@ public class ZeneDAO implements DAO<Zene> {
 
     @Override
     public void beszur(Zene zene) {
-              String multisql = "INSERT INTO MULTIMEDIA(CIM, AR, ELERESIUT) VALUES(?,?,?)";
+        String multisql = "INSERT INTO MULTIMEDIA(CIM, AR, ELERESIUT) VALUES(?,?,?)";
         jdbcTemplate.update(multisql,
                 zene.getCim(),
                 zene.getAr(),
@@ -61,7 +61,7 @@ public class ZeneDAO implements DAO<Zene> {
 
     }
 
-    private int idkeres(){
+    private int idkeres() {
         String idkeressql = "SELECT * FROM(SELECT ID FROM MULTIMEDIA ORDER BY ID DESC ) WHERE ROWNUM = 1 ";
         List<Integer> id = jdbcTemplate.query(idkeressql,
                 (rs, rowNum) ->
