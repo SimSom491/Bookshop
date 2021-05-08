@@ -64,7 +64,7 @@
             </div>
             <div class="books-items">
                 <div class="book-item" th:each="multi : ${multimedia}">
-                    <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${multi.getEleresiUt()}}">
+                    <a th:href="@{/multimediak/reszletekm/{id}(id=${multi.getId()})}"><img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="270" th:src="@{${multi.getEleresiUt()}}"></a>
                     <div class="book-details">
                         <p class="title" th:text="${multi.getCim()}">1984</p>
                         <hr>

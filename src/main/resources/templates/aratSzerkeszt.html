@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Konyvek</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/konyvek.css}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
+
+</head>
+
+<body>
+<header th:replace="fragments/header"></header>
+<div class="inside-menu-wrapper">
+    <ul class="inside-menu">
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/konyvek}">Könyv</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/magazinok}">Magazin</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/tankonyvek}">Tankönyv</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/antikvarkonyvek}">Antikvár könyv</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text"><a th:href="@{/hangoskonyvek}">Hangoskönyv</a></p></li>
+        <li class="inside-menu-item"><p class="list-one-row-text">Elérhetőség</p></li>
+    </ul>
+</div>
+<form action="/aratSzerkeszt" method="post">
+<label for="price3">Az új ár: </label>
+<input type="number" id="price3" name="ar">
+<input type="submit" >
+</form>
+</body>
+</html>

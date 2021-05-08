@@ -77,40 +77,27 @@
             <img src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="400" height="535" th:src="@{${konyv.getEleresiUt()}}">
             <div class="book-details">
                 <p th:text="${konyv.getCim()}" class="title">1984</p>
-                <p th:text="${konyv.getSzerzo()}"class="author">George Orwell</p>
-                <hr>
-                <p th:text="${konyv.getKiado()}"class="pub">Európa Könyvkiadó,</p>
-                <p th:text="${konyv.getKiadasiEv()}"class="year">2010</p> <br>
-                <p class="pageN">Oldalszám:</p>
-                <p th:text="${konyv.getOldalszam()}"class="num">300</p>
+
                 <br>
-                <p th:if="${konyv.getTipus()} == 'Magazin'" th:text="'Gyakoriság: ' + ${ konyv.getGyakorisag()}"class="num">gyakori</p>
-                <p th:if="${konyv.getTipus()} == 'Hangoskönyv'" th:text="'Elbeszélő: ' + ${ konyv.getElbeszelo()}+ ','"class="num">elbeszel</p>
-                <p th:if="${konyv.getTipus()} == 'Hangoskönyv'" th:text="'Hossz: ' + ${ konyv.getHossz()}+ 'perc'"class="num">sok ido</p>
-                <p th:if="${konyv.getTipus()} == 'Tankönyv'" th:text="'Ajánlott kor: ' + ${ konyv.getAjanlottKor()}+ ','"class="num">200</p>
-                <p th:if="${konyv.getTipus()} == 'Tankönyv'" th:text="'Típus: ' + ${ konyv.getFajta()}"class="num">poligon</p>
-                <p th:if="${konyv.getTipus()} == 'Antikvár'" th:text="'Kor: ' + ${ konyv.getKor()}+ ' Év,'"class="num">200</p>
-                <p th:if="${konyv.getTipus()} == 'Antikvár'" th:text="'Állapot: ' + ${ konyv.getAllapot()}"class="num">jó</p>
+                <p th:if="${zenee}" th:text="'Előadó: ' + ${ konyv.getEloado()}">swag</p>
+                <p th:if="${!zenee}" th:text="'Kiadási év: ' + ${ konyv.getEv()}"class="num">2016</p>
+                <p th:if="${!zenee}" th:text="'Hossz: ' + ${ konyv.getHossz()}+ ' perc'"class="num">2016</p>
 
                 <hr>
                 <p th:text="${konyv.getAr()} + Ft "class="price">5000 Ft</p>
                 <img th:src="@{/img/buy.svg}" alt="kosárba-tesz-helye" width="64" height="64">
                 <p style="color: green; font-size: large" >Raktáron</p>
-                <hr>
-                <p> Leírás:</p>
-                <p th:text="${konyv.leiras}" class="desc">"Üdvözlet az egyformaság korából, a magányosság korából, a Nagy Testvér korából, a
-                    duplagondol korából" - írja a naplójába Winston Smith, a lázadó, a gondolatbűnöző, aki nem hajlandó
-                    elismerni, hogy a 2x2 a Párt akarata szerint lehet három vagy öt. Talán valóban "csak" keserű
-                    üdvözlet lesz ez a regény a jövőben, örök emlékeztető a totalitárius XX. századra. </p>
+
+
             </div>
         </div>
         <h3>Ezeket a könyveket vették még meg, akik ezt a könyvet vették:</h3>
         <div class="book-roll">
-            <div th:each="vettKonyv : ${vettKonyvek}" class="book-roll-item">
+            <div th:each="vettKonyv : ${vettMultik}" class="book-roll-item">
                 <img th:src="@{${vettKonyv.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
                 <div>
                     <p th:text="${vettKonyv.getCim()}">Cím: 1984</p>
-                    <p th:text="${vettKonyv.getSzerzo()}">Szerző: George Orwell</p>
+                    <p th:text="${vettKonyv.getAr()}+ ' ft'">Szerző: George Orwell</p>
                 </div>
             </div>
         </div>

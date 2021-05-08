@@ -1,6 +1,7 @@
 package com.example.konyvesbolt.dao;
 
 import com.example.konyvesbolt.model.Film;
+import com.example.konyvesbolt.model.Zene;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -30,7 +31,9 @@ public class FilmDAO implements DAO<Film>{
 
     @Override
     public Film keres(int id) {
-        return null;
+        List<Film> konyvek = jdbcTemplate.query("SELECT * FROM FILM, MULTIMEDIA WHERE FILM.MULTIMEDIA_ID=MULTIMEDIA.ID AND id=" + id, (rs, rowNum) -> new Film(rs.getInt("id"), rs.getString("cim"),
+                rs.getInt("ar"), rs.getString("eleresiut"), rs.getInt("ev"),rs.getInt("hossz")));
+        return konyvek.get(0);
     }
 
     @Override

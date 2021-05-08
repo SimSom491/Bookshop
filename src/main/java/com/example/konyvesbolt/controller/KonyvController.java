@@ -15,6 +15,7 @@ import java.util.List;
 
 @Controller
 public class KonyvController {
+    public int idErtek;
 
     @Autowired
     MagazinDAO magazinDAO;
@@ -32,12 +33,17 @@ public class KonyvController {
     HangosKonyvDAO hangosKonyvDAO;
 
     @Autowired
+    MultimediaDAO multimediaDAO;
+
+    @Autowired
     KonyvDAO konyvDAO;
 
     @GetMapping(value = "/")
     public String Starter(Model model) {
         model.addAttribute("konyvek", konyvDAO.legujabbListaz());
+        model.addAttribute("multimediak", multimediaDAO.legujabbListaz());
         model.addAttribute("toplista", konyvDAO.toplista());
+        model.addAttribute("toplistaM", multimediaDAO.toplista());
         List<Mufaj> mufajok= mufajDAO.listaz();
 
         model.addAttribute("mufajok", mufajDAO.mufajszam(mufajok));
@@ -54,6 +60,19 @@ public class KonyvController {
     @GetMapping(value = "/konyvek/deleteKonyv/{id}")
     public String delete(@PathVariable("id") int konyvid, Model model) {
         konyvDAO.torol(konyvid);
+
+        return "redirect:/konyvek";
+    }
+
+    @GetMapping(value = "/konyvek/frissit/{id}")
+    public String aratFrissitGET(@PathVariable("id") int konyvid) {
+        idErtek = konyvid;
+        return "aratSzerkeszt";
+    }
+    @PostMapping(value = "/aratSzerkeszt")
+    public String aratFrissitPOST(@RequestParam("ar") int ar, Model model) {
+        konyvDAO.aratFrissit(idErtek, ar);
+
 
         return "redirect:/konyvek";
     }

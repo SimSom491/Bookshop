@@ -150,6 +150,17 @@ public class KonyvDAO implements DAO<Konyv> {
 
         return konyvek;
     }
+    public void aratFrissit(int id, int ar){
+         MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("id", id);
+        parameters.addValue("ar", ar);
+
+        String sql = "UPDATE KONYV SET AR = (:ar) WHERE ID IN (:id)";
+
+       namedParameterJdbcTemplate.update(sql, parameters);
+
+
+    }
 
 
 }

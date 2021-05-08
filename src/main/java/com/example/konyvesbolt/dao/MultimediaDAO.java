@@ -57,6 +57,31 @@ public class MultimediaDAO implements DAO<Multimedia> {
                 multimedia.getAr(),
                 multimedia.getEleresiUt());
     }
+    public List<Multimedia> toplista() {
+        List<Multimedia> multimediak = new ArrayList<>();
+        List<Integer> id = jdbcTemplate.query("SELECT MULTIMEDIA.ID FROM MULTIMEDIA,RAKTARON WHERE AR  < 2000 AND" +
+                        " (SELECT SUM(MENNYISEG) FROM VOROS.MULTIMEDIA, RAKTARON WHERE MULTIMEDIA.ID=RAKTARON.MULTIMEDIA_ID)>30 AND " +
+                        "MULTIMEDIA.ID = RAKTARON.MULTIMEDIA_ID GROUP BY MULTIMEDIA.ID",
+                (rs, rowNum) -> (rs.getInt("id")));
+
+        for (Integer i : id) {
+            multimediak.add(keres(i));
+        }
+
+        return multimediak;
+    }
+    public List<Multimedia> legujabbListaz() {
+        List<Multimedia> multimediak = new ArrayList<>();
+        List<Integer> id = jdbcTemplate.query("SELECT MULTIMEDIA.ID FROM MULTIMEDIA,RAKTARON WHERE CIM LIKE 'A%' OR CIM LIKE 'D%' AND " +
+                        "(SELECT SUM(MENNYISEG) FROM MULTIMEDIA, RAKTARON WHERE MULTIMEDIA.ID=RAKTARON.MULTIMEDIA_ID)>3 AND" +
+                        " MULTIMEDIA.ID = RAKTARON.MULTIMEDIA_ID GROUP BY MULTIMEDIA.ID",
+                (rs, rowNum) -> (rs.getInt("id")));
+
+        for (Integer i : id) {
+            multimediak.add(keres(i));
+        }
+        return multimediak;
+    }
 
     public List<Multimedia> getMultisWhoBoughtThisMultiAsWell(int multiID, int buyerID){
         MapSqlParameterSource parameters = new MapSqlParameterSource();
@@ -85,6 +110,13 @@ public class MultimediaDAO implements DAO<Multimedia> {
     public List<Multimedia> szur(int mufajId) {
 
         return jdbcTemplate.query("SELECT MULTIMEDIA.ID,MULTIMEDIA.AR,MULTIMEDIA.CIM,MULTIMEDIA.ELERESIUT FROM MULTIMEDIA,MUFAJA WHERE MULTIMEDIA.id=MUFAJA.multimedia_id AND MUFAJA.MUFAJ_ID="+mufajId, (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"),rs.getInt("ar"),rs.getString("eleresiut")));
+
+    }
+
+    public boolean isZene(int multiId) {
+
+            List<Multimedia> multik = jdbcTemplate.query("SELECT * FROM ZENE,MULTIMEDIA WHERE id="+multiId +" AND id=multimedia_id", (rs, rowNum) -> new Multimedia(rs.getInt("id"), rs.getString("cim"), rs.getInt("ar"),rs.getString("eleresiut")));
+        return multik.size() != 0;
 
     }
 }
