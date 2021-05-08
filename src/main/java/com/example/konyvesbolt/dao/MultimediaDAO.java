@@ -67,8 +67,8 @@ public class MultimediaDAO implements DAO<Multimedia> {
                 "                     WHERE MULTIMEDIA.ID = TARTOZIK.ID AND KONYV_ID = (:bookId) AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
                 "                       AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASAROL.VASARLO_ID = VASARLO.ID\n" +
                 "                       AND VASARLO.ID != (:buyerId) GROUP BY VASARLO.ID)\n" +
-                "  AND KONYV.ID = TARTOZIK.KONYV_ID AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
-                "  AND VASARLO.ID =VASAROL.VASARLO_ID AND KONYV.ID != (:bookId) GROUP BY KONYV.ID ORDER BY num DESC";
+                "  AND MULTIMEDIA.ID = TARTOZIK.MULTIMEDIA_ID AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
+                "  AND VASARLO.ID =VASAROL.VASARLO_ID AND MULTIMEDIA.ID != (:bookId) GROUP BY KONYV.ID ORDER BY num DESC";
         List<Integer> multiIds = namedParameterJdbcTemplate.query(sql,parameters,(rs, rowNum) ->
                 rs.getInt("id")
         );
