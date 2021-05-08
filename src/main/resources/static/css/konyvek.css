@@ -10,12 +10,14 @@
 }
 .search-bar{
     margin: 0 auto 0 11.8%;
-    align-items: center;
-    justify-content: flex-start;
-    width: 270px;
-    height: 2vh;
+    width: 380px;
     background-color: #f4f3e8;
-    padding: 10px;
+    padding: 5px;
+}
+
+.search-bar-form {
+    display: flex;
+    flex-direction: row;
 }
 .inside-menu-item{
     display: inline-block;
@@ -80,6 +82,10 @@ li{
     width: 190px;
     word-wrap: break-word;
 
+}
+
+.new-price-form{
+    display: none;
 }
 .title{
     font-weight: bold;

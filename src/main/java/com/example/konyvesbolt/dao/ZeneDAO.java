@@ -57,7 +57,7 @@ public class ZeneDAO implements DAO<Zene> {
         idkeres();
         zene.setId(idkeres());
         System.out.println(idkeres());
-        String sql = "INSERT INTO VOROS.ZENE( MULTIMEDIA_ID, VOROS.ZENE.ELOADO) VALUES(?,?)";
+        String sql = "INSERT INTO ZENE( MULTIMEDIA_ID, ZENE.ELOADO) VALUES(?,?)";
         jdbcTemplate.update(sql,
                 zene.getId(),
                 zene.getEloado());

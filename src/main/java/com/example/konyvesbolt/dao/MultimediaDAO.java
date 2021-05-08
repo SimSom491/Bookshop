@@ -60,7 +60,7 @@ public class MultimediaDAO implements DAO<Multimedia> {
     public List<Multimedia> toplista() {
         List<Multimedia> multimediak = new ArrayList<>();
         List<Integer> id = jdbcTemplate.query("SELECT MULTIMEDIA.ID FROM MULTIMEDIA,RAKTARON WHERE AR  < 2000 AND" +
-                        " (SELECT SUM(MENNYISEG) FROM VOROS.MULTIMEDIA, RAKTARON WHERE MULTIMEDIA.ID=RAKTARON.MULTIMEDIA_ID)>30 AND " +
+                        " (SELECT SUM(MENNYISEG) FROM MULTIMEDIA, RAKTARON WHERE MULTIMEDIA.ID=RAKTARON.MULTIMEDIA_ID)>30 AND " +
                         "MULTIMEDIA.ID = RAKTARON.MULTIMEDIA_ID GROUP BY MULTIMEDIA.ID",
                 (rs, rowNum) -> (rs.getInt("id")));
 
@@ -89,11 +89,11 @@ public class MultimediaDAO implements DAO<Multimedia> {
         parameters.addValue("buyerId", buyerID);
         String sql = "SELECT MULTIMEDIA.ID, COUNT(*) as num FROM MULTIMEDIA, VASARLO, VASAROL, VASARLAS, TARTOZIK\n" +
                 "WHERE VASARLO.ID IN (SELECT VASARLO.ID FROM MULTIMEDIA, VASARLO, VASAROL, VASARLAS, TARTOZIK\n" +
-                "                     WHERE MULTIMEDIA.ID = TARTOZIK.ID AND KONYV_ID = (:bookId) AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
+                "                     WHERE MULTIMEDIA.ID = TARTOZIK.ID AND MULTIMEDIA_ID = (:multiId) AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
                 "                       AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASAROL.VASARLO_ID = VASARLO.ID\n" +
                 "                       AND VASARLO.ID != (:buyerId) GROUP BY VASARLO.ID)\n" +
                 "  AND MULTIMEDIA.ID = TARTOZIK.MULTIMEDIA_ID AND TARTOZIK.VASARLAS_ID = VASARLAS.ID AND VASARLAS.ID = VASAROL.VASARLAS_ID\n" +
-                "  AND VASARLO.ID =VASAROL.VASARLO_ID AND MULTIMEDIA.ID != (:bookId) GROUP BY KONYV.ID ORDER BY num DESC";
+                "  AND VASARLO.ID =VASAROL.VASARLO_ID AND MULTIMEDIA.ID != (:multiId) GROUP BY MULTIMEDIA.ID ORDER BY num DESC";
         List<Integer> multiIds = namedParameterJdbcTemplate.query(sql,parameters,(rs, rowNum) ->
                 rs.getInt("id")
         );

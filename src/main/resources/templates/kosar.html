@@ -76,7 +76,12 @@
             <input id="szamla" type="checkbox" name="szamla" value="szamla">
             <input type="submit" value="Fizetés">
             </div>
+            <div th:each="uzenet : ${uzenetek}">
+                <p th:text="${uzenet.value}"></p>
+                <p th:text="${uzenet.key}"> </p>
+            </div>
         </form>
+
     </div>
 </main>
 

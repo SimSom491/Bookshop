@@ -67,13 +67,11 @@ public class KonyvController {
     @GetMapping(value = "/konyvek/frissit/{id}")
     public String aratFrissitGET(@PathVariable("id") int konyvid) {
         idErtek = konyvid;
-        return "aratSzerkeszt";
+        return "redirect:/konyvek";
     }
     @PostMapping(value = "/aratSzerkeszt")
-    public String aratFrissitPOST(@RequestParam("ar") int ar, Model model) {
-        konyvDAO.aratFrissit(idErtek, ar);
-
-
+    public String aratFrissitPOST(@RequestParam("ar") int ar,@RequestParam("id") int id, Model model) {
+        konyvDAO.aratFrissit(id, ar);
         return "redirect:/konyvek";
     }
 

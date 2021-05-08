@@ -60,7 +60,7 @@ public class HangosKonyvDAO implements DAO<Hangoskonyv> {
         );
         idkeres();
         hangosKonyv.setId(idkeres());
-        String sql = "INSERT INTO VOROS.HANGOSKONYV(KONYV_ID, ELBESZELO, HOSSZ) VALUES(?,?,?)";
+        String sql = "INSERT INTO HANGOSKONYV(KONYV_ID, ELBESZELO, HOSSZ) VALUES(?,?,?)";
         jdbcTemplate.update(sql,
                 hangosKonyv.getId(),
                 hangosKonyv.getElbeszelo(),

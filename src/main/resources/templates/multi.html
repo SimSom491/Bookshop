@@ -92,7 +92,7 @@
             </div>
         </div>
         <h3>Ezeket a könyveket vették még meg, akik ezt a könyvet vették:</h3>
-        <div class="book-roll">
+        <div th:if="${vettMultik.size() != 0}" class="book-roll">
             <div th:each="vettKonyv : ${vettMultik}" class="book-roll-item">
                 <img th:src="@{${vettKonyv.getEleresiUt()}}" src="../static/img/orwell-1984.jpg" alt="könyv borítójának helye" width="200" height="280">
                 <div>
@@ -100,6 +100,9 @@
                     <p th:text="${vettKonyv.getAr()}+ ' ft'">Szerző: George Orwell</p>
                 </div>
             </div>
+        </div>
+        <div th:if="${vettMultik.size() == 0}">
+            Nem vette meg más ezt a terméket
         </div>
     </div>
 </main>

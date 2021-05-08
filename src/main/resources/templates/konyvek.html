@@ -7,7 +7,7 @@
     <link th:href="@{/css/konyvek.css}" rel="stylesheet">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
     <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
-
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 <body>
 
@@ -22,30 +22,31 @@
         <li class="inside-menu-item"><p class="list-one-row-text">Elérhetőség</p></li>
     </ul>
 </div>
+
 <div class="search-bar">
 
-    <form action="/konyvek/keres" method="post">
+    <form class="search-bar-form" action="/konyvek/keres" method="post">
         <label>
             <input type="text" placeholder="Cím" name="cim">
 
         </label>
         <label>
-        <input type="text" placeholder="Szerző" name="szerzo">
+            <input type="text" placeholder="Szerző" name="szerzo">
         </label>
         <input type="submit" value="keres">
     </form>
 </div>
 
-
 <main>
     <div class="main-wrapper">
+
+
         <div class="genre-block">
             <div class="genre-header">
                 <h2>Műfaj szerint</h2>
             </div>
             <ul th:each=" mufaj: ${mufajok}">
                 <a th:href="@{/konyvek/szur/{id}(id=${mufaj.key.getId()})}"><li th:text="${mufaj.key.getNev()}+' ('+${mufaj.value}+')'"></li></a>
-
             </ul>
         </div>
 
@@ -71,12 +72,36 @@
                         <p th:text="${konyv.getCim()}" class="title">1984</p>
                         <p th:text="${konyv.getSzerzo()}" class="author">George Orwell</p>
                         <hr>
-                        <p th:text="${konyv.getAr()} + ' ' + Ft" class="price">5000 Ft</p>
-                       <a th:href="@{/konyvek/kosarhozad/{id}(id=${konyv.getId()})}"><img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64"></a>
+                        <p th:text="${konyv.getAr()} + ' ' + Ft" th:id="price + ${konyv.getId()}">5000 Ft</p>
+
+                        <form th:if="admine" th:id="new-price-form + ${konyv.getId()}" style="display:none;" action="/aratSzerkeszt" method="post">
+                            <label th:for="price3">Az új ár:</label>
+                            <input type="number" id="price3"  name="ar">
+                            <input type="hidden" id="id" name="id" th:value="${konyv.getId()}">
+                            <input class="form-submit" type="submit" >
+                        </form>
+
+                       <a class="add" th:href="@{/konyvek/kosarhozad/{id}(id=${konyv.getId()})}"><img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64"></a>
                         <p th:if="${admine}"> <a  th:href="@{/konyvek/deleteKonyv/{id}(id=${konyv.getId()})}" >Könyv törlése</a></p>
                         <p th:if="${admine}">
-                            <a  th:href="@{/konyvek/frissit/{id}(id=${konyv.getId()})}" >Ár frissítése</a></p>
+                            <button th:if="${admine}" class="osszfriss"  th:id="ar-frissit + ${konyv.getId()}">Ár frissítése</button>
                     </div>
+                    <script th:inline="javascript" >
+                        $(document).ready(() =>{
+                            var konyvid = /*[[${konyv.getId()}]]*/
+                                $('#ar-frissit' + konyvid).on('click', () => {
+                                    // $('#price' + konyvid).css("display","none");
+                                    $('#new-price-form' + konyvid).css("display","block");
+                                    $('.osszfriss').css("display", "none");
+                                    $('.add').css("display", "none");
+                                });
+                                $('.form-submit').on('click', () =>{
+                                    $('.osszfriss').css("display", "block");
+                                    $('.add').css("display", "block");
+                                });
+                            }
+                        )
+                    </script>
                 </div>
             </div>
         </div>
@@ -84,11 +109,6 @@
 
 </main>
 
-
-<footer>
-
-
-</footer>
 
 </body>
 </html>

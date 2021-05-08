@@ -4,6 +4,7 @@ package com.example.konyvesbolt.controller;
 import com.example.konyvesbolt.dao.*;
 import com.example.konyvesbolt.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -31,18 +33,19 @@ public class VasarlasController {
 
     public static Map<Konyv, Integer> konyvKosar = new TreeMap<>();
     public static Map<Multimedia, Integer> multiKosar = new TreeMap<>();
+    public static Map<String, String> messages = new TreeMap<>();
+
 
 
     @GetMapping(value = "/kosar")
     public String kosar(Model model, HttpSession httpSession) {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
-        model.addAttribute("konyvKosar", konyvKosar);
-        model.addAttribute("multiKosar", multiKosar);
-        model.addAttribute("sum", sum());
-        for (Konyv konyv : konyvKosar.keySet()) {
-            System.out.println(konyv.toString());
-        }
         if (vasarlo != null) {
+            model.addAttribute("konyvKosar", konyvKosar);
+            model.addAttribute("multiKosar", multiKosar);
+            model.addAttribute("sum", sum());
+            model.addAttribute("uzenetek", messages);
+
             return "kosar";
         } else {
             return "redirect:/login";
@@ -95,6 +98,7 @@ public class VasarlasController {
             Multimedia multimedia = multimediaDAO.keres(id);
             decreseItemNumber(multimedia, multiKosar);
             httpSession.setAttribute("cartSize", (httpSession.getAttribute("cartSize") == null ? 0 : (Integer) httpSession.getAttribute("cartSize")) - 1);
+
             return "redirect:/kosar";
         }
         return "redirect:/login";
@@ -135,6 +139,7 @@ public class VasarlasController {
                           HttpSession httpSession) {
         Vasarlo vasarlo = (Vasarlo) httpSession.getAttribute("logged_in_user");
         if (vasarlo != null) {
+            messages.clear();
             Vasarlas vasarlas = new Vasarlas();
             vasarlas.setSzamlaigenyes(szamla == null);
             vasarlas.setAtvetel(szallitas);
@@ -144,18 +149,27 @@ public class VasarlasController {
 
             int id=vasarlasDAO.idkeres();
 
-            for (Map.Entry<Konyv, Integer> konyvIntegerEntry : konyvKosar.entrySet()) {
-                tartozikDAO.beszur(new Tartozik(id,konyvIntegerEntry.getKey().getId(),0,0,konyvIntegerEntry.getValue()));
-            }
-            for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : multiKosar.entrySet()) {
-                tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
-            }
+            vasarolDAO.beszur(new Vasarol(vasarlo.getId(),0,1,id));
+
+
+                for (Map.Entry<Konyv, Integer> konyvIntegerEntry : konyvKosar.entrySet()) {
+
+                    try { tartozikDAO.beszur(new Tartozik(id,konyvIntegerEntry.getKey().getId(),0,0,konyvIntegerEntry.getValue()));}
+                    catch (UncategorizedSQLException exp){
+                        messages.put(konyvIntegerEntry.getKey().getCim(),"Nincs elég könyv ebből");
+                    }
+                }
+                for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : multiKosar.entrySet()) {
+                    tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
+                }
+
+
             //for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : .entrySet()) {
             //    tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
             //}TODO ajándékkosoár
 
 
-            vasarolDAO.beszur(new Vasarol(vasarlo.getId(),0,1,id));
+
 
             konyvKosar.clear();
             multiKosar.clear();
