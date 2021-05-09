@@ -7,6 +7,7 @@
     <link th:href="@{/css/konyvek.css}" rel="stylesheet">
     <link th:href="@{/css/cart.css}" rel="stylesheet">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link rel="icon"  th:href="@{/img/unicorn.svg}" />
     <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 
 </head>
@@ -74,7 +75,7 @@
             <input id="uzletbe" type="radio" name="szalliatas" value="uzletbe">
             <label for="szamla">Szamla igényes:</label>
             <input id="szamla" type="checkbox" name="szamla" value="szamla">
-            <input type="submit" value="Fizetés">
+            <input type="submit" value="Küldés">
             </div>
             <div th:each="uzenet : ${uzenetek}">
                 <p th:text="${uzenet.value}"></p>

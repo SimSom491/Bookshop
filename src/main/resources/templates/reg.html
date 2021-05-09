@@ -6,6 +6,7 @@
     <link th:href="@{/css/base.css}" rel="stylesheet">
     <link th:href="@{/css/log-reg.css}" rel="stylesheet">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link rel="icon"  th:href="@{/img/unicorn.svg}" />
     <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
 </head>
 <body>
@@ -41,7 +42,7 @@
             <input id="street" type="text" name="street">
             <label for="street-number">Utca szám:</label>
             <input id="street-number" type="number" name="street-number">
-            <input type="submit" value="Belépés">
+            <input type="submit" value="Regisztráció">
         </form>
         <div th:each="error : ${error_messages}">
             <div th:text="${error.value}">num</div>
