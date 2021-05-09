@@ -119,4 +119,15 @@ public class MultimediaDAO implements DAO<Multimedia> {
         return multik.size() != 0;
 
     }
+    public void aratFrissit(int id, int ar){
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("id", id);
+        parameters.addValue("ar", ar);
+
+        String sql = "UPDATE MULTIMEDIA SET AR = (:ar) WHERE ID IN (:id)";
+
+        namedParameterJdbcTemplate.update(sql, parameters);
+
+
+    }
 }

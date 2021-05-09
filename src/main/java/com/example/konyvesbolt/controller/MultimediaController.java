@@ -145,4 +145,13 @@ public class MultimediaController {
 
         return "multi";
     }
+    @GetMapping(value = "/aratSzerkesztM")
+    public String aratFrissitGET() {
+        return "multimediak";
+    }
+    @PostMapping(value = "/aratSzerkesztM")
+    public String aratFrissitPOST(@RequestParam("ar") int ar,@RequestParam("id") int id, Model model) {
+        multimediaDAO.aratFrissit(id, ar);
+        return "redirect:/multimedia";
+    }
 }

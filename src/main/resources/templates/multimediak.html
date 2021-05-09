@@ -8,7 +8,7 @@
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
     <link rel="icon"  th:href="@{/img/unicorn.svg}" />
     <link th:href="@{https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap}" rel="stylesheet">
-
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 <body>
 
@@ -69,9 +69,39 @@
                     <div class="book-details">
                         <p class="title" th:text="${multi.getCim()}">1984</p>
                         <hr>
-                        <p class="price" th:text="${multi.getAr() + ' Ft'}">5000 Ft</p>
-                       <a th:href="@{/multimedia/kosarhozad/{id}(id=${multi.getId()})}"> <img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64"></a>
+                        <p th:text="${multi.getAr()} + ' ' + Ft" th:id="price + ${multi.getId()}">5000 Ft</p>
+
+                        <form th:if="admine" th:id="new-price-form + ${multi.getId()}" style="display:none;" action="/aratSzerkesztM" method="post">
+                            <label th:for="price3">Az új ár:</label>
+                            <input type="number" id="price3"  name="ar">
+                            <input type="hidden" id="id" name="id" th:value="${multi.getId()}">
+                            <input class="form-submit" type="submit" >
+                        </form>
+                       <a  th:href="@{/multimedia/kosarhozad/{id}(id=${multi.getId()})}"> <img th:src="@{/img/buy.svg}" src="../static/img/buy.svg" alt="kosárba-tesz-helye" width="64" height="64"></a>
                         <p th:if="${admine}"> <a  th:href="@{/multimedia/deleteMult/{id}(id=${multi.getId()})}" >Elem törlése</a></p>
+
+                            <button th:if="${admine}" class="osszfrisss"  th:id="ar-frissitt + ${multi.getId()}">Ár frissítése</button>
+                    </div>
+                            <script th:inline="javascript" >
+                                $(document).ready(() =>{
+                                        var konyvid = /*[[${multi.getId()}]]*/
+                                            console.log(konyvid);
+                                            $('#ar-frissitt' + konyvid).on('click', () => {
+                                                // $('#price' + konyvid).css("display","none");
+                                                $('#new-price-form' + konyvid).css("display","block");
+                                                $('.osszfrisss').css("display", "none");
+                                                $('.add').css("display", "none");
+                                            });
+
+                                    $('.form-submit').on('click', () =>{
+                                            $('.osszfrisss').css("display", "block");
+                                            $('.add').css("display", "block");
+                                        });
+                                    }
+                                )
+                            </script>
+                    </div>
+
                     </div>
                 </div>
             </div>
