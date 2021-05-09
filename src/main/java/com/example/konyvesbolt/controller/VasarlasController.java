@@ -141,7 +141,7 @@ public class VasarlasController {
         if (vasarlo != null) {
             messages.clear();
             Vasarlas vasarlas = new Vasarlas();
-            vasarlas.setSzamlaigenyes(szamla == null);
+            vasarlas.setSzamlaigenyes(szamla != null);
             vasarlas.setAtvetel(szallitas);
             vasarlas.setMikor(Date.valueOf(LocalDate.now()));
 
@@ -154,19 +154,25 @@ public class VasarlasController {
 
                 for (Map.Entry<Konyv, Integer> konyvIntegerEntry : konyvKosar.entrySet()) {
 
-                    try { tartozikDAO.beszur(new Tartozik(id,konyvIntegerEntry.getKey().getId(),0,0,konyvIntegerEntry.getValue()));}
+                    try {
+                        tartozikDAO.beszur(new Tartozik(id,konyvIntegerEntry.getKey().getId(),0,0,konyvIntegerEntry.getValue()));
+                        messages.put(konyvIntegerEntry.getKey().getCim(), "sikeres vásárlás");
+                    }
+
                     catch (UncategorizedSQLException exp){
+                        vasarlasDAO.torol(id);
                         messages.put(konyvIntegerEntry.getKey().getCim(),"Nincs elég könyv ebből");
                     }
                 }
                 for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : multiKosar.entrySet()) {
                     tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
+                    messages.put(konyvIntegerEntry.getKey().getCim(), "sikeres vásárlás");
                 }
 
 
             //for (Map.Entry<Multimedia, Integer> konyvIntegerEntry : .entrySet()) {
             //    tartozikDAO.beszur(new Tartozik(id,0,konyvIntegerEntry.getKey().getId(),0,konyvIntegerEntry.getValue()));
-            //}TODO ajándékkosoár
+            //}
 
 
 
