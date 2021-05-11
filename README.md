@@ -1,1 +1,1 @@
-This is a Bookshop Web-app with an Oracle database and spring boot in the backend. Ferenc Wolf was responsible for Frontend, while Vivien Vörös and Soma Simon was responsible for the Backend mainly. But as you can see in the commits, everybody chipped in every place.
+This is a Bookshop Web-app with an Oracle database and spring boot in the backend. Ferenc Wolf was responsible for Frontend, while Vivien Vörös and Soma Simon was responsible for the Backend mainly. But as you can see in the commits, everybody chipped in every place. The database creation script is in voros.sql.
